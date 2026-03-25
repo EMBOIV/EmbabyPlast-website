@@ -95,6 +95,19 @@ function updateWishlistCount() {
     }
 }
 
+function syncStoredState() {
+    updateCartCount();
+    updateWishlistCount();
+
+    if (document.querySelector('.cart')) {
+        displayCart();
+    }
+
+    if (document.querySelector('.wishlist')) {
+        displayWishlist();
+    }
+}
+
 function addToCart(id, name, price, img, quantity = 1, options = null) {
     let cart = loadCart();
     let existingItem = cart.find(item => (item.key || item.id) === id);
@@ -402,16 +415,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    updateCartCount();
-    updateWishlistCount();
-
-    if (document.querySelector('.cart')) {
-        displayCart();
-    }
-
-    if (document.querySelector('.wishlist')) {
-        displayWishlist();
-    }
+    syncStoredState();
 
     let productsSection = document.querySelector('.products.luxury-grid');
     if (productsSection) {
@@ -531,4 +535,14 @@ document.addEventListener('DOMContentLoaded', function() {
             showToast('Item added to cart.');
         }
     });
+});
+
+window.addEventListener('pageshow', function() {
+    syncStoredState();
+});
+
+document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'visible') {
+        syncStoredState();
+    }
 });
