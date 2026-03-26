@@ -1559,7 +1559,7 @@ header .fa-bars {
 }
 
 .products.luxury-grid .content .current-price {
-    font-size: 2.2rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: var(--text-900);
 }
@@ -1728,7 +1728,7 @@ header .fa-bars {
 }
 
 .products .box-container .box .content .price .current-price {
-    font-size: 2.2rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: var(--text-900);
 }
