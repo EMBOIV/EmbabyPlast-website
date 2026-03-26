@@ -289,7 +289,7 @@ function renderProductConfigPage() {
                         <button id="config-qty-plus" class="config-qty-btn" type="button">+</button>
                     </div>
 
-                    <button id="add-configured-product" class="btn">Add to Cart</button>
+                    <button id="add-configured-product" class="btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
                 </div>
             </div>
         </div>
