@@ -1,5 +1,5 @@
-﻿id,familyKey,familyName,familyNameAr,variantName,variantNameAr,name,nameAr,cartonPrice,pcsPerCarton,description,descriptionAr,imageFile
-1,Amira,Amira Combs,أمشاط أميرة,Colors,ألوان,Amira Colors Comb,مشط أميرة ألوان,50,144,Amira comb - regular colors variant.,مشط أميرة - إصدار الألوان العادية.,Amira.jpg
-2,Dolphin,Dolphin Combs,أمشاط دولفين,Two Tone,٢ لون,Dolphin Two Tone Comb,مشط دولفين ٢ لون,75,144,Dolphin comb - two tone variant.,مشط دولفين - إصدار لونين.,Dolphin2color.jpg
-3,Dolphin,Dolphin Combs,أمشاط دولفين,Colors,ألوان,Dolphin Colors Comb,مشط دولفين ألوان,55,144,Dolphin comb - regular colors variant.,مشط دولفين - إصدار الألوان العادية.,Dolphin.jpg
-4,Carmen,Carmen Combs,أمشاط كارمن,Fluorescent,فسفوري,Carmen Fluorescent Comb,مشط كارمن فسفوري,72,144,Carmen comb - fluorescent variant.,مشط كارمن - إصدار فسفوري.,Carmen.jpg
+﻿id,familyKey,familyName,familyNameAr,variantName,variantNameAr,name,nameAr,cartonPrice,pcsPerCarton,description,descriptionAr,imageFile,badge,enabled
+1,Amira,Amira Combs,أمشاط أميرة,Colors,ألوان,Amira Colors Comb,مشط أميرة ألوان,50,144,Amira comb - regular colors variant.,مشط أميرة - إصدار الألوان العادية.,Amira.jpg,most selling,1
+2,Dolphin,Dolphin Combs,أمشاط دولفين,Two Tone,٢ لون,Dolphin Two Tone Comb,مشط دولفين ٢ لون,75,144,Dolphin comb - two tone variant.,مشط دولفين - إصدار لونين.,Dolphin2color.jpg,hot,1
+3,Dolphin,Dolphin Combs,أمشاط دولفين,Colors,ألوان,Dolphin Colors Comb,مشط دولفين ألوان,55,144,Dolphin comb - regular colors variant.,مشط دولفين - إصدار الألوان العادية.,Dolphin.jpg,,1
+4,Carmen,Carmen Combs,أمشاط كارمن,Fluorescent,فسفوري,Carmen Fluorescent Comb,مشط كارمن فسفوري,72,144,Carmen comb - fluorescent variant.,مشط كارمن - إصدار فسفوري.,Carmen.jpg,popular,1

@@ -3,7 +3,7 @@
 // Each row = one variant. Families are grouped using familyKey.
 // Required fields for import:
 // id, familyKey, familyName, familyNameAr, variantName, variantNameAr,
-// cartonPrice, pcsPerCarton, description, descriptionAr, imageFile
+// cartonPrice, pcsPerCarton, description, descriptionAr, imageFile, badge, enabled
 
 var PRODUCT_CATALOG = {
     '1': {
@@ -20,7 +20,9 @@ var PRODUCT_CATALOG = {
         pcsPerCartonAr: '144',
         description: 'Amira comb - regular colors variant.',
         descriptionAr: 'مشط أميرة - إصدار الألوان العادية.',
-        imageFile: 'Amira.jpg'
+        imageFile: 'Amira.jpg',
+        badge: 'most selling',
+        enabled: '1'
     },
     '2': {
         id: '2',
@@ -36,7 +38,9 @@ var PRODUCT_CATALOG = {
         pcsPerCartonAr: '144',
         description: 'Dolphin comb - two tone variant.',
         descriptionAr: 'مشط دولفين - إصدار لونين.',
-        imageFile: 'Dolphin2color.jpg'
+        imageFile: 'Dolphin2color.jpg',
+        badge: 'hot',
+        enabled: '1'
     },
     '3': {
         id: '3',
@@ -52,7 +56,9 @@ var PRODUCT_CATALOG = {
         pcsPerCartonAr: '144',
         description: 'Dolphin comb - regular colors variant.',
         descriptionAr: 'مشط دولفين - إصدار الألوان العادية.',
-        imageFile: 'Dolphin.jpg'
+        imageFile: 'Dolphin.jpg',
+        badge: '',
+        enabled: '1'
     },
     '4': {
         id: '4',
@@ -68,7 +74,9 @@ var PRODUCT_CATALOG = {
         pcsPerCartonAr: '144',
         description: 'Carmen comb - fluorescent variant.',
         descriptionAr: 'مشط كارمن - إصدار فسفوري.',
-        imageFile: 'Carmen.jpg'
+        imageFile: 'Carmen.jpg',
+        badge: 'popular',
+        enabled: '1'
     }
 };
 
@@ -118,9 +126,44 @@ function getProductImageFile(product) {
     return product.imageFile || (String(product.id) + '.jpg');
 }
 
+function isProductEnabled(product) {
+    var raw = String(product.enabled == null ? '1' : product.enabled).trim().toLowerCase();
+    return !(raw === '0' || raw === 'false' || raw === 'no' || raw === 'off' || raw === 'disabled');
+}
+
+function normalizeBadge(value) {
+    return String(value || '').trim().toLowerCase();
+}
+
+function getBadgeClass(value) {
+    var badge = normalizeBadge(value);
+    if (!badge) return '';
+    if (badge.indexOf('hot') !== -1) return 'hot';
+    if (badge.indexOf('most') !== -1 || badge.indexOf('sell') !== -1 || badge.indexOf('best') !== -1) return 'bestseller';
+    if (badge.indexOf('popular') !== -1) return 'popular';
+    return 'new';
+}
+
+function getBadgeLabel(value, ar) {
+    var badge = normalizeBadge(value);
+    if (!badge) return '';
+    if (ar) {
+        if (badge.indexOf('hot') !== -1) return 'HOT';
+        if (badge.indexOf('most') !== -1 || badge.indexOf('sell') !== -1 || badge.indexOf('best') !== -1) return 'الأكثر مبيعاً';
+        if (badge.indexOf('popular') !== -1) return 'شائع';
+        return 'جديد';
+    }
+    if (badge.indexOf('hot') !== -1) return 'HOT';
+    if (badge.indexOf('most') !== -1 || badge.indexOf('sell') !== -1 || badge.indexOf('best') !== -1) return 'Most Selling';
+    if (badge.indexOf('popular') !== -1) return 'Popular';
+    return 'New';
+}
+
 function getCatalogArray() {
     return Object.keys(PRODUCT_CATALOG).map(function(id) {
         return PRODUCT_CATALOG[id];
+    }).filter(function(product) {
+        return isProductEnabled(product);
     });
 }
 
@@ -152,6 +195,13 @@ function buildFamilies(products) {
         });
 
         family.minPrice = minPrice;
+        family.badge = '';
+        for (var i = 0; i < family.variants.length; i++) {
+            if (normalizeBadge(family.variants[i].badge)) {
+                family.badge = family.variants[i].badge;
+                break;
+            }
+        }
 
         family.searchText = family.variants.map(function(variant) {
             return [
@@ -240,6 +290,45 @@ function getFamilyVariants(product) {
     });
 }
 
+function buildRecommendations(currentProduct, ar, imgBase) {
+    var allFamilies = buildFamilies(getCatalogArray());
+    var currentFamilyKey = String(currentProduct.familyKey || currentProduct.id);
+    var candidates = allFamilies.filter(function(family) {
+        return String(family.key) !== currentFamilyKey;
+    });
+
+    for (var i = candidates.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = candidates[i];
+        candidates[i] = candidates[j];
+        candidates[j] = temp;
+    }
+
+    var picked = candidates.slice(0, 3);
+    if (!picked.length) return '';
+
+    var heading = ar ? 'قد يعجبك أيضاً' : 'You may also like';
+    var detailsLabel = ar ? 'عرض التفاصيل' : 'View Details';
+    var cards = picked.map(function(family) {
+        var topVariant = getHighestPriceVariant(family.variants);
+        var familyTitle = ar ? family.familyNameAr : family.familyName;
+        var startsFrom = getStartsFromText(family.minPrice, ar);
+        return ''
+            + '<article class="recommendation-card" data-detail-url="product.html?id=' + escapeHtml(topVariant.id) + '" tabindex="0" role="link" aria-label="' + escapeHtml(familyTitle) + '">'
+            + '<div class="recommendation-image-wrap"><img src="' + imgBase + escapeHtml(getProductImageFile(topVariant)) + '" alt="' + escapeHtml(getProductName(topVariant, ar)) + '"></div>'
+            + '<h4>' + escapeHtml(familyTitle) + '</h4>'
+            + '<p class="recommendation-price">' + (ar ? 'السعر يبدأ من: ' : 'Price starts from: ') + escapeHtml(startsFrom) + '</p>'
+            + '<a class="recommendation-link" href="product.html?id=' + escapeHtml(topVariant.id) + '">' + detailsLabel + '</a>'
+            + '</article>';
+    }).join('');
+
+    return ''
+        + '<section class="product-recommendations">'
+        + '<h3>' + heading + '</h3>'
+        + '<div class="product-recommendations-grid">' + cards + '</div>'
+        + '</section>';
+}
+
 function ensureProductImageLightbox() {
     var lightbox = document.getElementById('product-image-lightbox');
     if (lightbox) return lightbox;
@@ -289,7 +378,7 @@ function renderProductConfigPage() {
     var product = PRODUCT_CATALOG[productId];
     var imgBase = getImageBase();
 
-    if (!product) {
+    if (!product || !isProductEnabled(product)) {
         var notFoundMsg = ar ? '\u0627\u0644\u0645\u0646\u062A\u062C \u063A\u064A\u0631 \u0645\u0648\u062C\u0648\u062F.' : 'Product not found.';
         var backMsg = ar ? '\u0627\u0644\u0639\u0648\u062F\u0629 \u0644\u0644\u0643\u062A\u0627\u0644\u0648\u062C' : 'Back to Catalog';
         container.innerHTML = '<p>' + notFoundMsg + ' <a href="products.html">' + backMsg + '</a></p>';
@@ -344,7 +433,8 @@ function renderProductConfigPage() {
         + '<a href="products.html" class="btn btn-outline-dark">' + btnBack + '</a>'
         + '</div>'
         + '</div>'
-        + '</div>';
+        + '</div>'
+        + buildRecommendations(product, ar, imgBase);
 
     function applyVariant(selectedProduct) {
         var productName = getProductName(selectedProduct, ar);
@@ -405,6 +495,19 @@ function renderProductConfigPage() {
 
     applyVariant(initialVariant || product);
 
+    container.querySelectorAll('.recommendation-card').forEach(function(card) {
+        card.addEventListener('click', function(e) {
+            if (e.target.closest('.recommendation-link')) return;
+            window.location.href = this.dataset.detailUrl;
+        });
+        card.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                window.location.href = this.dataset.detailUrl;
+            }
+        });
+    });
+
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -420,6 +523,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var ar = isArabic();
         var imgBase = getImageBase();
         var boxContainer = productsSection.querySelector('.box-container');
+        var totalCountEl = document.getElementById('products-total-count');
         var products = getCatalogArray();
         var families = buildFamilies(products);
 
@@ -431,9 +535,12 @@ document.addEventListener('DOMContentLoaded', function() {
             var familyTitle = ar ? family.familyNameAr : family.familyName;
             var startsFrom = getStartsFromText(family.minPrice, ar);
             var viewLabel = ar ? '\u0639\u0631\u0636 \u0627\u0644\u062A\u0641\u0627\u0635\u064A\u0644' : 'View Details';
+            var badgeLabel = getBadgeLabel(family.badge, ar);
+            var badgeClass = getBadgeClass(family.badge);
 
             cardsHtml += ''
                 + '<div class="box" data-family-key="' + escapeHtml(family.key) + '" data-search="' + escapeHtml(family.searchText) + '" data-detail-url="product.html?id=' + escapeHtml(initial.id) + '" tabindex="0" role="link" aria-label="' + escapeHtml(familyTitle) + '">'
+                + (badgeLabel ? '<span class="product-badge ' + escapeHtml(badgeClass) + '">' + escapeHtml(badgeLabel) + '</span>' : '')
                 + '<div class="images">'
                 + '<img class="product-family-image" src="' + imgBase + escapeHtml(getProductImageFile(initial)) + '" alt="' + escapeHtml(getProductName(initial, ar)) + '" onerror="this.style.background=\'#D8DEE4\';this.style.height=\'28rem\'">'
                 + '</div>'
@@ -468,6 +575,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (noResults) {
                 noResults.style.display = visibleCount === 0 ? '' : 'none';
+            }
+
+            if (totalCountEl) {
+                var totalText = ar
+                    ? ('إجمالي المنتجات: ' + families.length)
+                    : ('Total products: ' + families.length);
+                var visibleText = ar
+                    ? (' | المعروض: ' + visibleCount)
+                    : (' | Showing: ' + visibleCount);
+                totalCountEl.textContent = totalText + visibleText;
             }
         }
 

@@ -591,6 +591,13 @@ section {
     box-shadow: 0 0 0 3px rgba(0, 168, 168, 0.12);
 }
 
+.products .products-total-count {
+    margin-top: 1rem;
+    font-size: 1.35rem;
+    color: var(--text-light);
+    font-weight: 600;
+}
+
 .products .products-no-results {
     margin-top: 2rem;
     font-size: 1.5rem;
@@ -610,6 +617,7 @@ section {
 .products .box-container .box {
     display: flex;
     flex-direction: column;
+    position: relative;
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: 0.4rem;
@@ -634,6 +642,9 @@ section {
     top: 1.2rem;
     left: 1.2rem;
     z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    opacity: 1;
     font-size: 1.1rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -646,6 +657,7 @@ section {
 .products .box .product-badge.new { background: var(--secondary); }
 .products .box .product-badge.bestseller { background: var(--accent); }
 .products .box .product-badge.popular { background: var(--primary); }
+.products .box .product-badge.hot { background: #d94848; }
 
 .products .box .images {
     position: relative;
@@ -1049,11 +1061,20 @@ section {
 
 .product-config-pricing { margin-bottom: 1.8rem; }
 
+.product-config-price-label {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin: 0 0 0.4rem;
+    letter-spacing: 0.02em;
+}
+
 .product-config-price {
-    font-size: 2.2rem;
+    font-size: 2.8rem;
     color: var(--secondary);
     margin: 0;
-    font-weight: 700;
+    font-weight: 800;
+    line-height: 1.2;
 }
 
 .product-config-meta-price {
@@ -1110,6 +1131,99 @@ section {
 }
 
 .product-config-specs td:last-child { color: var(--text-light); }
+
+.product-recommendations {
+    margin-top: 2.4rem;
+    padding: 2rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 0.4rem;
+    box-shadow: 0 6px 18px var(--shadow);
+}
+
+.product-recommendations h3 {
+    font-family: "Montserrat", "Poppins", sans-serif;
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 1.4rem;
+}
+
+.product-recommendations-grid {
+    display: flex;
+    gap: 1.4rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 0.6rem;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+}
+
+.product-recommendations-grid::-webkit-scrollbar {
+    height: 0.8rem;
+}
+
+.product-recommendations-grid::-webkit-scrollbar-thumb {
+    background: #c6cdd4;
+    border-radius: 99px;
+}
+
+.recommendation-card {
+    flex: 0 0 24rem;
+    scroll-snap-align: start;
+    border: 1px solid var(--border);
+    border-radius: 0.4rem;
+    padding: 1rem;
+    background: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recommendation-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px var(--shadow-hover);
+}
+
+.recommendation-card:focus-visible {
+    outline: 2px solid var(--secondary);
+    outline-offset: 2px;
+}
+
+.recommendation-image-wrap {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 0.35rem;
+    padding: 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.recommendation-image-wrap img {
+    width: 100%;
+    height: 14rem;
+    object-fit: contain;
+    background: #fff;
+}
+
+.recommendation-card h4 {
+    font-size: 1.45rem;
+    color: var(--primary);
+    margin: 0.9rem 0 0.4rem;
+}
+
+.recommendation-price {
+    font-size: 1.25rem;
+    color: var(--text-light);
+    margin-bottom: 0.7rem;
+}
+
+.recommendation-link {
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--secondary);
+    text-transform: uppercase;
+}
 
 .product-config-actions {
     margin-top: auto;
@@ -1429,12 +1543,26 @@ section {
 @media(max-width: 768px) {
     header .navbar { display: flex !important; opacity: 0; visibility: hidden; }
     header #toggler:checked ~ .navbar { opacity: 1 !important; visibility: visible !important; }
+
+    .recommendation-card {
+        flex-basis: 21rem;
+    }
 }
 
 @media(max-width: 450px) {
     html { font-size: 50%; }
     .heading { font-size: 3rem; }
     .home .content h3 { font-size: 3.4rem; }
+
+    .recommendation-card {
+        flex-basis: 19rem;
+    }
+}
+
+html[dir="rtl"] .force-ltr-number {
+    direction: ltr;
+    unicode-bidi: isolate;
+    display: inline-block;
 }
 
 /* ===== Language Toggle (Header Inline) ===== */
