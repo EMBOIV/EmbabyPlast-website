@@ -299,19 +299,6 @@ section {
     border-radius: 0.6rem;
 }
 
-.about .row .image-container h3 {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 2.4rem;
-    font-family: "Montserrat", "Poppins", sans-serif;
-    color: #fff;
-    background-color: rgba(11, 29, 42, 0.85);
-    padding: 1.2rem 2rem;
-    width: 100%;
-    text-align: center;
-}
-
 .about .row .content {
     flex: 1 1 30rem;
 }
