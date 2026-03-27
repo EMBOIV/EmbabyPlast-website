@@ -539,42 +539,6 @@ section {
 /* --- Products Page --- */
 .products { padding-top: 12rem; }
 
-.products .products-filter {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.products .products-filter-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.85rem 1.8rem;
-    border-radius: 0.4rem;
-    border: 1px solid var(--border);
-    background: var(--white);
-    color: var(--text-light);
-    font-size: 1.35rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    font-weight: 600;
-    transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease;
-}
-
-.products .products-filter-link:hover,
-.products .products-filter-link:focus-visible {
-    background: rgba(0,168,168,0.08);
-    color: var(--secondary);
-    border-color: var(--secondary);
-}
-
-.products .products-filter-link.active {
-    background: var(--secondary);
-    border-color: var(--secondary);
-    color: #fff;
-}
-
 /* --- Product Search --- */
 .products .products-search {
     position: relative;
@@ -686,17 +650,22 @@ section {
 .products .box .images {
     position: relative;
     overflow: hidden;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
 }
 
 .products .box .images img {
     width: 100%;
     height: 28rem;
-    object-fit: cover;
-    transition: transform 0.4s ease;
+    object-fit: contain;
+    transition: none;
 }
 
 .products .box:hover .images img {
-    transform: scale(1.04);
+    transform: none;
 }
 
 .products .box .wishlist-btn {
@@ -996,8 +965,57 @@ section {
 .product-config-media img {
     width: 100%;
     height: 44rem;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 0.4rem;
+    background: #fff;
+}
+
+.product-config-media img.clickable-preview {
+    cursor: zoom-in;
+}
+
+.product-image-lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 16, 24, 0.92);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    padding: 2rem;
+}
+
+.product-image-lightbox.open {
+    display: flex;
+}
+
+.product-image-lightbox img {
+    max-width: 96vw;
+    max-height: 90vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 0.4rem;
+}
+
+.product-image-lightbox-close {
+    position: absolute;
+    top: 1.4rem;
+    right: 1.8rem;
+    width: 4.2rem;
+    height: 4.2rem;
+    border: none;
+    border-radius: 0.4rem;
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    font-size: 3rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.product-image-lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.24);
 }
 
 .product-thumb-strip {
@@ -1023,9 +1041,10 @@ section {
 .product-thumb img {
     width: 100%;
     height: 10rem;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 0.3rem;
     display: block;
+    background: #fff;
 }
 
 .product-config-pricing { margin-bottom: 1.8rem; }
@@ -1446,11 +1465,74 @@ section {
 
 /* ===== Product Price on Cards ===== */
 .product-price {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--secondary);
     margin: 0.5rem 0;
     letter-spacing: 0.02em;
+}
+
+.product-price .price-label {
+    font-weight: 600;
+    color: var(--text-light);
+    font-size: 1.3rem;
+}
+
+.product-variant-price {
+    margin-top: 0.3rem;
+}
+
+.product-variant-price .price-label {
+    display: block;
+}
+
+.product-variant-price-value {
+    display: block;
+    margin-top: 0.2rem;
+    font-size: 1.7rem;
+    color: var(--secondary);
+    font-weight: 700;
+}
+
+
+.product-variant-options {
+    margin-top: 1.5rem;
+}
+
+.variant-options-label {
+    font-size: 1.3rem;
+    color: var(--text-light);
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+}
+
+.variant-options-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.variant-option-btn {
+    border: 1px solid var(--border);
+    background: var(--white);
+    color: var(--text);
+    padding: 0.7rem 1.1rem;
+    border-radius: 0.4rem;
+    font-size: 1.3rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.variant-option-btn:hover {
+    border-color: var(--secondary);
+    color: var(--secondary);
+}
+
+.variant-option-btn.active {
+    background: var(--secondary);
+    border-color: var(--secondary);
+    color: #fff;
 }
 
 /* ===== RTL Support ===== */
