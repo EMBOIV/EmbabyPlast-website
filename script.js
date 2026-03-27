@@ -183,8 +183,47 @@ document.addEventListener('DOMContentLoaded', function() {
         var filterLinks = productsSection.querySelectorAll('.products-filter-link');
         var categoryMap = { styling: 'Hair Styling', barber: 'Barber Professional', specialty: 'Specialty' };
         var activeCategory = category && categoryMap[category] ? category : 'all';
+        var allBoxes = productsSection.querySelectorAll('.box-container .box');
 
-        productsSection.querySelectorAll('.box-container .box').forEach(function(box) {
+        function applyFilters() {
+            var searchInput = document.getElementById('product-search');
+            var query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+            var noResults = document.getElementById('no-results');
+            var visibleCount = 0;
+
+            allBoxes.forEach(function(box) {
+                var matchesCategory = activeCategory === 'all' || box.dataset.category === activeCategory;
+                var matchesSearch = true;
+
+                if (query) {
+                    var productId = box.dataset.id;
+                    var product = PRODUCT_CATALOG[productId];
+                    if (product) {
+                        var searchableText = [
+                            product.name, product.nameAr,
+                            product.description, product.descriptionAr,
+                            product.material, product.materialAr,
+                            product.size, product.sizeAr,
+                            product.category
+                        ].join(' ').toLowerCase();
+                        matchesSearch = searchableText.indexOf(query) !== -1;
+                    } else {
+                        var boxText = box.textContent.toLowerCase();
+                        matchesSearch = boxText.indexOf(query) !== -1;
+                    }
+                }
+
+                var visible = matchesCategory && matchesSearch;
+                box.style.display = visible ? '' : 'none';
+                if (visible) visibleCount++;
+            });
+
+            if (noResults) {
+                noResults.style.display = visibleCount === 0 ? '' : 'none';
+            }
+        }
+
+        allBoxes.forEach(function(box) {
             box.style.display = activeCategory === 'all' || box.dataset.category === activeCategory ? '' : 'none';
         });
 
@@ -192,6 +231,14 @@ document.addEventListener('DOMContentLoaded', function() {
             var linkCategory = link.dataset.category || 'all';
             link.classList.toggle('active', linkCategory === activeCategory);
         });
+
+        // Search input listener
+        var searchInput = document.getElementById('product-search');
+        if (searchInput) {
+            searchInput.addEventListener('input', function() {
+                applyFilters();
+            });
+        }
 
         if (category && !categoryMap[category]) {
             window.history.replaceState({}, '', 'products.html');
