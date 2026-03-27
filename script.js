@@ -39,7 +39,7 @@ var PRODUCT_CATALOG = {
         description: 'Dolphin comb - two tone variant.',
         descriptionAr: 'مشط دولفين - إصدار لونين.',
         imageFile: 'Dolphin2color.jpg',
-        badge: 'hot',
+        badge: '',
         enabled: '1'
     },
     '3': {
@@ -138,7 +138,7 @@ function normalizeBadge(value) {
 function getBadgeClass(value) {
     var badge = normalizeBadge(value);
     if (!badge) return '';
-    if (badge.indexOf('hot') !== -1) return 'hot';
+    if (badge.indexOf('hot') !== -1) return '';
     if (badge.indexOf('most') !== -1 || badge.indexOf('sell') !== -1 || badge.indexOf('best') !== -1) return 'bestseller';
     if (badge.indexOf('popular') !== -1) return 'popular';
     return 'new';
@@ -147,13 +147,12 @@ function getBadgeClass(value) {
 function getBadgeLabel(value, ar) {
     var badge = normalizeBadge(value);
     if (!badge) return '';
+    if (badge.indexOf('hot') !== -1) return '';
     if (ar) {
-        if (badge.indexOf('hot') !== -1) return 'HOT';
         if (badge.indexOf('most') !== -1 || badge.indexOf('sell') !== -1 || badge.indexOf('best') !== -1) return 'الأكثر مبيعاً';
         if (badge.indexOf('popular') !== -1) return 'شائع';
         return 'جديد';
     }
-    if (badge.indexOf('hot') !== -1) return 'HOT';
     if (badge.indexOf('most') !== -1 || badge.indexOf('sell') !== -1 || badge.indexOf('best') !== -1) return 'Most Selling';
     if (badge.indexOf('popular') !== -1) return 'Popular';
     return 'New';
@@ -261,26 +260,6 @@ function getHighestPriceVariant(variants) {
     }
 
     return highest || variants[0] || null;
-}
-
-function updateFamilyCard(card, product, ar, imgBase) {
-    var img = card.querySelector('.product-family-image');
-    var variantPrice = card.querySelector('.product-variant-price-value');
-    var variantName = card.querySelector('.product-current-variant');
-    var finish = card.querySelector('.product-current-finish');
-    var link = card.querySelector('.product-view-link');
-
-    var productName = getProductName(product, ar);
-    if (img) {
-        img.src = imgBase + getProductImageFile(product);
-        img.alt = productName;
-    }
-    if (variantPrice) variantPrice.textContent = getPriceText(product, ar);
-    if (variantName) variantName.textContent = getVariantLabel(product, ar);
-    if (finish) finish.textContent = ar
-        ? ('\u0627\u0644\u0646\u0648\u0639: ' + getVariantLabel(product, true))
-        : ('Type: ' + getVariantLabel(product, false));
-    if (link) link.href = 'product.html?id=' + product.id;
 }
 
 function getFamilyVariants(product) {
