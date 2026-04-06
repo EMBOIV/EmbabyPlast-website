@@ -1,5 +1,25 @@
-﻿id,familyKey,familyName,familyNameAr,variantName,variantNameAr,name,nameAr,cartonPrice,pcsPerCarton,description,descriptionAr,imageFile,badge,enabled
-1,Amira,Amira Combs,أمشاط أميرة,Colors,ألوان,Amira Colors Comb,مشط أميرة ألوان,50,144,Amira comb - regular colors variant.,مشط أميرة - إصدار الألوان العادية.,Amira.jpg,most selling,1
-2,Dolphin,Dolphin Combs,أمشاط دولفين,Two Tone,٢ لون,Dolphin Two Tone Comb,مشط دولفين ٢ لون,75,144,Dolphin comb - two tone variant.,مشط دولفين - إصدار لونين.,Dolphin2color.jpg,,1
-3,Dolphin,Dolphin Combs,أمشاط دولفين,Colors,ألوان,Dolphin Colors Comb,مشط دولفين ألوان,55,144,Dolphin comb - regular colors variant.,مشط دولفين - إصدار الألوان العادية.,Dolphin.jpg,,1
-4,Carmen,Carmen Combs,أمشاط كارمن,Fluorescent,فسفوري,Carmen Fluorescent Comb,مشط كارمن فسفوري,72,144,Carmen comb - fluorescent variant.,مشط كارمن - إصدار فسفوري.,Carmen.jpg,popular,1
+﻿id,familyKey,familyName,familyNameAr,variantName,variantNameAr,name,nameAr,DozenPrice,pcsPerCarton,imageFile,badge,enabled
+1,Amira,Amira Combs,أمشاط أميرة,Colors,ألوان,Amira Colors Comb,مشط أميرة ألوان,50,144,Amira.jpg,most selling,1
+2,,,,,,,,,,,,
+3,,,,,,,,,,,,
+4,,,,,,,,,,,,
+,,,,,الوان عادة,,مشط ارنب عادة,20,120,,,
+,,,,,2 لون,,مشط ارنب 2 لون,30,120,,,
+,,,,,فسفورى مطبوع,,مشط ارنب فسفورى مطبوع,65,40,,,
+,,,,,زجاج الوان وعسلى مطبوع,,مشط ارنب زجاج الوان وعسلى مطبوع,85,40,,,
+,,,,,2 لون  مطبوع,,مشط ارنب 2 لون  مطبوع,65,40,,,
+,,,,,الوان,,اميرة الوان,20,192,,,
+,,,,,فسفورى,,اميرة فسفورى,30,192,,,
+,,,,,2 لون طرى,,اميرة 2 لون طرى,30,192,,,
+,,,,,ناشف الوان وبيج,,اميرة ناشف الوان وبيج,30,192,,,
+,,,,,اسود,,جاجوار اسود,10,360,,,
+,,,,,الوان,,جاجوار الوان,10,360,,,
+,,,,,2 لون,,جاجوار 2 لون,17,360,,,
+,,,,,الوان,,دولفين الوان,23,120,,,
+,,,,,فسفورى علبة,,دولفين  فسفورى علبة,47,72,,,
+,,,,,2 لون,,دولفن 2 لون,37,120,,,
+,,,,,فسفورى  مطبوع,,دولفن فسفورى  مطبوع,65,40,,,
+,,,,,زجاج الوان وعسلى  مطبوع,,دولفن زجاج الوان وعسلى  مطبوع,85,40,,,
+,,,,,  2لون طرى الوان مطبوع,,دولفن 2لون طرى الوان مطبوع,65,40,,,
+,,,,,2 لون مطبوع,,دولفن 2 لون مطبوع,65,40,,,
+,,,,,كيس سادة مطبوع,,دولفين كيس سادة مطبوع,65,40,,,

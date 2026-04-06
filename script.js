@@ -3,7 +3,7 @@
 // Each row = one variant. Families are grouped using familyKey.
 // Required fields for import:
 // id, familyKey, familyName, familyNameAr, variantName, variantNameAr,
-// cartonPrice, pcsPerCarton, description, descriptionAr, imageFile, badge, enabled
+// name, nameAr, DozenPrice, pcsPerCarton, imageFile, badge, enabled
 
 var PRODUCT_CATALOG = {
     '1': {
@@ -93,6 +93,10 @@ function getImageBase() {
 function toNumberPrice(value) {
     var num = Number(value);
     return Number.isFinite(num) ? num : 0;
+}
+
+function getNumericPrice(product) {
+    return toNumberPrice(product.DozenPrice || product.dozenPrice || product.cartonPrice);
 }
 
 function escapeHtml(text) {
@@ -187,7 +191,7 @@ function buildFamilies(products) {
         var minPrice = 0;
 
         family.variants.forEach(function(variant) {
-            var price = toNumberPrice(variant.cartonPrice);
+            var price = getNumericPrice(variant);
             if (price > 0 && (minPrice === 0 || price < minPrice)) {
                 minPrice = price;
             }
@@ -206,8 +210,7 @@ function buildFamilies(products) {
             return [
                 variant.familyName, variant.familyNameAr,
                 variant.variantName, variant.variantNameAr,
-                variant.name, variant.nameAr,
-                variant.description, variant.descriptionAr
+                variant.name, variant.nameAr
             ].join(' ');
         }).join(' ').toLowerCase();
 
@@ -216,11 +219,20 @@ function buildFamilies(products) {
 }
 
 function getPriceText(product, ar) {
-    var price = toNumberPrice(product.cartonPrice);
+    var price = getNumericPrice(product);
     if (price > 0) {
         return 'EGP ' + price.toFixed(2);
     }
     return ar ? '\u0627\u0644\u0633\u0639\u0631 \u0639\u0646\u062F \u0627\u0644\u0637\u0644\u0628' : 'On Request';
+}
+
+function getDozensPerCarton(product) {
+    var pcsRaw = product.pcsPerCarton != null ? product.pcsPerCarton : product.pcsPerCartonAr;
+    var pcs = Number(pcsRaw);
+    if (!Number.isFinite(pcs) || pcs <= 0) return '';
+    var dozens = pcs / 12;
+    if (Number.isInteger(dozens)) return String(dozens);
+    return dozens.toFixed(2).replace(/\.00$/, '');
 }
 
 function getStartsFromText(minPrice, ar) {
@@ -236,7 +248,7 @@ function getCheapestVariant(variants) {
 
     for (var i = 0; i < variants.length; i++) {
         var variant = variants[i];
-        var price = toNumberPrice(variant.cartonPrice);
+        var price = getNumericPrice(variant);
         if (price > 0 && (cheapest === null || price < cheapestPrice)) {
             cheapest = variant;
             cheapestPrice = price;
@@ -252,7 +264,7 @@ function getHighestPriceVariant(variants) {
 
     for (var i = 0; i < variants.length; i++) {
         var variant = variants[i];
-        var price = toNumberPrice(variant.cartonPrice);
+        var price = getNumericPrice(variant);
         if (price > highestPrice) {
             highest = variant;
             highestPrice = price;
@@ -371,108 +383,94 @@ function renderProductConfigPage() {
     document.title = familyName + (ar ? ' - \u0625\u0645\u0628\u0627\u0628\u064A \u0628\u0644\u0627\u0633\u062A' : ' - Embaby Plast');
 
     var variants = getFamilyVariants(product).slice().sort(function(a, b) {
-        var pa = toNumberPrice(a.cartonPrice);
-        var pb = toNumberPrice(b.cartonPrice);
+        var pa = getNumericPrice(a);
+        var pb = getNumericPrice(b);
 
         // Keep "on request" (0) variants at the end, then sort ascending by price.
         if (pa === 0 && pb > 0) return 1;
         if (pb === 0 && pa > 0) return -1;
         return pa - pb;
     });
-    var initialVariant = getCheapestVariant(variants);
-    var lblVariantType = ar ? '\u0627\u0644\u0646\u0648\u0639' : 'Type';
-    var lblPcsPerCarton = ar ? '\u0639\u062F\u062F \u0627\u0644\u0642\u0637\u0639 / \u0643\u0631\u062A\u0648\u0646\u0629' : 'Pcs / Carton';
     var lblVariant = ar ? '\u0627\u0644\u0623\u0646\u0648\u0627\u0639' : 'Variants';
-    var priceLabel = ar ? '\u0633\u0639\u0631 \u0627\u0644\u0643\u0631\u062A\u0648\u0646\u0629' : 'Carton Price';
+    var priceLabel = ar ? '\u0633\u0639\u0631 \u0627\u0644\u062F\u0633\u062A\u0629' : 'Dozen Price';
+    var dozenInCartonLabel = ar ? '\u0639\u062F\u062F \u0627\u0644\u062F\u0633\u062A\u0629 \u0641\u064A \u0627\u0644\u0643\u0631\u062A\u0648\u0646\u0629' : 'Dozens Per Carton';
     var btnWhatsapp = ar ? '\u062A\u0648\u0627\u0635\u0644 \u0639\u0628\u0631 \u0627\u0644\u0648\u0627\u062A\u0633\u0627\u0628' : 'Contact via WhatsApp';
     var btnBack = ar ? '\u0627\u0644\u0639\u0648\u062F\u0629 \u0644\u0644\u0643\u062A\u0627\u0644\u0648\u062C' : 'Back to Catalog';
 
-    var optionsMarkup = variants.map(function(item) {
-        return '<button type="button" class="variant-option-btn" data-variant-id="' + escapeHtml(item.id) + '">' + escapeHtml(getVariantLabel(item, ar)) + '</button>';
+    var langToggle = document.getElementById('lang-toggle-link');
+    var langMobile = document.getElementById('lang-switch-mobile');
+    var otherLangFolder = ar ? '../en/' : '../ar/';
+    var otherProductUrl = otherLangFolder + 'product.html?id=' + product.id;
+    if (langToggle) langToggle.href = otherProductUrl;
+    if (langMobile) langMobile.href = otherProductUrl;
+
+    var cardsMarkup = variants.map(function(item) {
+        var productName = getProductName(item, ar);
+        var priceText = getPriceText(item, ar);
+        var dozensPerCarton = getDozensPerCarton(item);
+        var cardWhatsappMsg = ar
+            ? '\u0645\u0631\u062D\u0628\u0627\u064B \u0625\u0645\u0628\u0627\u0628\u064A \u0628\u0644\u0627\u0633\u062A! \u0623\u0648\u062F \u0627\u0644\u0627\u0633\u062A\u0641\u0633\u0627\u0631 \u0639\u0646: ' + productName
+            : 'Hello Embaby Plast! I would like to inquire about: ' + productName;
+
+        return ''
+            + '<article class="product-variant-card' + (String(item.id) === String(product.id) ? ' active' : '') + '" data-detail-url="product.html?id=' + escapeHtml(item.id) + '" tabindex="0" role="link" aria-label="' + escapeHtml(productName) + '">'
+            + '<div class="images">'
+            + '<img src="' + imgBase + escapeHtml(getProductImageFile(item)) + '" alt="' + escapeHtml(productName) + '" onerror="this.style.background=\'#D8DEE4\';this.style.height=\'28rem\'">'
+            + '</div>'
+            + '<div class="content">'
+                + '<h3>' + escapeHtml(productName) + '</h3>'
+            + '<p class="product-price product-variant-price"><span class="price-label">' + priceLabel + ':</span><span class="product-variant-price-value">' + escapeHtml(priceText) + '</span></p>'
+            + '<p class="product-dozen-qty"><span class="qty-label">' + dozenInCartonLabel + ':</span><span class="qty-value"> ' + escapeHtml(dozensPerCarton || '-') + '</span></p>'
+            + '</div>'
+            + '<div class="icons">'
+            + '<a href="https://wa.me/201010294098?text=' + encodeURIComponent(cardWhatsappMsg) + '" target="_blank" rel="noopener noreferrer" class="btn-cart product-variant-wa">' + btnWhatsapp + '</a>'
+            + '</div>'
+            + '</article>';
     }).join('');
 
     container.innerHTML = ''
-        + '<div class="product-config-card">'
-        + '<div class="product-config-media">'
-        + '<img id="product-main-image" src="" alt="">'
-        + '</div>'
+        + '<div class="product-config-card product-variants-layout">'
         + '<div class="product-config-form">'
-        + '<p class="product-config-description" id="product-description"></p>'
         + '<div class="product-variant-options">'
         + '<p class="variant-options-label">' + lblVariant + '</p>'
-        + '<div class="variant-options-row">' + optionsMarkup + '</div>'
+        + '<div class="product-variants-grid">' + cardsMarkup + '</div>'
         + '</div>'
-        + '<div class="product-config-specs"><table>'
-        + '<tr><td>' + lblVariantType + '</td><td id="product-finish-value"></td></tr>'
-        + '<tr><td>' + lblPcsPerCarton + '</td><td id="product-pcs-value"></td></tr>'
-        + '</table></div>'
-        + '<div class="product-config-pricing"><p class="product-config-price-label">' + priceLabel + '</p><p class="product-config-price" id="product-price-value"></p></div>'
         + '<div class="product-config-actions">'
-        + '<a href="#" target="_blank" rel="noopener noreferrer" class="btn whatsapp-btn" id="product-whatsapp-link"><i class="fab fa-whatsapp"></i> ' + btnWhatsapp + '</a>'
         + '<a href="products.html" class="btn btn-outline-dark">' + btnBack + '</a>'
         + '</div>'
         + '</div>'
         + '</div>'
         + buildRecommendations(product, ar, imgBase);
 
-    function applyVariant(selectedProduct) {
-        var productName = getProductName(selectedProduct, ar);
-        var mainImg = document.getElementById('product-main-image');
-        var descEl = document.getElementById('product-description');
-        var finishEl = document.getElementById('product-finish-value');
-        var pcsEl = document.getElementById('product-pcs-value');
-        var priceEl = document.getElementById('product-price-value');
-        var whatsappEl = document.getElementById('product-whatsapp-link');
-
-        if (mainImg) {
-            mainImg.src = imgBase + getProductImageFile(selectedProduct);
-            mainImg.alt = productName;
-            mainImg.classList.add('clickable-preview');
-        }
-        if (descEl) descEl.textContent = ar ? (selectedProduct.descriptionAr || selectedProduct.description || '') : (selectedProduct.description || selectedProduct.descriptionAr || '');
-        if (finishEl) finishEl.textContent = getVariantLabel(selectedProduct, ar);
-        if (pcsEl) pcsEl.textContent = ar ? (selectedProduct.pcsPerCartonAr || selectedProduct.pcsPerCarton || '') : (selectedProduct.pcsPerCarton || selectedProduct.pcsPerCartonAr || '');
-        if (priceEl) priceEl.textContent = getPriceText(selectedProduct, ar);
-
-        var whatsappMsg = ar
-            ? '\u0645\u0631\u062D\u0628\u0627\u064B \u0625\u0645\u0628\u0627\u0628\u064A \u0628\u0644\u0627\u0633\u062A! \u0623\u0648\u062F \u0627\u0644\u0627\u0633\u062A\u0641\u0633\u0627\u0631 \u0639\u0646: ' + productName
-            : 'Hello Embaby Plast! I would like to inquire about: ' + productName;
-        if (whatsappEl) whatsappEl.href = 'https://wa.me/201010294098?text=' + encodeURIComponent(whatsappMsg);
-
-        var langToggle = document.getElementById('lang-toggle-link');
-        var langMobile = document.getElementById('lang-switch-mobile');
-        var otherLangFolder = ar ? '../en/' : '../ar/';
-        var otherProductUrl = otherLangFolder + 'product.html?id=' + selectedProduct.id;
-        if (langToggle) langToggle.href = otherProductUrl;
-        if (langMobile) langMobile.href = otherProductUrl;
-
-        container.querySelectorAll('.variant-option-btn').forEach(function(btn) {
-            btn.classList.toggle('active', String(btn.dataset.variantId) === String(selectedProduct.id));
+    container.querySelectorAll('.product-variant-card').forEach(function(card) {
+        card.addEventListener('click', function(e) {
+            if (e.target.closest('.product-view-link') || e.target.closest('.product-variant-wa')) return;
+            window.location.href = this.dataset.detailUrl;
         });
-    }
-
-    container.querySelectorAll('.variant-option-btn').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var selected = PRODUCT_CATALOG[this.dataset.variantId];
-            if (!selected) return;
-            applyVariant(selected);
+        card.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                window.location.href = this.dataset.detailUrl;
+            }
         });
     });
 
     var lightbox = ensureProductImageLightbox();
     var lightboxImg = document.getElementById('product-image-lightbox-img');
-    var mainImage = document.getElementById('product-main-image');
-    if (mainImage && lightbox && lightboxImg) {
-        mainImage.addEventListener('click', function() {
-            lightboxImg.src = mainImage.src;
-            lightboxImg.alt = mainImage.alt;
-            lightbox.classList.add('open');
-            lightbox.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
+    if (lightbox && lightboxImg) {
+        container.querySelectorAll('.product-variant-card .images img').forEach(function(img) {
+            img.classList.add('clickable-preview');
+            img.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('open');
+                lightbox.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+            });
         });
     }
-
-    applyVariant(initialVariant || product);
 
     container.querySelectorAll('.recommendation-card').forEach(function(card) {
         card.addEventListener('click', function(e) {
