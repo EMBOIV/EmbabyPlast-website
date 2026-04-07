@@ -2,7 +2,7 @@
 // ===== PRODUCT CATALOG =====
 // Each row = one variant. Families are grouped using familyKey.
 // Required fields for import:
-// id, familyKey, familyName, familyNameAr, variantName, variantNameAr,
+// id, familyKey, familyName, familyNameAr, varianttype, varianttypeAr,
 // name, nameAr, DozenPrice, pcsPerCarton, imageFile, badge, enabled
 
 var PRODUCT_CATALOG = {
@@ -11,8 +11,8 @@ var PRODUCT_CATALOG = {
         familyKey: 'Amira',
         familyName: 'Amira Combs',
         familyNameAr: 'أمشاط أميرة',
-        variantName: 'Colors',
-        variantNameAr: 'ألوان',
+        varianttype: 'Colors',
+        varianttypeAr: 'ألوان',
         name: 'Amira Colors Comb',
         nameAr: 'مشط أميرة ألوان',
         cartonPrice: 50,
@@ -29,8 +29,8 @@ var PRODUCT_CATALOG = {
         familyKey: 'Dolphin',
         familyName: 'Dolphin Combs',
         familyNameAr: 'أمشاط دولفين',
-        variantName: 'Two Tone',
-        variantNameAr: '٢ لون',
+        varianttype: 'Two Tone',
+        varianttypeAr: '٢ لون',
         name: 'Dolphin Two Tone Comb',
         nameAr: 'مشط دولفين ٢ لون',
         cartonPrice: 75,
@@ -47,8 +47,8 @@ var PRODUCT_CATALOG = {
         familyKey: 'Dolphin',
         familyName: 'Dolphin Combs',
         familyNameAr: 'أمشاط دولفين',
-        variantName: 'Colors',
-        variantNameAr: 'ألوان',
+        varianttype: 'Colors',
+        varianttypeAr: 'ألوان',
         name: 'Dolphin Colors Comb',
         nameAr: 'مشط دولفين ألوان',
         cartonPrice: 55,
@@ -65,8 +65,8 @@ var PRODUCT_CATALOG = {
         familyKey: 'Carmen',
         familyName: 'Carmen Combs',
         familyNameAr: 'أمشاط كارمن',
-        variantName: 'Fluorescent',
-        variantNameAr: 'فسفوري',
+        varianttype: 'Fluorescent',
+        varianttypeAr: 'فسفوري',
         name: 'Carmen Fluorescent Comb',
         nameAr: 'مشط كارمن فسفوري',
         cartonPrice: 72,
@@ -205,8 +205,6 @@ function buildCatalogFromCsvRows(rows) {
             familyKey: String(familyKey),
             familyName: familyName || name,
             familyNameAr: familyNameAr || nameAr || familyName || name,
-            variantName: getRowValue(mapped, ['variantName', 'variant_name']),
-            variantNameAr: getRowValue(mapped, ['variantNameAr', 'variant_name_ar', 'variantarabic']),
             varianttype: getRowValue(mapped, ['varianttype', 'variantType', 'type']),
             varianttypeAr: getRowValue(mapped, ['varianttypeAr', 'variantTypeAr', 'typeAr']),
             name: name,
@@ -257,6 +255,159 @@ function getImageBase() {
     return '../images/';
 }
 
+function getCurrentPageName() {
+    var parts = String(window.location.pathname || '').split('/');
+    var file = String(parts[parts.length - 1] || '').toLowerCase();
+    if (!file || file.indexOf('.html') === -1) return 'index.html';
+    return file;
+}
+
+function getSectionHref(isHome, sectionId) {
+    return isHome ? ('#' + sectionId) : ('index.html#' + sectionId);
+}
+
+function getLangPageHref(targetLang, pageName, currentLang) {
+    if (targetLang === currentLang) return pageName;
+    return '../' + targetLang + '/' + pageName;
+}
+
+function buildSharedHeaderHtml(ctx) {
+    var ar = ctx.ar;
+    var menuArrow = ar ? 'right' : 'left';
+    var menuBack = ar ? 'رجوع' : 'Back';
+    var langMobileLabel = ar ? 'English' : 'العربية';
+    var langMobileAria = ar ? 'English' : 'Arabic';
+    var socialWaTitle = ar ? 'واتساب' : 'WhatsApp';
+    var socialFbTitle = ar ? 'فيسبوك' : 'Facebook';
+    var currentLang = ar ? 'ar' : 'en';
+
+    var homeHref = getSectionHref(ctx.isHome, 'home');
+    var aboutHref = getSectionHref(ctx.isHome, 'about');
+    var whyHref = getSectionHref(ctx.isHome, 'why-choose');
+    var contactHref = getSectionHref(ctx.isHome, 'contact');
+    var productsHref = 'products.html';
+
+    var enHref = getLangPageHref('en', ctx.pageName, currentLang);
+    var arHref = getLangPageHref('ar', ctx.pageName, currentLang);
+    var mobileLangHref = ar ? enHref : arHref;
+    var mobileLangExtra = ctx.isProduct ? ' id="lang-switch-mobile"' : '';
+    var productToggleExtra = ctx.isProduct ? ' id="lang-toggle-link"' : '';
+
+    var homeLabel = ar ? 'الرئيسية' : 'Home';
+    var aboutLabel = ar ? 'عن المصنع' : 'About';
+    var productsLabel = ar ? 'المنتجات' : 'Products';
+    var whyLabel = ar ? 'لماذا نحن' : 'Why Us';
+    var contactLabel = ar ? 'اتصل بنا' : 'Contact';
+
+    return ''
+        + '<input type="checkbox" id="toggler">'
+        + '<label for="toggler" class="fas fa-bars"></label>'
+        + '<div class="logo-wrap">'
+        + '<a href="index.html" class="logo">Embaby<span>Plast</span></a>'
+        + '<div class="lang-mini-switch" aria-label="Language switch">'
+        + '<a href="' + enHref + '" class="lang-mini-btn' + (ar ? '' : ' active') + '"' + (ar && ctx.isProduct ? productToggleExtra : '') + ' onclick="localStorage.setItem(\'lang\',\'en\')">EN</a>'
+        + '<a href="' + arHref + '" class="lang-mini-btn' + (ar ? ' active' : '') + '"' + (!ar && ctx.isProduct ? productToggleExtra : '') + ' onclick="localStorage.setItem(\'lang\',\'ar\')">AR</a>'
+        + '</div>'
+        + '</div>'
+        + '<nav class="navbar">'
+        + '<label for="toggler" class="menu-close"><i class="fas fa-arrow-' + menuArrow + '"></i> <span>' + menuBack + '</span></label>'
+        + '<a href="' + homeHref + '">' + homeLabel + '</a>'
+        + '<a href="' + aboutHref + '">' + aboutLabel + '</a>'
+        + '<a href="' + productsHref + '">' + productsLabel + '</a>'
+        + '<a href="' + whyHref + '">' + whyLabel + '</a>'
+        + '<a href="' + contactHref + '">' + contactLabel + '</a>'
+        + '<a href="' + mobileLangHref + '" class="lang-switch-mobile"' + mobileLangExtra + ' onclick="localStorage.setItem(\'lang\',\'' + (ar ? 'en' : 'ar') + '\')" aria-label="' + langMobileAria + '">' + langMobileLabel + '</a>'
+        + '<div class="nav-social">'
+        + '<a href="https://wa.me/201010294098" target="_blank" rel="noreferrer" aria-label="WhatsApp" title="' + socialWaTitle + '"><i class="fab fa-whatsapp"></i></a>'
+        + '<a href="https://www.facebook.com/" target="_blank" rel="noreferrer" aria-label="Facebook" title="' + socialFbTitle + '"><i class="fab fa-facebook-f"></i></a>'
+        + '</div>'
+        + '</nav>'
+        + '<label for="toggler" class="menu-overlay"></label>';
+}
+
+function buildSharedFooterHtml(ar) {
+    var brandDesc = ar
+        ? 'مصنع تصنيع أمشاط بلاستيكية دقيقة. نوفر أمشاط جملة متينة للموزعين.'
+        : 'Precision plastic comb manufacturing factory. Supplying durable wholesale combs for distributors worldwide.';
+
+    var quickLinksTitle = ar ? 'روابط سريعة' : 'Quick Links';
+    var homeLabel = ar ? 'الرئيسية' : 'Home';
+    var aboutLabel = ar ? 'عن المصنع' : 'About Factory';
+    var productsLabel = ar ? 'المنتجات' : 'Products';
+    var contactLabel = ar ? 'اتصل بنا' : 'Contact';
+
+    var productsColTitle = ar ? 'المنتجات' : 'Products';
+    var allProductsLabel = ar ? 'جميع المنتجات' : 'All Products';
+    var browseCatalogLabel = ar ? 'تصفح الكتالوج' : 'Browse Catalog';
+    var requestOrderLabel = ar ? 'اطلب الآن' : 'Request Order';
+
+    var contactTitle = ar ? 'تواصل المصنع' : 'Factory Contact';
+    var waLabel = ar ? 'واتساب' : 'WhatsApp';
+    var location = ar ? 'المنطقة الصناعية، القاهرة، مصر' : 'Industrial Zone, Cairo, Egypt';
+
+    var copyright = ar
+        ? '&copy; 2026 إمبابي بلاست. جميع الحقوق محفوظة. | مصنع منتجات بلاستيكية'
+        : '&copy; 2026 Embaby Plast. All rights reserved. | Plastic Products Factory';
+
+    return ''
+        + '<div class="footer-top">'
+        + '<div class="footer-brand">'
+        + '<a href="index.html" class="footer-logo">Embaby<span>Plast</span></a>'
+        + '<p>' + brandDesc + '</p>'
+        + '</div>'
+        + '<div class="footer-links">'
+        + '<h3>' + quickLinksTitle + '</h3>'
+        + '<a href="index.html#home">' + homeLabel + '</a>'
+        + '<a href="index.html#about">' + aboutLabel + '</a>'
+        + '<a href="products.html">' + productsLabel + '</a>'
+        + '<a href="index.html#contact">' + contactLabel + '</a>'
+        + '</div>'
+        + '<div class="footer-links">'
+        + '<h3>' + productsColTitle + '</h3>'
+        + '<a href="products.html">' + allProductsLabel + '</a>'
+        + '<a href="products.html">' + browseCatalogLabel + '</a>'
+        + '<a href="index.html#contact">' + requestOrderLabel + '</a>'
+        + '</div>'
+        + '<div class="footer-contact">'
+        + '<h3>' + contactTitle + '</h3>'
+        + '<a href="tel:+201010294098"><i class="fas fa-phone"></i> +20 101 029 4098</a>'
+        + '<a href="https://wa.me/201010294098" target="_blank" rel="noreferrer"><i class="fab fa-whatsapp"></i> ' + waLabel + '</a>'
+        + '<a href="mailto:info@embabyplast.com"><i class="fas fa-envelope"></i> info@embabyplast.com</a>'
+        + '<p><i class="fas fa-location-dot"></i> ' + location + '</p>'
+        + '<div class="social-links">'
+        + '<a href="https://www.facebook.com/" class="social-link" target="_blank" rel="noreferrer" aria-label="Facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>'
+        + '<a href="https://wa.me/201010294098" class="social-link" target="_blank" rel="noreferrer" aria-label="WhatsApp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>'
+        + '</div>'
+        + '</div>'
+        + '</div>'
+        + '<div class="footer-bottom">'
+        + '<p>' + copyright + '</p>'
+        + '</div>';
+}
+
+function renderSharedLayout() {
+    var header = document.getElementById('site-header');
+    var footer = document.getElementById('site-footer');
+    if (!header && !footer) return;
+
+    var ar = isArabic();
+    var pageName = getCurrentPageName();
+    var ctx = {
+        ar: ar,
+        pageName: pageName,
+        isHome: pageName === 'index.html',
+        isProduct: pageName === 'product.html'
+    };
+
+    if (header) {
+        header.innerHTML = buildSharedHeaderHtml(ctx);
+    }
+
+    if (footer) {
+        footer.innerHTML = buildSharedFooterHtml(ar);
+    }
+}
+
 function toNumberPrice(value) {
     var num = Number(value);
     return Number.isFinite(num) ? num : 0;
@@ -279,18 +430,18 @@ function getProductName(product, ar) {
     if (ar) {
         if (product.nameAr) return product.nameAr;
         var famAr = product.familyNameAr || product.familyName || '';
-        var varAr = product.variantNameAr || product.variantName || '';
+        var varAr = product.varianttypeAr || product.varianttype || product.variantTypeAr || product.variantType || '';
         return (famAr + (varAr ? ' - ' + varAr : '')).trim();
     }
     if (product.name) return product.name;
     var fam = product.familyName || product.familyNameAr || '';
-    var variant = product.variantName || product.variantNameAr || '';
+    var variant = product.varianttype || product.varianttypeAr || product.variantType || product.variantTypeAr || '';
     return (fam + (variant ? ' - ' + variant : '')).trim();
 }
 
 function getVariantLabel(product, ar) {
-    if (ar) return product.variantNameAr || product.variantName || product.finishAr || product.finish || product.id;
-    return product.variantName || product.variantNameAr || product.finish || product.finishAr || product.id;
+    if (ar) return product.varianttypeAr || product.varianttype || product.variantTypeAr || product.variantType || product.finishAr || product.finish || product.id;
+    return product.varianttype || product.varianttypeAr || product.variantType || product.variantTypeAr || product.finish || product.finishAr || product.id;
 }
 
 function getProductImageFile(product) {
@@ -426,7 +577,6 @@ function buildFamilies(products) {
                 variant.familyName, variant.familyNameAr,
                 variant.varianttype, variant.varianttypeAr,
                 variant.variantType, variant.variantTypeAr,
-                variant.variantName, variant.variantNameAr,
                 variant.name, variant.nameAr
             ].join(' ');
         }).join(' '));
@@ -739,6 +889,7 @@ function renderProductConfigPage() {
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
+    renderSharedLayout();
     await loadCatalogFromCsv();
 
     var menuToggler = document.getElementById('toggler');
@@ -764,7 +915,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                 item.familyName, item.familyNameAr,
                 item.varianttype, item.varianttypeAr,
                 item.variantType, item.variantTypeAr,
-                item.variantName, item.variantNameAr,
                 item.name, item.nameAr
             ].join(' '));
         }

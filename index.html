@@ -6,6 +6,13 @@
     <meta name="color-scheme" content="light">
     <meta name="theme-color" content="#0B1D2A">
     <title>Embaby Plast | Welcome</title>
+    <script>
+        (function() {
+            var lang = localStorage.getItem('lang');
+            var target = (lang === 'ar') ? 'ar/products.html' : 'en/products.html';
+            window.location.replace(target);
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
@@ -82,7 +89,7 @@
 </head>
 <body>
     <div class="welcome-container">
-        <div class="welcome-logo">Embaby <span>Plast</span></div>
+        <div class="welcome-logo">Embaby<span>Plast</span></div>
         <p class="welcome-tagline">Precision Plastic Combs Manufacturer</p>
         <p class="welcome-label">Choose your language / اختر اللغة</p>
         <div class="lang-buttons">
@@ -92,3 +99,4 @@
     </div>
 </body>
 </html>
+

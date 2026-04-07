@@ -66,10 +66,29 @@ header .logo {
     font-weight: 800;
     color: var(--primary);
     letter-spacing: 0.02em;
+    display: inline-block;
+    line-height: 1;
 }
 
 header .logo span {
     color: var(--secondary);
+    position: relative;
+    display: inline-block;
+}
+
+header .logo span::after {
+    content: "Since 1967";
+    position: absolute;
+    left: 0;
+    top: 100%;
+    margin-top: 0.1rem;
+    font-family: "Inter", "Roboto", sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(11, 29, 42, 0.62);
+    white-space: nowrap;
 }
 
 header .logo-wrap {
@@ -987,8 +1006,8 @@ section {
 }
 
 .product-config .product-variant-card.active {
-    border-color: var(--secondary);
-    box-shadow: 0 0 0 2px rgba(0, 168, 168, 0.12), 0 12px 28px var(--shadow-hover);
+    border-color: var(--border);
+    box-shadow: 0 4px 16px var(--shadow);
 }
 
 .product-config .product-variant-card .images {
