@@ -6,78 +6,6 @@
 // name, nameAr, DozenPrice, pcsPerCarton, imageFile, badge, enabled
 
 var PRODUCT_CATALOG = {
-    '1': {
-        id: '1',
-        familyKey: 'Amira',
-        familyName: 'Amira Combs',
-        familyNameAr: 'أمشاط أميرة',
-        varianttype: 'Colors',
-        varianttypeAr: 'ألوان',
-        name: 'Amira Colors Comb',
-        nameAr: 'مشط أميرة ألوان',
-        cartonPrice: 50,
-        pcsPerCarton: '144',
-        pcsPerCartonAr: '144',
-        description: 'Amira comb - regular colors variant.',
-        descriptionAr: 'مشط أميرة - إصدار الألوان العادية.',
-        imageFile: 'Amira.jpg',
-        badge: 'most selling',
-        enabled: '1'
-    },
-    '2': {
-        id: '2',
-        familyKey: 'Dolphin',
-        familyName: 'Dolphin Combs',
-        familyNameAr: 'أمشاط دولفين',
-        varianttype: 'Two Tone',
-        varianttypeAr: '٢ لون',
-        name: 'Dolphin Two Tone Comb',
-        nameAr: 'مشط دولفين ٢ لون',
-        cartonPrice: 75,
-        pcsPerCarton: '144',
-        pcsPerCartonAr: '144',
-        description: 'Dolphin comb - two tone variant.',
-        descriptionAr: 'مشط دولفين - إصدار لونين.',
-        imageFile: 'Dolphin2color.jpg',
-        badge: '',
-        enabled: '1'
-    },
-    '3': {
-        id: '3',
-        familyKey: 'Dolphin',
-        familyName: 'Dolphin Combs',
-        familyNameAr: 'أمشاط دولفين',
-        varianttype: 'Colors',
-        varianttypeAr: 'ألوان',
-        name: 'Dolphin Colors Comb',
-        nameAr: 'مشط دولفين ألوان',
-        cartonPrice: 55,
-        pcsPerCarton: '144',
-        pcsPerCartonAr: '144',
-        description: 'Dolphin comb - regular colors variant.',
-        descriptionAr: 'مشط دولفين - إصدار الألوان العادية.',
-        imageFile: 'Dolphin.jpg',
-        badge: '',
-        enabled: '1'
-    },
-    '4': {
-        id: '4',
-        familyKey: 'Carmen',
-        familyName: 'Carmen Combs',
-        familyNameAr: 'أمشاط كارمن',
-        varianttype: 'Fluorescent',
-        varianttypeAr: 'فسفوري',
-        name: 'Carmen Fluorescent Comb',
-        nameAr: 'مشط كارمن فسفوري',
-        cartonPrice: 72,
-        pcsPerCarton: '144',
-        pcsPerCartonAr: '144',
-        description: 'Carmen comb - fluorescent variant.',
-        descriptionAr: 'مشط كارمن - إصدار فسفوري.',
-        imageFile: 'Carmen.jpg',
-        badge: 'popular',
-        enabled: '1'
-    }
 };
 
 function getCatalogCsvPath() {
@@ -414,7 +342,7 @@ function toNumberPrice(value) {
 }
 
 function getNumericPrice(product) {
-    return toNumberPrice(product.DozenPrice || product.dozenPrice || product.cartonPrice);
+    return toNumberPrice(product.DozenPrice);
 }
 
 function escapeHtml(text) {
@@ -430,18 +358,13 @@ function getProductName(product, ar) {
     if (ar) {
         if (product.nameAr) return product.nameAr;
         var famAr = product.familyNameAr || product.familyName || '';
-        var varAr = product.varianttypeAr || product.varianttype || product.variantTypeAr || product.variantType || '';
+        var varAr = product.varianttypeAr || product.varianttype || '';
         return (famAr + (varAr ? ' - ' + varAr : '')).trim();
     }
     if (product.name) return product.name;
     var fam = product.familyName || product.familyNameAr || '';
-    var variant = product.varianttype || product.varianttypeAr || product.variantType || product.variantTypeAr || '';
+    var variant = product.varianttype || product.varianttypeAr || '';
     return (fam + (variant ? ' - ' + variant : '')).trim();
-}
-
-function getVariantLabel(product, ar) {
-    if (ar) return product.varianttypeAr || product.varianttype || product.variantTypeAr || product.variantType || product.finishAr || product.finish || product.id;
-    return product.varianttype || product.varianttypeAr || product.variantType || product.variantTypeAr || product.finish || product.finishAr || product.id;
 }
 
 function getProductImageFile(product) {
@@ -470,11 +393,11 @@ function normalizeLookup(value) {
 }
 
 function getVariantTypeEn(product) {
-    return product.varianttype || product.variantType || product.type || '';
+    return product.varianttype || '';
 }
 
 function getVariantTypeAr(product) {
-    return product.varianttypeAr || product.variantTypeAr || product.typeAr || '';
+    return product.varianttypeAr || '';
 }
 
 function getVariantTypeLabel(product, ar) {
@@ -572,15 +495,6 @@ function buildFamilies(products) {
             }
         }
 
-        family.searchText = normalizeLookup(family.variants.map(function(variant) {
-            return [
-                variant.familyName, variant.familyNameAr,
-                variant.varianttype, variant.varianttypeAr,
-                variant.variantType, variant.variantTypeAr,
-                variant.name, variant.nameAr
-            ].join(' ');
-        }).join(' '));
-
         return family;
     });
 }
@@ -594,7 +508,7 @@ function getPriceText(product, ar) {
 }
 
 function getDozensPerCarton(product) {
-    var pcsRaw = product.pcsPerCarton != null ? product.pcsPerCarton : product.pcsPerCartonAr;
+    var pcsRaw = product.pcsPerCarton;
     if (pcsRaw == null) return '';
 
     var pcsText = String(pcsRaw).trim();
@@ -611,7 +525,6 @@ function getDozensPerCarton(product) {
 // opts = {
 //   extraClasses : extra CSS classes on the <article> wrapper (default: '')
 //   extraAttrs   : extra attribute string on the <article> wrapper (default: '')
-//   activeId     : id to compare against item.id to add 'active' class (default: null)
 //   showBadge    : show product badge (default: false)
 // }
 function buildVariantCardHtml(item, ar, imgBase, opts) {
@@ -626,7 +539,6 @@ function buildVariantCardHtml(item, ar, imgBase, opts) {
         ? '\u0645\u0631\u062D\u0628\u0627\u064B \u0625\u0645\u0628\u0627\u0628\u064A \u0628\u0644\u0627\u0633\u062A! \u0623\u0648\u062F \u0627\u0644\u0627\u0633\u062A\u0641\u0633\u0627\u0631 \u0639\u0646: ' + productName
         : 'Hello Embaby Plast! I would like to inquire about: ' + productName;
 
-    var activeClass = (opts.activeId != null && String(item.id) === String(opts.activeId)) ? ' active' : '';
     var extraClasses = opts.extraClasses ? ' ' + opts.extraClasses : '';
     var extraAttrs   = opts.extraAttrs   ? ' ' + opts.extraAttrs   : '';
 
@@ -639,7 +551,7 @@ function buildVariantCardHtml(item, ar, imgBase, opts) {
     }
 
     return ''
-        + '<article class="product-variant-card' + activeClass + extraClasses + '" tabindex="0" aria-label="' + escapeHtml(productName) + '"' + extraAttrs + '>'
+        + '<article class="product-variant-card' + extraClasses + '" tabindex="0" aria-label="' + escapeHtml(productName) + '"' + extraAttrs + '>'
         + badgeHtml
         + '<div class="images">'
         + '<img src="' + imgBase + escapeHtml(getProductImageFile(item)) + '" alt="' + escapeHtml(productName) + '" onerror="this.style.background=\'#D8DEE4\';this.style.height=\'24rem\'">'
@@ -661,22 +573,6 @@ function getStartsFromText(minPrice, ar) {
         return 'EGP ' + minPrice.toFixed(2);
     }
     return ar ? '\u0627\u0644\u0633\u0639\u0631 \u0639\u0646\u062F \u0627\u0644\u0637\u0644\u0628' : 'On Request';
-}
-
-function getCheapestVariant(variants) {
-    var cheapest = null;
-    var cheapestPrice = 0;
-
-    for (var i = 0; i < variants.length; i++) {
-        var variant = variants[i];
-        var price = getNumericPrice(variant);
-        if (price > 0 && (cheapest === null || price < cheapestPrice)) {
-            cheapest = variant;
-            cheapestPrice = price;
-        }
-    }
-
-    return cheapest || variants[0] || null;
 }
 
 function getHighestPriceVariant(variants) {
@@ -824,7 +720,6 @@ function renderProductConfigPage() {
 
     var cardsMarkup = variants.map(function(item) {
         return buildVariantCardHtml(item, ar, imgBase, {
-            activeId: product.id,
             showBadge: false
         });
     }).join('');
@@ -842,19 +737,6 @@ function renderProductConfigPage() {
         + '</div>'
         + '</div>'
         + buildRecommendations(product, ar, imgBase);
-
-    container.querySelectorAll('.product-variant-card').forEach(function(card) {
-        card.addEventListener('click', function(e) {
-            if (e.target.closest('.product-view-link') || e.target.closest('.product-variant-wa')) return;
-            window.location.href = this.dataset.detailUrl;
-        });
-        card.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                window.location.href = this.dataset.detailUrl;
-            }
-        });
-    });
 
     var lightbox = ensureProductImageLightbox();
     var lightboxImg = document.getElementById('product-image-lightbox-img');
@@ -914,7 +796,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             return normalizeLookup([
                 item.familyName, item.familyNameAr,
                 item.varianttype, item.varianttypeAr,
-                item.variantType, item.variantTypeAr,
                 item.name, item.nameAr
             ].join(' '));
         }

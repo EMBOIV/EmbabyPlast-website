@@ -162,17 +162,6 @@ header .navbar a.active {
     background: rgba(0, 168, 168, 0.08);
 }
 
-header .icons a {
-    font-size: 2rem;
-    margin-left: 1.5rem;
-    color: var(--text-light);
-    transition: color 0.2s ease;
-}
-
-header .icons a:hover {
-    color: var(--secondary);
-}
-
 header #toggler {
     display: none;
 }
@@ -195,41 +184,12 @@ header .menu-close {
     display: none;
 }
 
-/* --- Header Icons --- */
-.header-icons {
-    display: flex;
-    align-items: center;
-    gap: 1.1rem;
-}
-
-.header-icons .icon-item {
-    position: relative;
-    display: inline-flex;
-}
-
-.header-icons .icon-count {
-    position: absolute;
-    top: -0.7rem;
-    right: -0.8rem;
-    min-width: 1.9rem;
-    height: 1.9rem;
-    border-radius: 50%;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #fff;
-    background: var(--accent);
-    pointer-events: none;
-}
-
 /* --- Sections --- */
 section {
     padding: 5rem 9%;
 }
 
-.home, .products, .cart, .inquiry {
+.home, .products {
     padding-top: 12rem;
 }
 
@@ -923,40 +883,6 @@ section {
     }
 }
 
-@media(max-width: 480px) {
-    .products.luxury-grid .box-container {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
-/* WhatsApp Button */
-.whatsapp-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.8rem;
-    margin-top: 2rem;
-    padding: 1.2rem 2.4rem;
-    background: #25d366;
-    color: #fff !important;
-    border-radius: 0.4rem;
-    font-family: "Montserrat", "Poppins", sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-}
-
-.whatsapp-btn i { font-size: 1.8rem; }
-
-.whatsapp-btn:hover {
-    background: #128c7e;
-    color: #fff !important;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
-}
-
 /* --- Product Config --- */
 .product-config { padding-top: 12rem; min-height: 75vh; }
 
@@ -1003,11 +929,6 @@ section {
 .product-config .product-variant-card:focus-visible {
     outline: 2px solid var(--secondary);
     outline-offset: 3px;
-}
-
-.product-config .product-variant-card.active {
-    border-color: var(--border);
-    box-shadow: 0 4px 16px var(--shadow);
 }
 
 .product-config .product-variant-card .images {
@@ -1109,24 +1030,12 @@ section {
     box-shadow: 0 8px 24px var(--shadow);
 }
 
-.product-config-media, .product-config-form {
+.product-config-form {
     max-width: 72rem;
     width: 100%;
     margin: 0 auto;
-}
-
-.product-config-media { position: relative; }
-
-.product-config-media img {
-    width: 100%;
-    height: 44rem;
-    object-fit: contain;
-    border-radius: 0.4rem;
-    background: #fff;
-}
-
-.product-config-media img.clickable-preview {
-    cursor: zoom-in;
+    display: flex;
+    flex-direction: column;
 }
 
 .product-image-lightbox {
@@ -1172,108 +1081,6 @@ section {
 .product-image-lightbox-close:hover {
     background: rgba(255, 255, 255, 0.24);
 }
-
-.product-thumb-strip {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.9rem;
-    margin-top: 1rem;
-}
-
-.product-thumb {
-    border: 1px solid var(--border);
-    border-radius: 0.4rem;
-    padding: 0.3rem;
-    background: var(--white);
-    cursor: pointer;
-}
-
-.product-thumb.active {
-    border-color: var(--secondary);
-    box-shadow: 0 0 0 2px rgba(0, 168, 168, 0.2);
-}
-
-.product-thumb img {
-    width: 100%;
-    height: 10rem;
-    object-fit: contain;
-    border-radius: 0.3rem;
-    display: block;
-    background: #fff;
-}
-
-.product-config-pricing { margin-bottom: 1.8rem; }
-
-.product-config-price-label {
-    font-size: 1.35rem;
-    font-weight: 700;
-    color: var(--text-light);
-    margin: 0 0 0.4rem;
-    letter-spacing: 0.02em;
-}
-
-.product-config-price {
-    font-size: 2.8rem;
-    color: var(--secondary);
-    margin: 0;
-    font-weight: 800;
-    line-height: 1.2;
-}
-
-.product-config-meta-price {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-top: 0.7rem;
-}
-
-.product-config-old-price {
-    font-size: 1.5rem;
-    color: #8f8f8f;
-    text-decoration: line-through;
-}
-
-.product-config-discount {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.35rem 0.8rem;
-    border-radius: 0.3rem;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #fff;
-    background: var(--accent);
-}
-
-.product-config-form { display: flex; flex-direction: column; }
-
-.product-config-description {
-    font-size: 1.5rem;
-    color: var(--text-light);
-    line-height: 1.7;
-    margin: 1.2rem 0 0;
-}
-
-.product-config-specs { margin-top: 1.6rem; }
-
-.product-config-specs table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 1.4rem;
-}
-
-.product-config-specs td {
-    padding: 0.8rem 1rem;
-    border-bottom: 1px solid var(--border);
-}
-
-.product-config-specs td:first-child {
-    font-weight: 600;
-    color: var(--primary);
-    width: 40%;
-}
-
-.product-config-specs td:last-child { color: var(--text-light); }
 
 .product-recommendations {
     margin-top: 2.4rem;
@@ -1378,9 +1185,20 @@ section {
 }
 
 .product-config-form .btn {
-    border: none;
     margin-top: 0;
     margin-left: auto;
+}
+
+.btn-outline-dark {
+    background: transparent;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+}
+
+.btn-outline-dark:hover {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
 }
 
 @media(max-width: 1024px) {
@@ -1492,7 +1310,7 @@ section {
     html { font-size: 55%; }
     header { padding: 1.2rem 2rem; }
     section { padding: 4rem 2rem; }
-    .home, .products, .cart, .inquiry { padding-top: 11rem; }
+    .home, .products { padding-top: 11rem; }
     .footer { padding: 4rem 2rem 2rem; }
     .footer .footer-top { grid-template-columns: 1fr 1fr; }
 }
@@ -1620,13 +1438,10 @@ section {
     }
 
     .product-config-card { padding: 1.5rem; }
-    .product-config-media img { height: 30rem; }
     .product-config-actions { flex-wrap: wrap; }
     .product-config-form .btn { width: 100%; margin-left: 0; }
-}
 
-@media(max-width: 768px) {
-    header .navbar { display: flex !important; opacity: 0; visibility: hidden; }
+    header .navbar { display: flex !important; }
     header #toggler:checked ~ .navbar { opacity: 1 !important; visibility: visible !important; }
 
     .recommendation-card {
@@ -1652,27 +1467,6 @@ html[dir="rtl"] .force-ltr-number {
     direction: ltr;
     unicode-bidi: isolate;
     display: inline-block;
-}
-
-/* ===== Language Toggle (Header Inline) ===== */
-.lang-toggle {
-    font-size: 1.4rem;
-    font-weight: 600;
-    padding: 0.5rem 1.4rem;
-    color: var(--secondary);
-    border: 1.5px solid var(--secondary);
-    border-radius: 0.4rem;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    font-family: "Inter", sans-serif;
-    text-decoration: none;
-    white-space: nowrap;
-    margin-left: 1.2rem;
-}
-
-.lang-toggle:hover {
-    background: var(--secondary);
-    color: #fff;
 }
 
 /* Language switch inside mobile dropdown */
@@ -1716,42 +1510,6 @@ html[dir="rtl"] .force-ltr-number {
     margin-top: 1.5rem;
 }
 
-.variant-options-label {
-    font-size: 1.3rem;
-    color: var(--text-light);
-    margin-bottom: 0.8rem;
-    font-weight: 600;
-}
-
-.variant-options-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.8rem;
-}
-
-.variant-option-btn {
-    border: 1px solid var(--border);
-    background: var(--white);
-    color: var(--text);
-    padding: 0.7rem 1.1rem;
-    border-radius: 0.4rem;
-    font-size: 1.3rem;
-    font-family: inherit;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.variant-option-btn:hover {
-    border-color: var(--secondary);
-    color: var(--secondary);
-}
-
-.variant-option-btn.active {
-    background: var(--secondary);
-    border-color: var(--secondary);
-    color: #fff;
-}
-
 /* ===== RTL Support ===== */
 [dir="rtl"] body {
     font-family: "Inter", "Noto Sans Arabic", "Tahoma", sans-serif;
@@ -1759,11 +1517,6 @@ html[dir="rtl"] .force-ltr-number {
 
 [dir="rtl"] header {
     direction: rtl;
-}
-
-[dir="rtl"] .lang-toggle {
-    margin-left: 0;
-    margin-right: 1.2rem;
 }
 
 [dir="rtl"] header .logo-wrap {
@@ -1826,10 +1579,6 @@ html[dir="rtl"] .force-ltr-number {
         border-right: none;
         border-left: 2px solid var(--secondary);
         box-shadow: -12px 0 34px rgba(11, 29, 42, 0.15);
-    }
-
-    .lang-toggle {
-        display: none !important;
     }
 
     .lang-switch-mobile {
