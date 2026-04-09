@@ -8,6 +8,79 @@
 var PRODUCT_CATALOG = {
 };
 
+var CONTACT_INFO = {
+    phoneDigits: '201277793199',
+    phoneDisplay: '+2012 777 93 199',
+    location: {
+        ar: 'المنطقة الصناعية، القاهرة، مصر',
+        en: 'Industrial Zone, Cairo, Egypt'
+    },
+    workingHours: {
+        ar: 'السبت - الخميس: 8:00 ص - 5:00 م',
+        en: 'Sat - Thu: 8:00 AM - 5:00 PM'
+    }
+};
+
+var BRAND_INFO = {
+    ar: 'إمبابي بلاست',
+    en: 'Embaby Plast'
+};
+
+// Products page structure toggle:
+// true  => show families first, then children on filtering
+// false => always show all child products directly
+var PRODUCTS_PAGE_SETTINGS = {
+    groupByFamily: true
+};
+
+function getPhoneTelHref() {
+    return 'tel:+' + CONTACT_INFO.phoneDigits;
+}
+
+function getWhatsappBaseHref() {
+    return 'https://wa.me/' + CONTACT_INFO.phoneDigits;
+}
+
+function getWhatsappHrefWithText(text) {
+    if (!text) return getWhatsappBaseHref();
+    return getWhatsappBaseHref() + '?text=' + encodeURIComponent(text);
+}
+
+function getLocalizedLocation(ar) {
+    return ar ? CONTACT_INFO.location.ar : CONTACT_INFO.location.en;
+}
+
+function getLocalizedWorkingHours(ar) {
+    return ar ? CONTACT_INFO.workingHours.ar : CONTACT_INFO.workingHours.en;
+}
+
+function syncContactLinks() {
+    var ar = isArabic();
+
+    document.querySelectorAll('[data-contact-link="phone"]').forEach(function(link) {
+        link.setAttribute('href', getPhoneTelHref());
+        if (link.hasAttribute('data-contact-text')) {
+            link.textContent = CONTACT_INFO.phoneDisplay;
+        }
+    });
+
+    document.querySelectorAll('[data-contact-link="whatsapp"]').forEach(function(link) {
+        var msg = link.getAttribute('data-whatsapp-message') || '';
+        link.setAttribute('href', getWhatsappHrefWithText(msg));
+        if (link.hasAttribute('data-contact-text')) {
+            link.textContent = CONTACT_INFO.phoneDisplay;
+        }
+    });
+
+    document.querySelectorAll('[data-contact-content="location"]').forEach(function(el) {
+        el.textContent = getLocalizedLocation(ar);
+    });
+
+    document.querySelectorAll('[data-contact-content="hours"]').forEach(function(el) {
+        el.textContent = getLocalizedWorkingHours(ar);
+    });
+}
+
 function getCatalogCsvPath() {
     var path = String(window.location.pathname || '').toLowerCase();
     if (path.indexOf('/en/') !== -1 || path.indexOf('/ar/') !== -1) {
@@ -206,7 +279,6 @@ function buildSharedHeaderHtml(ctx) {
     var langMobileLabel = ar ? 'English' : 'العربية';
     var langMobileAria = ar ? 'English' : 'Arabic';
     var socialWaTitle = ar ? 'واتساب' : 'WhatsApp';
-    var socialFbTitle = ar ? 'فيسبوك' : 'Facebook';
     var currentLang = ar ? 'ar' : 'en';
 
     var homeHref = getSectionHref(ctx.isHome, 'home');
@@ -246,8 +318,7 @@ function buildSharedHeaderHtml(ctx) {
         + '<a href="' + contactHref + '">' + contactLabel + '</a>'
         + '<a href="' + mobileLangHref + '" class="lang-switch-mobile"' + mobileLangExtra + ' onclick="localStorage.setItem(\'lang\',\'' + (ar ? 'en' : 'ar') + '\')" aria-label="' + langMobileAria + '">' + langMobileLabel + '</a>'
         + '<div class="nav-social">'
-        + '<a href="https://wa.me/201010294098" target="_blank" rel="noreferrer" aria-label="WhatsApp" title="' + socialWaTitle + '"><i class="fab fa-whatsapp"></i></a>'
-        + '<a href="https://www.facebook.com/" target="_blank" rel="noreferrer" aria-label="Facebook" title="' + socialFbTitle + '"><i class="fab fa-facebook-f"></i></a>'
+        + '<a href="' + getWhatsappBaseHref() + '" target="_blank" rel="noreferrer" aria-label="WhatsApp" title="' + socialWaTitle + '"><i class="fab fa-whatsapp"></i></a>'
         + '</div>'
         + '</nav>'
         + '<label for="toggler" class="menu-overlay"></label>';
@@ -271,11 +342,12 @@ function buildSharedFooterHtml(ar) {
 
     var contactTitle = ar ? 'تواصل المصنع' : 'Factory Contact';
     var waLabel = ar ? 'واتساب' : 'WhatsApp';
-    var location = ar ? 'المنطقة الصناعية، القاهرة، مصر' : 'Industrial Zone, Cairo, Egypt';
+    var location = getLocalizedLocation(ar);
+    var currentYear = String(new Date().getFullYear());
 
     var copyright = ar
-        ? '&copy; 2026 إمبابي بلاست. جميع الحقوق محفوظة. | مصنع منتجات بلاستيكية'
-        : '&copy; 2026 Embaby Plast. All rights reserved. | Plastic Products Factory';
+        ? ('&copy; ' + currentYear + ' ' + BRAND_INFO.ar + '. جميع الحقوق محفوظة. | مصنع منتجات بلاستيكية')
+        : ('&copy; ' + currentYear + ' ' + BRAND_INFO.en + '. All rights reserved. | Plastic Products Factory');
 
     return ''
         + '<div class="footer-top">'
@@ -298,13 +370,11 @@ function buildSharedFooterHtml(ar) {
         + '</div>'
         + '<div class="footer-contact">'
         + '<h3>' + contactTitle + '</h3>'
-        + '<a href="tel:+201010294098"><i class="fas fa-phone"></i> +20 101 029 4098</a>'
-        + '<a href="https://wa.me/201010294098" target="_blank" rel="noreferrer"><i class="fab fa-whatsapp"></i> ' + waLabel + '</a>'
-        + '<a href="mailto:info@embabyplast.com"><i class="fas fa-envelope"></i> info@embabyplast.com</a>'
+        + '<a href="' + getPhoneTelHref() + '"><i class="fas fa-phone"></i> ' + CONTACT_INFO.phoneDisplay + '</a>'
+        + '<a href="' + getWhatsappBaseHref() + '" target="_blank" rel="noreferrer"><i class="fab fa-whatsapp"></i> ' + waLabel + '</a>'
         + '<p><i class="fas fa-location-dot"></i> ' + location + '</p>'
         + '<div class="social-links">'
-        + '<a href="https://www.facebook.com/" class="social-link" target="_blank" rel="noreferrer" aria-label="Facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>'
-        + '<a href="https://wa.me/201010294098" class="social-link" target="_blank" rel="noreferrer" aria-label="WhatsApp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>'
+        + '<a href="' + getWhatsappBaseHref() + '" class="social-link" target="_blank" rel="noreferrer" aria-label="WhatsApp" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>'
         + '</div>'
         + '</div>'
         + '</div>'
@@ -537,7 +607,7 @@ function buildVariantCardHtml(item, ar, imgBase, opts) {
     var btnWhatsapp = ar ? '\u062A\u0648\u0627\u0635\u0644 \u0639\u0628\u0631 \u0627\u0644\u0648\u0627\u062A\u0633\u0627\u0628' : 'Contact via WhatsApp';
     var waMsg = ar
         ? '\u0645\u0631\u062D\u0628\u0627\u064B \u0625\u0645\u0628\u0627\u0628\u064A \u0628\u0644\u0627\u0633\u062A! \u0623\u0648\u062F \u0627\u0644\u0627\u0633\u062A\u0641\u0633\u0627\u0631 \u0639\u0646: ' + productName
-        : 'Hello Embaby Plast! I would like to inquire about: ' + productName;
+        : ('Hello ' + BRAND_INFO.en + '! I would like to inquire about: ' + productName);
 
     var extraClasses = opts.extraClasses ? ' ' + opts.extraClasses : '';
     var extraAttrs   = opts.extraAttrs   ? ' ' + opts.extraAttrs   : '';
@@ -562,7 +632,7 @@ function buildVariantCardHtml(item, ar, imgBase, opts) {
         + '<p class="product-dozen-qty"><span class="qty-label">' + dozenLabel + ':</span><span class="qty-value"> ' + escapeHtml(dozensPerCarton || '-') + '</span></p>'
         + '</div>'
         + '<div class="icons">'
-        + '<a href="https://wa.me/201010294098?text=' + encodeURIComponent(waMsg) + '" target="_blank" rel="noopener noreferrer" class="btn-cart product-variant-wa">' + btnWhatsapp + '</a>'
+        + '<a href="' + getWhatsappHrefWithText(waMsg) + '" target="_blank" rel="noopener noreferrer" class="btn-cart product-variant-wa">' + btnWhatsapp + '</a>'
         + '</div>'
         + '</article>';
 }
@@ -697,7 +767,7 @@ function renderProductConfigPage() {
         ? (product.familyNameAr || product.nameAr || product.familyName || product.name)
         : (product.familyName || product.name || product.familyNameAr || product.nameAr);
     if (pageTitle) pageTitle.textContent = familyName;
-    document.title = familyName + (ar ? ' - \u0625\u0645\u0628\u0627\u0628\u064A \u0628\u0644\u0627\u0633\u062A' : ' - Embaby Plast');
+    document.title = familyName + (ar ? (' - ' + BRAND_INFO.ar) : (' - ' + BRAND_INFO.en));
 
     var variants = getFamilyVariants(product).slice().sort(function(a, b) {
         var pa = getNumericPrice(a);
@@ -772,6 +842,7 @@ function renderProductConfigPage() {
 
 document.addEventListener('DOMContentLoaded', async function() {
     renderSharedLayout();
+    syncContactLinks();
     await loadCatalogFromCsv();
 
     var menuToggler = document.getElementById('toggler');
@@ -840,7 +911,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         function bindCardInteractions() {
             var boxes = productsSection.querySelectorAll('.box-container .box');
             boxes.forEach(function(box) {
-                if (!box.dataset.detailUrl) return; // variant-result cards have no detailUrl — WA button handles action
+                if (!box.dataset.detailUrl) return;
                 box.addEventListener('click', function(e) {
                     if (e.target.closest('.product-view-link') || e.target.closest('.product-variant-wa')) return;
                     window.location.href = this.dataset.detailUrl;
@@ -853,8 +924,6 @@ document.addEventListener('DOMContentLoaded', async function() {
                 });
             });
         }
-        if (boxContainer) boxContainer.innerHTML = families.map(makeFamilyCardHtml).join('');
-        bindCardInteractions();
 
         var searchBar = document.querySelector('.products-search');
         var typeFilter = null;
@@ -895,25 +964,23 @@ document.addEventListener('DOMContentLoaded', async function() {
             var selectedType = typeFilter ? typeFilter.value : '';
             var noResults = document.getElementById('no-results');
             var visibleCount = 0;
+            var hasActiveFilter = Boolean(query || selectedType);
+            var showChildrenDirectly = !PRODUCTS_PAGE_SETTINGS.groupByFamily || hasActiveFilter;
 
-            if (query) {
+            if (showChildrenDirectly) {
                 var matchedProducts = products.filter(function(item) {
                     var typeKey = getFilterKey(getVariantTypeLabel(item, ar));
                     var matchesType = !selectedType || typeKey === selectedType;
                     if (!matchesType) return false;
+                    if (!query) return true;
                     return buildProductSearchText(item).indexOf(query) !== -1;
                 });
 
                 if (boxContainer) boxContainer.innerHTML = matchedProducts.map(makeVariantCardHtml).join('');
                 visibleCount = matchedProducts.length;
             } else {
-                var filteredFamilies = families.filter(function(family) {
-                    var typeKey = getFilterKey(getVariantTypeLabel(family, ar));
-                    return !selectedType || typeKey === selectedType;
-                });
-
-                if (boxContainer) boxContainer.innerHTML = filteredFamilies.map(makeFamilyCardHtml).join('');
-                visibleCount = filteredFamilies.length;
+                if (boxContainer) boxContainer.innerHTML = families.map(makeFamilyCardHtml).join('');
+                visibleCount = families.length;
             }
 
             bindCardInteractions();
@@ -923,9 +990,10 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
 
             if (totalCountEl) {
+                var totalBaseCount = showChildrenDirectly ? products.length : families.length;
                 var totalText = ar
-                    ? ('إجمالي المنتجات: ' + (query ? products.length : families.length))
-                    : ('Total products: ' + (query ? products.length : families.length));
+                    ? ('إجمالي المنتجات: ' + totalBaseCount)
+                    : ('Total products: ' + totalBaseCount);
                 var visibleText = ar
                     ? (' | المعروض: ' + visibleCount)
                     : (' | Showing: ' + visibleCount);
