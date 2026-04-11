@@ -1,221 +1,221 @@
-﻿"id","familyKey","familyName","name","familyNameAr","nameAr","DozenPrice","pcsPerCarton","cartonPrice","imageFile","badge","badgeAr","enabled","varianttype","varianttypeAr","rowType"
-"family-Rabbit","Rabbit","Rabbit Combs","","أمشاط أرنب","","","","","","","","1","","","parent"
-"1","Rabbit","","Rabbit Colors","","ارنب الوان","20","120","2400","","","","1","","",""
-"2","Rabbit","","Rabbit Two-Tone Colors","","ارنب 2 لون","30","120","3600","","","","1","","",""
-"3","Rabbit","","Rabbit Fluorescent Printed","","ارنب فسفورى مطبوع","65","40","2600","","","","1","","",""
-"4","Rabbit","","Rabbit Glass Honey Printed","","ارنب زجاج عسلى مطبوع","85","40","3400","","","","1","","",""
-"5","Rabbit","","Rabbit Glass Colors Printed","","ارنب زجاج الوان مطبوع","85","40","3400","","","","1","","",""
-"6","Rabbit","","Rabbit Two-Tone Colors Printed","","ارنب 2 لون مطبوع","65","40","2600","","","","1","","",""
-"family-Amira","Amira","Amira Combs","","أمشاط أميرة","","","","","","","","1","","","parent"
-"7","Amira","","Amira Colors","","اميرة الوان","20","192","3840","","","","1","","",""
-"8","Amira","","Amira Fluorescent","","اميرة فسفورى","30","192","5760","","","","1","","",""
-"9","Amira","","Amira Two-Tone Colors","","اميرة 2 لون","30","192","5760","","","","1","","",""
-"10","Amira","","Amira Matte Colors","","اميرة ناشف الوان","30","192","5760","","","","1","","",""
-"11","Amira","","Amira Matte Beige","","اميرة ناشف بيج","30","192","5760","","","","1","","",""
-"family-Jaguar","Jaguar","Jaguar Combs","","أمشاط جاجوار","","","","","","","","1","","","parent"
-"12","Jaguar","","Jaguar Black","","جاجوار اسود","10","360","3600","","","","1","","",""
-"13","Jaguar","","Jaguar Colors","","جاجوار الوان","10","360","3600","","","","1","","",""
-"14","Jaguar","","Jaguar Two-Tone Colors","","جاجوار 2 لون","17","360","6120","","","","1","","",""
-"family-Dolphin","Dolphin","Dolphin Combs","","أمشاط دولفين","","","","","","","","1","","","parent"
-"15","Dolphin","","Dolphin Colors","","دولفين الوان","23","120","2760","","","","1","","",""
-"16","Dolphin","","Dolphin Fluorescent Boxed","","دولفين فسفورى علبة","47","72","3384","","","","1","","",""
-"17","Dolphin","","Dolphin Two-Tone Colors","","دولفن 2 لون","37","120","4440","","","","1","","",""
-"18","Dolphin","","Dolphin Fluorescent Printed","","دولفين فسفورى مطبوع","65","40","2600","","","","1","","",""
-"19","Dolphin","","Dolphin Glass Colors Printed","","دولفين زجاج الوان مطبوع","85","40","3400","","","","1","","",""
-"20","Dolphin","","Dolphin Glass Honey Printed","","دولفين زجاج عسلى مطبوع","85","40","3400","","","","1","","",""
-"21","Dolphin","","Dolphin Colors Printed","","دولفين الوان مطبوع","65","40","2600","","","","1","","",""
-"22","Dolphin","","Dolphin Two-Tone Colors Printed","","دولفين 2 لون مطبوع","65","40","2600","","","","1","","",""
-"23","Dolphin","","Dolphin Bag Plain Printed","","دولفين كيس سادة مطبوع","65","40","2600","","","","1","","",""
-"family-Halaq","Halaq","Halaq Combs","","أمشاط حلاق","","","","","","","","1","","","parent"
-"24","Halaq","","Halaq White","","حلاق ابيض","25","360","9000","","","","1","","",""
-"25","Halaq","","Halaq Black","","حلاق اسود","25","360","9000","","","","1","","",""
-"26","Halaq","","Halaq Beige","","حلاق بيج","25","360","9000","","","","1","","",""
-"family-Gogo","Gogo","Gogo Combs","","أمشاط جوجو","","","","","","","","1","","","parent"
-"27","Gogo","","Gogo","","جوجو","20","360","7200","","","","1","","",""
-"family-Cinderella","Cinderella","Cinderella Combs","","أمشاط سندريلا","","","","","","","","1","","","parent"
-"28","Cinderella","","Cinderella Colors","","سندريلا الوان","35","80","2800","","","","1","","",""
-"29","Cinderella","","Cinderella Two-Tone Colors","","سندريلا 2 لون","47","80","3760","","","","1","","",""
-"30","Cinderella","","Cinderella Glass Colors Printed","","سندريلا زجاج الوان مطبوع","115","40","4600","","","","1","","",""
-"31","Cinderella","","Cinderella Glass Honey Printed","","سندريلا زجاج عسلى مطبوع","115","40","4600","","","","1","","",""
-"32","Cinderella","","Cinderella Fluorescent Carded and Printed","","سندريلا فسفورى كارت و مطبوع","85","40","3400","","","","1","","",""
-"33","Cinderella","","Cinderella Two-Tone Colors Printed","","سندريلا 2 لون مطبوع","85","40","3400","","","","1","","",""
-"family-Sindbad","Sindbad","Sindbad Combs","","أمشاط سندباد","","","","","","","","1","","","parent"
-"34","Sindbad","","Sindbad Colors","","سندباد الوان","20","120","2400","","","","1","","",""
-"family-SatoorKbyr","SatoorKbyr","Satoor Kbyr Combs","","أمشاط ساطور كبير","","","","","","","","1","","","parent"
-"35","SatoorKbyr","","Satoor Kbyr Colors","","ساطور كبير الوان","55","40","2200","","","","1","","",""
-"36","SatoorKbyr","","Satoor Kbyr Black","","ساطور كبير اسود","55","40","2200","","","","1","","",""
-"37","SatoorKbyr","","Satoor Kbyr Fluorescent Printed","","ساطور كبير فسفورى مطبوع","85","40","3400","","","","1","","",""
-"38","SatoorKbyr","","Satoor Kbyr Two-Tone Colors Printed","","ساطور كبير 2 لون مطبوع","85","40","3400","","","","1","","",""
-"39","SatoorKbyr","","Satoor Kbyr Glass Colors Printed","","ساطور كبير زجاج الوان مطبوع","115","40","4600","","","","1","","",""
-"40","SatoorKbyr","","Satoor Kbyr Glass Honey Printed","","ساطور كبير زجاج عسلى مطبوع","115","40","4600","","","","1","","",""
-"41","SatoorKbyr","","Satoor Kbyr Black Printed","","ساطور كبير اسود مطبوع","85","40","3400","","","","1","","",""
-"family-SatoorSghyr","SatoorSghyr","Satoor Sghyr Combs","","أمشاط ساطور صغير","","","","","","","","1","","","parent"
-"42","SatoorSghyr","","Satoor Sghyr Black","","ساطور صغير اسود","27","90","2430","","","","1","","",""
-"43","SatoorSghyr","","Satoor Sghyr Colors","","ساطور صغير الوان","27","90","2430","","","","1","","",""
-"44","SatoorSghyr","","Satoor Sghyr Fluorescent Printed","","ساطور صغير فسفورى مطبوع","65","40","2600","","","","1","","",""
-"45","SatoorSghyr","","Satoor Glass Honey Printed","","ساطور زجاج عسلى مطبوع","85","40","3400","","","","1","","",""
-"46","SatoorSghyr","","Satoor Sghyr Two-Tone Colors Printed","","ساطور صغير 2 لون مطبوع","65","40","2600","","","","1","","",""
-"47","SatoorSghyr","","Satoor Sghyr Black Printed","","ساطور صغير اسود مطبوع","65","40","2600","","","","1","","",""
-"48","SatoorSghyr","","Satoor Sghyr Glass Colors Printed","","ساطور صغير زجاج الوان مطبوع","85","40","3400","","","","1","","",""
-"family-kokoSghyr","kokoSghyr","koko Sghyr Combs","","أمشاط كوكو صغير","","","","","","","","1","","","parent"
-"49","kokoSghyr","","koko Sghyr Fluorescent","","كوكو صغير فسفورى","23","180","4140","","","","1","","",""
-"50","kokoSghyr","","koko Soghayar Black","","كوكو صغير اسود","15","180","2700","","","","1","","",""
-"50","kokoSghyr","","koko Soghayar Colors","","كوكو صغير الوان","15","180","2700","","","","1","","",""
-"51","kokoSghyr","","koko Sghyr Two-Tone Colors","","كوكو صغير 2 لون","25","180","4500","","","","1","","",""
-"family-kokoKbyr","kokoKbyr","koko Kbyr Combs","","أمشاط كوكو كبير","","","","","","","","1","","","parent"
-"52","kokoKbyr","","koko Kbyr Fluorescent","","كوكو كبير فسفورى","48","120","5760","","","","1","","",""
-"53","kokoKbyr","","koko Kbyr Colors","","كوكو كبير الوان","33","120","3960","","","","1","","",""
-"family-TaqmkokoSghyr","TaqmkokoSghyr","Taqm koko Sghyr Combs","","أطقم كوكو صغير","","","","","","","","1","","","parent"
-"54","TaqmkokoSghyr","","Taqm koko Sghyr Black Printed","","طقم كوكو صغير اسود مطبوع","60","40","2400","","","","1","","",""
-"55","TaqmkokoSghyr","","Taqm koko Sghyr Fluorescent Printed","","طقم كوكو صغير فسفورى مطبوع","60","40","2400","","","","1","","",""
-"56","TaqmkokoSghyr","","Taqm koko Sghyr Aag Printed","","طقم كوكو صغير عاج مطبوع","60","40","2400","","","","1","","",""
-"57","TaqmkokoSghyr","","Taqm koko Sghyr Glass Colors Printed","","طقم كوكو صغير زجاج الوان مطبوع","85","40","3400","","","","1","","",""
-"58","TaqmkokoSghyr","","Taqm koko Sghyr Glass Honey Printed","","طقم كوكو صغير زجاج عسلى مطبوع","85","40","3400","","","","1","","",""
-"59","TaqmkokoSghyr","","Taqm koko Sghyr Two-Tone Colors Printed","","طقم كوكو صغير 2 لون مطبوع","65","40","2600","","","","1","","",""
-"family-TaqmkokoKbyr","TaqmkokoKbyr","Taqm koko Kbyr Combs","","أطقم كوكو كبير","","","","","","","","1","","","parent"
-"60","TaqmkokoKbyr","","Taqm koko Kbyr Glass Printed","","طقم كوكو كبير زجاج مطبوع","115","40","4600","","","","1","","",""
-"61","TaqmkokoKbyr","","Taqm koko Kbyr Fluorescent Printed","","طقم كوكو كبير فسفورى مطبوع","65","40","2600","","","","1","","",""
-"62","TaqmkokoKbyr","","Taqm koko Kbyr Ivory Printed","","طقم كوكو كبير سن فيل مطبوع","65","40","2600","","","","1","","",""
-"63","TaqmkokoKbyr","","Taqm Kwkwkbyr Black Printed","","طقم كوكوكبير اسود مطبوع","65","40","2600","","","","1","","",""
-"family-Gawhara","Gawhara","Gawhara Combs","","أمشاط الجوهرة","","","","","","","","1","","","parent"
-"64","Gawhara","","Mesht Al Gawhara Colors","","الجوهرة الوان","23","120","2760","","","","1","","",""
-"65","Gawhara","","Gawhara Fluorescent Boxed","","الجوهرة فسفورى علبة","47","72","3384","","","","1","","",""
-"66","Gawhara","","Mesht Al Gawhara Two-Tone Colors","","الجوهرة 2 لون","37","120","4440","","","","1","","",""
-"67","Gawhara","","Mesht Gawhara Black","","الجوهرة اسود","18","120","2160","","","","1","","",""
-"68","Gawhara","","Mesht Al Gawhara Two-Tone Colors Printed","","الجوهرة 2 لون مطبوع","65","40","2600","","","","1","","",""
-"69","Gawhara","","Al Gawhara Glass Colors Printed","","الجوهرة زجاج الوان مطبوع","85","40","3400","","","","1","","",""
-"70","Gawhara","","Al Gawhara Glass Honey Printed","","الجوهرة زجاج عسلى مطبوع","85","40","3400","","","","1","","",""
-"71","Gawhara","","Al Gawhara Glass Black Printed","","الجوهرة زجاج اسود مطبوع","65","40","2600","","","","1","","",""
-"72","Gawhara","","Al Gawhara Fluorescent Printed","","الجوهرة فسفورى مطبوع","65","40","2600","","","","1","","",""
-"73","Gawhara","","Gawhara Bag Plain Printed","","الجوهرة كيس سادة مطبوع","65","40","2600","","","","1","","",""
-"family-Kawafeer","Kawafeer","Kawafeer Combs","","أمشاط كوافير","","","","","","","","1","","","parent"
-"74","Kawafeer","","Kawafeer Colors","","كوافير الوان","20","192","3840","","","","1","","",""
-"75","Kawafeer","","Kawafeer Two-Tone Colors","","كوافير 2 لون","33","120","3960","","","","1","","",""
-"76","Kawafeer","","Kawafeer Fluorescent Printed","","كوافير فسفورى مطبوع","65","40","2600","","","","1","","",""
-"77","Kawafeer","","Kawafeer Black Printed","","كوافير اسود مطبوع","65","40","2600","","","","1","","",""
-"78","Kawafeer","","Kawafeer Two-Tone Colors Printed","","كوافير 2 لون مطبوع","65","40","2600","","","","1","","",""
-"79","Kawafeer","","Kawafeer Glass Colors Printed","","كوافير زجاج الوان مطبوع","85","40","3400","","","","1","","",""
-"80","Kawafeer","","Kawafeer Glass Honey Printed","","كوافير زجاج عسلى مطبوع","85","40","3400","","","","1","","",""
-"family-Karma","Karma","Karma Combs","","أمشاط كارما","","","","","","","","1","","","parent"
-"81","Karma","","Karma Fluorescent","","كارمـا فسفورى","35","120","4200","","","","1","","",""
-"82","Karma","","Karma Colors","","كارمـا الوان","18","120","2160","","","","1","","",""
-"83","Karma","","Karma Black","","كارمـا اسود","18","120","2160","","","","1","","",""
-"84","Karma","","Karma Two-Tone Colors","","كارمـا 2 لون","30","120","3600","","","","1","","",""
-"85","Karma","","Karma Fluorescent Printed","","كارمـا فسفورى مطبوع","65","40","2600","","","","1","","",""
-"86","Karma","","Karma Glass Colors Printed","","كارما زجاج الوان مطبوع","85","40","3400","","","","1","","",""
-"87","Karma","","Karma Glass Honey Printed","","كارما زجاج عسلى مطبوع","85","40","3400","","","","1","","",""
-"family-Leader","Leader","Leader Combs","","أمشاط ليدر","","","","","","","","1","","","parent"
-"88","Leader","","Leader Colors","","ليدر الوان","27","96","2592","","","","1","","",""
-"89","Leader","","Mesht Leader Fluorescent Printed","","ليدر فسفورى مطبوع","65","40","2600","","","","1","","",""
-"90","Leader","","Mesht Leader Glass Printed","","ليدر زجاج مطبوع","85","40","3400","","","","1","","",""
-"family-Rody","Rody","Rody Combs","","أمشاط رودي","","","","","","","","1","","","parent"
-"91","Rody","","Mesht Rody Colors","","رودى الوان","30","100","3000","","","","1","","",""
-"92","Rody","","Mesht Rody Fluorescent","","رودى فسفورى","55","100","5500","","","","1","","",""
-"93","Rody","","Mesht Rody Two-Tone Colors","","رودى 2 لون","45","100","4500","","","","1","","",""
-"94","Rody","","Rody Two-Tone Colors Printed","","رودى 2 لون مطبوع","65","40","2600","","","","1","","",""
-"family-TwoNahia","TwoNahia","2 Nahia Combs","","أمشاط 2 ناحية","","","","","","","","1","","","parent"
-"95","TwoNahia","","2 Nahia Colors","","2 ناحية الوان","168","15","2520","","","","1","","",""
-"96","TwoNahia","","2 Nahia Glass Colors Printed","","2 ناحية زجاج الوان مطبوع","45","40","1800","","","","1","","",""
-"97","TwoNahia","","2 Nahia Glass Honey Printed","","2 ناحية زجاج عسلى مطبوع","45","40","1800","","","","1","","",""
-"98","TwoNahia","","2 Nahia Fluorescent Printed","","2 ناحية فسفورى مطبوع","45","40","1800","","","","1","","",""
-"99","TwoNahia","","2 Nahia Black Printed","","2 ناحية اسود مطبوع","25","40","1000","","","","1","","",""
-"family-ThreeNahia","ThreeNahia","3 Nahia Combs","","أمشاط 3 ناحية","","","","","","","","1","","","parent"
-"100","ThreeNahia","","3 Nahia Colors","","3 ناحية الوان","27","60","1620","","","","1","","",""
-"101","ThreeNahia","","3 Nahia Black Set","","3 ناحية اسود طقم","23","100","2300","","","","1","","",""
-"102","ThreeNahia","","3 Nahia Black Printed","","3 ناحية اسود مطبوع","27","60","1620","","","","1","","",""
-"103","ThreeNahia","","3 Nahia Glass Honey Printed","","3 ناحية زجاج عسلى مطبوع","85","40","3400","","","","1","","",""
-"104","ThreeNahia","","3 Nahia Glass Colors Printed","","3 ناحية زجاج الوان مطبوع","85","40","3400","","","","1","","",""
-"105","ThreeNahia","","3 Nahia Two-Tone Colors Printed","","3 ناحية 2 لون مطبوع","35","40","1400","","","","1","","",""
-"family-Carmen","Carmen","Carmen Combs","","فلايات كارمن","","","","","","","","1","","","parent"
-"106","Carmen","","Carmen White Lux","","كارمن ابيض لوكس","33","240","7920","","","","1","","",""
-"107","Carmen","","Carmen White","","كارمن ابيض","18","240","4320","","","","1","","",""
-"108","Carmen","","Carmen Fluorescent","","كارمن فسفورى","33","240","7920","","","","1","","",""
-"109","Carmen","","Carmen Colors","","كارمن الوان","20","240","4800","","","","1","","",""
-"110","Carmen","","Carmen Black","","كارمن اسود","20","240","4800","","","","1","","",""
-"111","Carmen","","Carmen Green","","كارمن اخضر","27","240","6480","","","","1","","",""
-"family-Miro","Miro","Miro Combs","","فلايات ميرو","","","","","","","","1","","","parent"
-"112","Miro","","Miro Fluorescent","","ميــرو فسفورى","33","240","7920","","","","1","","",""
-"113","Miro","","Miro Colors","","ميــرو الوان","18","240","4320","","","","1","","",""
-"114","Miro","","Miro A Sfr","","ميــرو اصفر","33","240","7920","","","","1","","",""
-"115","Miro","","Miro White","","ميــرو ابيض","33","240","7920","","","","1","","",""
-"116","Miro","","Miro Black","","ميــرو اسود","18","240","4320","","","","1","","",""
-"117","Miro","","Miro Two-Tone Colors","","ميــرو 2 لون","26","240","6240","","","","1","","",""
-"family-Shams","Shams","Shams Combs","","فلايات شمس","","","","","","","","1","","","parent"
-"118","Shams","","Shams Two-Tone Colors","","شمس 2 لون","28","144","4032","","","","1","","",""
-"119","Shams","","Shams Black","","شمس اسود","19","144","2736","","","","1","","",""
-"120","Shams","","Shams Black Lux","","شمس اسود لوكس","21","144","3024","","","","1","","",""
-"121","Shams","","Shams Colors","","شمس الوان","21","144","3024","","","","1","","",""
-"122","Shams","","Shams Fluorescent Printed","","شمس فسفورى مطبوع","60","48","2880","","","","1","","",""
-"123","Shams","","Shams White Printed","","شمس ابيض مطبوع","60","48","2880","","","","1","","",""
-"124","Shams","","Shams Yellow Printed","","شمس اصفر مطبوع","60","48","2880","","","","1","","",""
-"125","Shams","","Shams Ivory Printed","","شمس سن فيل مطبوع","60","48","2880","","","","1","","",""
-"126","Shams","","Shams Glass Colors Printed","","شمس زجاج الوان مطبوع","70","48","3360","","","","1","","",""
-"127","Shams","","Shams Glass Honey Printed","","شمس زجاج عسلى مطبوع","70","48","3360","","","","1","","",""
-"family-Nogoom","Nogoom","Nogoom Combs","","فلايات نجوم","","","","","","","","1","","","parent"
-"128","Nogoom","","Nogoom Lux","","نجوم لوكس","21","240","5040","","","","1","","",""
-"129","Nogoom","","Nogoom White","","نجوم ابيض","15","240","3600","","","","1","","",""
-"130","Nogoom","","Nogoom Colors","","نجوم الوان","15","240","3600","","","","1","","",""
-"131","Nogoom","","Nogoom Matte","","نجوم ناشف","20","240","4800","","","","1","","",""
-"family-Samar","Samar","Samar Combs","","فلايات سمر","","","","","","","","1","","","parent"
-"132","Samar","","Samar Colors","","سمر الوان","16","240","3840","","","","1","","",""
-"133","Samar","","Samar Fluorescent","","سمر فسفورى","28","240","6720","","","","1","","",""
-"134","Samar","","Samar Black","","سمر اسود","16","240","3840","","","","1","","",""
-"135","Samar","","Samar Two-Tone Colors","","سمر 2 لون","24","240","5760","","","","1","","",""
-"family-Zeina","Zeina","Zeina Combs","","فلايات زينة","","","","","","","","1","","","parent"
-"136","Zeina","","Zeina Black","","زينة اسود","21","144","3024","","","","1","","",""
-"137","Zeina","","Zeina Two-Tone Colors","","زينة 2 لون","28","144","4032","","","","1","","",""
-"138","Zeina","","Zeina Glass Colors Printed","","زينة زجاج الوان مطبوع","70","48","3360","","","","1","","",""
-"139","Zeina","","Zeina Glass Honey Printed","","زينة زجاج عسلى مطبوع","70","48","3360","","","","1","","",""
-"140","Zeina","","Zeina Aag Printed","","زينة عاج مطبوع","60","48","2880","","","","1","","",""
-"family-Yasmina","Yasmina","Yasmina Combs","","أمشاط ياسمينا","","","","","","","","1","","","parent"
-"141","Yasmina","","Yasmina Fluorescent Printed","","ياسمينا فسفورى مطبوع","65","40","2600","","","","1","","",""
-"142","Yasmina","","Yasmina Black Printed","","ياسمينا اسود مطبوع","65","40","2600","","","","1","","",""
-"143","Yasmina","","Yasmina Blue Printed","","ياسمينا ازرق مطبوع","65","40","2600","","","","1","","",""
-"family-Kyng","Kyng","Kyng Combs","","أمشاط كينج","","","","","","","","1","","","parent"
-"144","Kyng","","Mesht Kyng Fluorescent Printed","","كينج فسفورى مطبوع","115","40","4600","","","","1","","",""
-"145","Kyng","","Mesht Kyng Colors Printed","","كينج الوان مطبوع","65","40","2600","","","","1","","",""
-"146","Kyng","","Mesht Kyng Glass Colors Printed","","كينج زجاج الوان مطبوع","165","40","6600","","","","1","","",""
-"147","Kyng","","Mesht Kyng Glass Honey Printed","","كينج زجاج عسلى مطبوع","165","40","6600","","","","1","","",""
-"family-Lady","Lady","Lady Combs","","أمشاط ليدي","","","","","","","","1","","","parent"
-"148","Lady","","Lady Fluorescent Printed","","ليدى فسفورى مطبوع","65","40","2600","","","","1","","",""
-"149","Lady","","Lady Ivory Printed","","ليدى سن فيل مطبوع","65","40","2600","","","","1","","",""
-"150","Lady","","Lady Colors","","ليدى الوان","37","60","2220","","","","1","","",""
-"family-Farasha","Farasha","Farasha","","فراشة","","","","","","","","1","","","parent"
-"151","Farasha","","Farasha Fluorescent","","فراشة فسفورى","27","100","2700","","","","1","","",""
-"152","Farasha","","Farasha Asd","","فراشة اسد","22","100","2200","","","","1","","",""
-"153","Farasha","","Farasha Export","","فراشة تصدير","42","60","2520","","","","1","","",""
-"family-Master","Master","Master Combs","","أمشاط ماستر","","","","","","","","1","","","parent"
-"154","Master","","Mesht Master White","","ماستر ابيض","60","60","3600","","","","1","","",""
-"155","Master","","Mesht Master Black","","ماستر اسود","60","60","3600","","","","1","","",""
-"156","Master","","Mesht Master Ivory","","ماستر سن فيل","60","60","3600","","","","1","","",""
-"157","Master","","Mesht Master Fluorescent","","ماستر فسفورى","60","60","3600","","","","1","","",""
-"family-Gwlyt","Gwlyt","Gwlyt Fly","","فلايات جوليت","","","","","","","","1","","","parent"
-"158","Gwlyt","","Falaya Gwlyt Black","","جوليت اسود","15","240","3600","","","","1","","",""
-"159","Gwlyt","","Gwlyt Fluorescent","","جوليت فسفورى","25","240","6000","","","","1","","",""
-"160","Gwlyt","","Gwlyt White","","جوليت ابيض","25","240","6000","","","","1","","",""
-"161","Gwlyt","","Gwlyt Aag","","جوليت عاج","25","240","6000","","","","1","","",""
-"162","Gwlyt","","Falaya Gwlyt Colors","","جوليت الوان","15","240","3600","","","","1","","",""
-"163","Gwlyt","","Falaya Qlb Fluorescent","","قلب فسفورى","25","240","6000","","","","1","","",""
-"family-Qlb","Qlb","Qlb Fly","","فلايات قلب","","","","","","","","1","","","parent"
-"164","Qlb","","Falaya Qlb Two-Tone Colors","","قلب 2 لون","17","240","4080","","","","1","","",""
-"165","Qlb","","Falaya Qlb Colors","","قلب الوان","15","240","3600","","","","1","","",""
-"166","Qlb","","Qlb Matte Beige","","قلب ناشف بيج","25","240","6000","","","","1","","",""
-"family-Khashab","Khashab","Khashab Combs","","أمشاط خشب","","","","","","","","1","","","parent"
-"167","Khashab","","Falaya Wooden","","فلاية خشب","60","30","1800","","","","1","","",""
-"168","Khashab","","Khashab Kbyr Anwaa Lwks Wooden","","خشب كبير انواع لوكس","115","22","2530","","","","1","","",""
-"169","Khashab","","Khashab Sghyr Anwaa Lwks Wooden","","خشب صغير انواع لوكس","96","30","2880","","","","1","","",""
-"170","Khashab","","Khashab Aks Larg Wooden","","خشب اكس لارج","120","20","2400","","","","1","","",""
-"family-Warda","Warda","Warda Combs","","أمشاط وردة","","","","","","","","1","","","parent"
-"171","Warda","","Warda Fluorescent","","وردة فسفورى","27","100","2700","","","","1","","",""
-"family-Sobaa","Sobaa","Sobaa Combs","","أمشاط صباع","","","","","","","","1","","","parent"
-"172","Sobaa","","Sobaa Fluorescent","","صبــــــاع فسفورى","17","200","3400","","","","1","","",""
-"family-Frshaa","Frshaa","Frshaa Brushes","","فرشاة شعر","","","","","","","","1","","","parent"
-"173","Frshaa","","Frshaa Dyna","","فرشاة دينا","60","39","2340","","","","1","","",""
-"174","Frshaa","","Frshaa Mrbaa","","فرشاة مربعة","25","100","2500","","","","1","","",""
-"175","Frshaa","","Frshaa Abyr","","فرشاة عبير","25","100","2500","","","","1","","",""
-"176","Frshaa","","Frshaa Napoli Fluorescent","","فرشاة نابولى فسفورى","70","30","2100","","","","1","","",""
-"family-Hanady","Hanady","Hanady Combs","","أمشاط هنادي","","","","","","","","1","","","parent"
-"177","Hanady","","Hanady Fluorescent","","هنادى فسفورى","35","144","5040","","","","1","","",""
-"178","Hanady","","Hanady White","","هنادى ابيض","35","144","5040","","","","1","","",""
-"family-Bgrab","Bgrab","Bgrab Combs","","أمشاط بجراب","","","","","","","","1","","","parent"
-"179","Bgrab","","Mesht Bgrab Colors","","بجراب الوان","38","144","5472","","","","1","","",""
+﻿id,familyKey,familyName,name,familyNameAr,nameAr,DozenPrice,pcsPerCarton,cartonPrice,imageFile,badge,badgeAr,enabled,varianttype,varianttypeAr,rowType
+family-Rabbit,Rabbit,Rabbit Combs,,أمشاط أرنب,,,,,,,,1,,,parent
+1,Rabbit,,Rabbit Colors,,ارنب الوان,20,120,2400,,,,1,,,
+2,Rabbit,,Rabbit Two-Tone Colors,,ارنب 2 لون,30,120,3600,,,,1,,,
+3,Rabbit,,Rabbit Fluorescent Printed,,ارنب فسفورى مطبوع,65,40,2600,,,,1,,,
+4,Rabbit,,Rabbit Glass Honey Printed,,ارنب زجاج عسلى مطبوع,85,40,3400,,,,1,,,
+5,Rabbit,,Rabbit Glass Colors Printed,,ارنب زجاج الوان مطبوع,85,40,3400,,,,1,,,
+6,Rabbit,,Rabbit Two-Tone Colors Printed,,ارنب 2 لون مطبوع,65,40,2600,,,,1,,,
+family-Amira,Amira,Amira Combs,,أمشاط أميرة,,,,,,,,1,,,parent
+7,Amira,,Amira Colors,,اميرة الوان,20,192,3840,,,,1,,,
+8,Amira,,Amira Fluorescent,,اميرة فسفورى,30,192,5760,,,,1,,,
+9,Amira,,Amira Two-Tone Colors,,اميرة 2 لون,30,192,5760,,,,1,,,
+10,Amira,,Amira Matte Colors,,اميرة ناشف الوان,30,192,5760,,,,1,,,
+11,Amira,,Amira Matte Beige,,اميرة ناشف بيج,30,192,5760,,,,1,,,
+family-Jaguar,Jaguar,Jaguar Combs,,أمشاط جاجوار,,,,,,,,1,,,parent
+12,Jaguar,,Jaguar Black,,جاجوار اسود,10,360,3600,,,,1,,,
+13,Jaguar,,Jaguar Colors,,جاجوار الوان,10,360,3600,,,,1,,,
+14,Jaguar,,Jaguar Two-Tone Colors,,جاجوار 2 لون,17,360,6120,,,,1,,,
+family-Dolphin,Dolphin,Dolphin Combs,,أمشاط دولفين,,,,,,,,1,,,parent
+15,Dolphin,,Dolphin Colors,,دولفين الوان,23,120,2760,,,,1,,,
+16,Dolphin,,Dolphin Fluorescent Boxed,,دولفين فسفورى علبة,47,72,3384,,,,1,,,
+17,Dolphin,,Dolphin Two-Tone Colors,,دولفن 2 لون,37,120,4440,,,,1,,,
+18,Dolphin,,Dolphin Fluorescent Printed,,دولفين فسفورى مطبوع,65,40,2600,,,,1,,,
+19,Dolphin,,Dolphin Glass Colors Printed,,دولفين زجاج الوان مطبوع,85,40,3400,,,,1,,,
+20,Dolphin,,Dolphin Glass Honey Printed,,دولفين زجاج عسلى مطبوع,85,40,3400,,,,1,,,
+21,Dolphin,,Dolphin Colors Printed,,دولفين الوان مطبوع,65,40,2600,,,,1,,,
+22,Dolphin,,Dolphin Two-Tone Colors Printed,,دولفين 2 لون مطبوع,65,40,2600,,,,1,,,
+23,Dolphin,,Dolphin Bag Plain Printed,,دولفين كيس سادة مطبوع,65,40,2600,,,,1,,,
+family-Halaq,Halaq,Halaq Combs,,أمشاط حلاق,,,,,,,,1,,,parent
+24,Halaq,,Halaq White,,حلاق ابيض,25,360,9000,,,,1,,,
+25,Halaq,,Halaq Black,,حلاق اسود,25,360,9000,,,,1,,,
+26,Halaq,,Halaq Beige,,حلاق بيج,25,360,9000,,,,1,,,
+family-Gogo,Gogo,Gogo Combs,,أمشاط جوجو,,,,,,,,1,,,parent
+27,Gogo,,Gogo,,جوجو,20,360,7200,,,,1,,,
+family-Cinderella,Cinderella,Cinderella Combs,,أمشاط سندريلا,,,,,,,,1,,,parent
+28,Cinderella,,Cinderella Colors,,سندريلا الوان,35,80,2800,,,,1,,,
+29,Cinderella,,Cinderella Two-Tone Colors,,سندريلا 2 لون,47,80,3760,,,,1,,,
+30,Cinderella,,Cinderella Glass Colors Printed,,سندريلا زجاج الوان مطبوع,115,40,4600,,,,1,,,
+31,Cinderella,,Cinderella Glass Honey Printed,,سندريلا زجاج عسلى مطبوع,115,40,4600,,,,1,,,
+32,Cinderella,,Cinderella Fluorescent Carded and Printed,,سندريلا فسفورى كارت و مطبوع,85,40,3400,,,,1,,,
+33,Cinderella,,Cinderella Two-Tone Colors Printed,,سندريلا 2 لون مطبوع,85,40,3400,,,,1,,,
+family-Sindbad,Sindbad,Sindbad Combs,,أمشاط سندباد,,,,,,,,1,,,parent
+34,Sindbad,,Sindbad Colors,,سندباد الوان,20,120,2400,,,,1,,,
+family-SatoorKbyr,SatoorKbyr,Satoor Kbyr Combs,,أمشاط ساطور كبير,,,,,,,,1,,,parent
+35,SatoorKbyr,,Satoor Kbyr Colors,,ساطور كبير الوان,55,40,2200,,,,1,,,
+36,SatoorKbyr,,Satoor Kbyr Black,,ساطور كبير اسود,55,40,2200,,,,1,,,
+37,SatoorKbyr,,Satoor Kbyr Fluorescent Printed,,ساطور كبير فسفورى مطبوع,85,40,3400,,,,1,,,
+38,SatoorKbyr,,Satoor Kbyr Two-Tone Colors Printed,,ساطور كبير 2 لون مطبوع,85,40,3400,,,,1,,,
+39,SatoorKbyr,,Satoor Kbyr Glass Colors Printed,,ساطور كبير زجاج الوان مطبوع,115,40,4600,,,,1,,,
+40,SatoorKbyr,,Satoor Kbyr Glass Honey Printed,,ساطور كبير زجاج عسلى مطبوع,115,40,4600,,,,1,,,
+41,SatoorKbyr,,Satoor Kbyr Black Printed,,ساطور كبير اسود مطبوع,85,40,3400,,,,1,,,
+family-SatoorSghyr,SatoorSghyr,Satoor Sghyr Combs,,أمشاط ساطور صغير,,,,,,,,1,,,parent
+42,SatoorSghyr,,Satoor Sghyr Black,,ساطور صغير اسود,27,90,2430,,,,1,,,
+43,SatoorSghyr,,Satoor Sghyr Colors,,ساطور صغير الوان,27,90,2430,,,,1,,,
+44,SatoorSghyr,,Satoor Sghyr Fluorescent Printed,,ساطور صغير فسفورى مطبوع,65,40,2600,,,,1,,,
+45,SatoorSghyr,,Satoor Glass Honey Printed,,ساطور زجاج عسلى مطبوع,85,40,3400,,,,1,,,
+46,SatoorSghyr,,Satoor Sghyr Two-Tone Colors Printed,,ساطور صغير 2 لون مطبوع,65,40,2600,,,,1,,,
+47,SatoorSghyr,,Satoor Sghyr Black Printed,,ساطور صغير اسود مطبوع,65,40,2600,,,,1,,,
+48,SatoorSghyr,,Satoor Sghyr Glass Colors Printed,,ساطور صغير زجاج الوان مطبوع,85,40,3400,,,,1,,,
+family-kokoSghyr,kokoSghyr,koko Sghyr Combs,,أمشاط كوكو صغير,,,,,,,,1,,,parent
+49,kokoSghyr,,koko Sghyr Fluorescent,,كوكو صغير فسفورى,23,180,4140,,,,1,,,
+50,kokoSghyr,,koko Soghayar Black,,كوكو صغير اسود,15,180,2700,,,,1,,,
+50,kokoSghyr,,koko Soghayar Colors,,كوكو صغير الوان,15,180,2700,,,,1,,,
+51,kokoSghyr,,koko Sghyr Two-Tone Colors,,كوكو صغير 2 لون,25,180,4500,,,,1,,,
+family-kokoKbyr,kokoKbyr,koko Kbyr Combs,,أمشاط كوكو كبير,,,,,,,,1,,,parent
+52,kokoKbyr,,koko Kbyr Fluorescent,,كوكو كبير فسفورى,48,120,5760,,,,1,,,
+53,kokoKbyr,,koko Kbyr Colors,,كوكو كبير الوان,33,120,3960,,,,1,,,
+family-TaqmkokoSghyr,TaqmkokoSghyr,Taqm koko Sghyr Combs,,أطقم كوكو صغير,,,,,,,,1,,,parent
+54,TaqmkokoSghyr,,Taqm koko Sghyr Black Printed,,طقم كوكو صغير اسود مطبوع,60,40,2400,,,,1,,,
+55,TaqmkokoSghyr,,Taqm koko Sghyr Fluorescent Printed,,طقم كوكو صغير فسفورى مطبوع,60,40,2400,,,,1,,,
+56,TaqmkokoSghyr,,Taqm koko Sghyr Aag Printed,,طقم كوكو صغير عاج مطبوع,60,40,2400,,,,1,,,
+57,TaqmkokoSghyr,,Taqm koko Sghyr Glass Colors Printed,,طقم كوكو صغير زجاج الوان مطبوع,85,40,3400,,,,1,,,
+58,TaqmkokoSghyr,,Taqm koko Sghyr Glass Honey Printed,,طقم كوكو صغير زجاج عسلى مطبوع,85,40,3400,,,,1,,,
+59,TaqmkokoSghyr,,Taqm koko Sghyr Two-Tone Colors Printed,,طقم كوكو صغير 2 لون مطبوع,65,40,2600,,,,1,,,
+family-TaqmkokoKbyr,TaqmkokoKbyr,Taqm koko Kbyr Combs,,أطقم كوكو كبير,,,,,,,,1,,,parent
+60,TaqmkokoKbyr,,Taqm koko Kbyr Glass Printed,,طقم كوكو كبير زجاج مطبوع,115,40,4600,,,,1,,,
+61,TaqmkokoKbyr,,Taqm koko Kbyr Fluorescent Printed,,طقم كوكو كبير فسفورى مطبوع,65,40,2600,,,,1,,,
+62,TaqmkokoKbyr,,Taqm koko Kbyr Ivory Printed,,طقم كوكو كبير سن فيل مطبوع,65,40,2600,,,,1,,,
+63,TaqmkokoKbyr,,Taqm Kwkwkbyr Black Printed,,طقم كوكوكبير اسود مطبوع,65,40,2600,,,,1,,,
+family-Gawhara,Gawhara,Gawhara Combs,,أمشاط الجوهرة,,,,,,,,1,,,parent
+64,Gawhara,,Mesht Al Gawhara Colors,,الجوهرة الوان,23,120,2760,,,,1,,,
+65,Gawhara,,Gawhara Fluorescent Boxed,,الجوهرة فسفورى علبة,47,72,3384,,,,1,,,
+66,Gawhara,,Mesht Al Gawhara Two-Tone Colors,,الجوهرة 2 لون,37,120,4440,,,,1,,,
+67,Gawhara,,Mesht Gawhara Black,,الجوهرة اسود,18,120,2160,,,,1,,,
+68,Gawhara,,Mesht Al Gawhara Two-Tone Colors Printed,,الجوهرة 2 لون مطبوع,65,40,2600,,,,1,,,
+69,Gawhara,,Al Gawhara Glass Colors Printed,,الجوهرة زجاج الوان مطبوع,85,40,3400,,,,1,,,
+70,Gawhara,,Al Gawhara Glass Honey Printed,,الجوهرة زجاج عسلى مطبوع,85,40,3400,,,,1,,,
+71,Gawhara,,Al Gawhara Glass Black Printed,,الجوهرة زجاج اسود مطبوع,65,40,2600,,,,1,,,
+72,Gawhara,,Al Gawhara Fluorescent Printed,,الجوهرة فسفورى مطبوع,65,40,2600,,,,1,,,
+73,Gawhara,,Gawhara Bag Plain Printed,,الجوهرة كيس سادة مطبوع,65,40,2600,,,,1,,,
+family-Kawafeer,Kawafeer,Kawafeer Combs,,أمشاط كوافير,,,,,,,,1,,,parent
+74,Kawafeer,,Kawafeer Colors,,كوافير الوان,20,192,3840,,,,1,,,
+75,Kawafeer,,Kawafeer Two-Tone Colors,,كوافير 2 لون,33,120,3960,,,,1,,,
+76,Kawafeer,,Kawafeer Fluorescent Printed,,كوافير فسفورى مطبوع,65,40,2600,,,,1,,,
+77,Kawafeer,,Kawafeer Black Printed,,كوافير اسود مطبوع,65,40,2600,,,,1,,,
+78,Kawafeer,,Kawafeer Two-Tone Colors Printed,,كوافير 2 لون مطبوع,65,40,2600,,,,1,,,
+79,Kawafeer,,Kawafeer Glass Colors Printed,,كوافير زجاج الوان مطبوع,85,40,3400,,,,1,,,
+80,Kawafeer,,Kawafeer Glass Honey Printed,,كوافير زجاج عسلى مطبوع,85,40,3400,,,,1,,,
+family-Karma,Karma,Karma Combs,,أمشاط كارما,,,,,,,,1,,,parent
+81,Karma,,Karma Fluorescent,,كارمـا فسفورى,35,120,4200,,,,1,,,
+82,Karma,,Karma Colors,,كارمـا الوان,18,120,2160,,,,1,,,
+83,Karma,,Karma Black,,كارمـا اسود,18,120,2160,,,,1,,,
+84,Karma,,Karma Two-Tone Colors,,كارمـا 2 لون,30,120,3600,,,,1,,,
+85,Karma,,Karma Fluorescent Printed,,كارمـا فسفورى مطبوع,65,40,2600,,,,1,,,
+86,Karma,,Karma Glass Colors Printed,,كارما زجاج الوان مطبوع,85,40,3400,,,,1,,,
+87,Karma,,Karma Glass Honey Printed,,كارما زجاج عسلى مطبوع,85,40,3400,,,,1,,,
+family-Leader,Leader,Leader Combs,,أمشاط ليدر,,,,,,,,1,,,parent
+88,Leader,,Leader Colors,,ليدر الوان,27,96,2592,,,,1,,,
+89,Leader,,Mesht Leader Fluorescent Printed,,ليدر فسفورى مطبوع,65,40,2600,,,,1,,,
+90,Leader,,Mesht Leader Glass Printed,,ليدر زجاج مطبوع,85,40,3400,,,,1,,,
+family-Rody,Rody,Rody Combs,,أمشاط رودي,,,,,,,,1,,,parent
+91,Rody,,Mesht Rody Colors,,رودى الوان,30,100,3000,,,,1,,,
+92,Rody,,Mesht Rody Fluorescent,,رودى فسفورى,55,100,5500,,,,1,,,
+93,Rody,,Mesht Rody Two-Tone Colors,,رودى 2 لون,45,100,4500,,,,1,,,
+94,Rody,,Rody Two-Tone Colors Printed,,رودى 2 لون مطبوع,65,40,2600,,,,1,,,
+family-TwoNahia,TwoNahia,2 Nahia Combs,,أمشاط 2 ناحية,,,,,,,,1,,,parent
+95,TwoNahia,,2 Nahia Colors,,2 ناحية الوان,168,15,2520,,,,1,,,
+96,TwoNahia,,2 Nahia Glass Colors Printed,,2 ناحية زجاج الوان مطبوع,45,40,1800,,,,1,,,
+97,TwoNahia,,2 Nahia Glass Honey Printed,,2 ناحية زجاج عسلى مطبوع,45,40,1800,,,,1,,,
+98,TwoNahia,,2 Nahia Fluorescent Printed,,2 ناحية فسفورى مطبوع,45,40,1800,,,,1,,,
+99,TwoNahia,,2 Nahia Black Printed,,2 ناحية اسود مطبوع,25,40,1000,,,,1,,,
+family-ThreeNahia,ThreeNahia,3 Nahia Combs,,أمشاط 3 ناحية,,,,,,,,1,,,parent
+100,ThreeNahia,,3 Nahia Colors,,3 ناحية الوان,27,60,1620,,,,1,,,
+101,ThreeNahia,,3 Nahia Black Set,,3 ناحية اسود طقم,23,100,2300,,,,1,,,
+102,ThreeNahia,,3 Nahia Black Printed,,3 ناحية اسود مطبوع,27,60,1620,,,,1,,,
+103,ThreeNahia,,3 Nahia Glass Honey Printed,,3 ناحية زجاج عسلى مطبوع,85,40,3400,,,,1,,,
+104,ThreeNahia,,3 Nahia Glass Colors Printed,,3 ناحية زجاج الوان مطبوع,85,40,3400,,,,1,,,
+105,ThreeNahia,,3 Nahia Two-Tone Colors Printed,,3 ناحية 2 لون مطبوع,35,40,1400,,,,1,,,
+family-Carmen,Carmen,Carmen Combs,,فلايات كارمن,,,,,,,,1,,,parent
+106,Carmen,,Carmen White Lux,,كارمن ابيض لوكس,33,240,7920,,,,1,,,
+107,Carmen,,Carmen White,,كارمن ابيض,18,240,4320,,,,1,,,
+108,Carmen,,Carmen Fluorescent,,كارمن فسفورى,33,240,7920,,,,1,,,
+109,Carmen,,Carmen Colors,,كارمن الوان,20,240,4800,,,,1,,,
+110,Carmen,,Carmen Black,,كارمن اسود,20,240,4800,,,,1,,,
+111,Carmen,,Carmen Green,,كارمن اخضر,27,240,6480,,,,1,,,
+family-Miro,Miro,Miro Combs,,فلايات ميرو,,,,,,,,1,,,parent
+112,Miro,,Miro Fluorescent,,ميــرو فسفورى,33,240,7920,,,,1,,,
+113,Miro,,Miro Colors,,ميــرو الوان,18,240,4320,,,,1,,,
+114,Miro,,Miro A Sfr,,ميــرو اصفر,33,240,7920,,,,1,,,
+115,Miro,,Miro White,,ميــرو ابيض,33,240,7920,,,,1,,,
+116,Miro,,Miro Black,,ميــرو اسود,18,240,4320,,,,1,,,
+117,Miro,,Miro Two-Tone Colors,,ميــرو 2 لون,26,240,6240,,,,1,,,
+family-Shams,Shams,Shams Combs,,فلايات شمس,,,,,,,,1,,,parent
+118,Shams,,Shams Two-Tone Colors,,شمس 2 لون,28,144,4032,,,,1,,,
+119,Shams,,Shams Black,,شمس اسود,19,144,2736,,,,1,,,
+120,Shams,,Shams Black Lux,,شمس اسود لوكس,21,144,3024,,,,1,,,
+121,Shams,,Shams Colors,,شمس الوان,21,144,3024,,,,1,,,
+122,Shams,,Shams Fluorescent Printed,,شمس فسفورى مطبوع,60,48,2880,,,,1,,,
+123,Shams,,Shams White Printed,,شمس ابيض مطبوع,60,48,2880,,,,1,,,
+124,Shams,,Shams Yellow Printed,,شمس اصفر مطبوع,60,48,2880,,,,1,,,
+125,Shams,,Shams Ivory Printed,,شمس سن فيل مطبوع,60,48,2880,,,,1,,,
+126,Shams,,Shams Glass Colors Printed,,شمس زجاج الوان مطبوع,70,48,3360,,,,1,,,
+127,Shams,,Shams Glass Honey Printed,,شمس زجاج عسلى مطبوع,70,48,3360,,,,1,,,
+family-Nogoom,Nogoom,Nogoom Combs,,فلايات نجوم,,,,,,,,1,,,parent
+128,Nogoom,,Nogoom Lux,,نجوم لوكس,21,240,5040,,,,1,,,
+129,Nogoom,,Nogoom White,,نجوم ابيض,15,240,3600,,,,1,,,
+130,Nogoom,,Nogoom Colors,,نجوم الوان,15,240,3600,,,,1,,,
+131,Nogoom,,Nogoom Matte,,نجوم ناشف,20,240,4800,,,,1,,,
+family-Samar,Samar,Samar Combs,,فلايات سمر,,,,,,,,1,,,parent
+132,Samar,,Samar Colors,,سمر الوان,16,240,3840,,,,1,,,
+133,Samar,,Samar Fluorescent,,سمر فسفورى,28,240,6720,,,,1,,,
+134,Samar,,Samar Black,,سمر اسود,16,240,3840,,,,1,,,
+135,Samar,,Samar Two-Tone Colors,,سمر 2 لون,24,240,5760,,,,1,,,
+family-Zeina,Zeina,Zeina Combs,,فلايات زينة,,,,,,,,1,,,parent
+136,Zeina,,Zeina Black,,زينة اسود,21,144,3024,,,,1,,,
+137,Zeina,,Zeina Two-Tone Colors,,زينة 2 لون,28,144,4032,,,,1,,,
+138,Zeina,,Zeina Glass Colors Printed,,زينة زجاج الوان مطبوع,70,48,3360,,,,1,,,
+139,Zeina,,Zeina Glass Honey Printed,,زينة زجاج عسلى مطبوع,70,48,3360,,,,1,,,
+140,Zeina,,Zeina Aag Printed,,زينة عاج مطبوع,60,48,2880,,,,1,,,
+family-Yasmina,Yasmina,Yasmina Combs,,أمشاط ياسمينا,,,,,,,,1,,,parent
+141,Yasmina,,Yasmina Fluorescent Printed,,ياسمينا فسفورى مطبوع,65,40,2600,,,,1,,,
+142,Yasmina,,Yasmina Black Printed,,ياسمينا اسود مطبوع,65,40,2600,,,,1,,,
+143,Yasmina,,Yasmina Blue Printed,,ياسمينا ازرق مطبوع,65,40,2600,,,,1,,,
+family-Kyng,Kyng,Kyng Combs,,أمشاط كينج,,,,,,,,1,,,parent
+144,Kyng,,Mesht Kyng Fluorescent Printed,,كينج فسفورى مطبوع,115,40,4600,,,,1,,,
+145,Kyng,,Mesht Kyng Colors Printed,,كينج الوان مطبوع,65,40,2600,,,,1,,,
+146,Kyng,,Mesht Kyng Glass Colors Printed,,كينج زجاج الوان مطبوع,165,40,6600,,,,1,,,
+147,Kyng,,Mesht Kyng Glass Honey Printed,,كينج زجاج عسلى مطبوع,165,40,6600,,,,1,,,
+family-Lady,Lady,Lady Combs,,أمشاط ليدي,,,,,,,,1,,,parent
+148,Lady,,Lady Fluorescent Printed,,ليدى فسفورى مطبوع,65,40,2600,,,,1,,,
+149,Lady,,Lady Ivory Printed,,ليدى سن فيل مطبوع,65,40,2600,,,,1,,,
+150,Lady,,Lady Colors,,ليدى الوان,37,60,2220,,,,1,,,
+family-Farasha,Farasha,Farasha,,فراشة,,,,,,,,1,,,parent
+151,Farasha,,Farasha Fluorescent,,فراشة فسفورى,27,100,2700,,,,1,,,
+152,Farasha,,Farasha Asd,,فراشة اسد,22,100,2200,,,,1,,,
+153,Farasha,,Farasha Export,,فراشة تصدير,42,60,2520,,,,1,,,
+family-Master,Master,Master Combs,,أمشاط ماستر,,,,,,,,1,,,parent
+154,Master,,Mesht Master White,,ماستر ابيض,60,60,3600,,,,1,,,
+155,Master,,Mesht Master Black,,ماستر اسود,60,60,3600,,,,1,,,
+156,Master,,Mesht Master Ivory,,ماستر سن فيل,60,60,3600,,,,1,,,
+157,Master,,Mesht Master Fluorescent,,ماستر فسفورى,60,60,3600,,,,1,,,
+family-Gwlyt,Gwlyt,Gwlyt Fly,,فلايات جوليت,,,,,,,,1,,,parent
+158,Gwlyt,,Falaya Gwlyt Black,,جوليت اسود,15,240,3600,,,,1,,,
+159,Gwlyt,,Gwlyt Fluorescent,,جوليت فسفورى,25,240,6000,,,,1,,,
+160,Gwlyt,,Gwlyt White,,جوليت ابيض,25,240,6000,,,,1,,,
+161,Gwlyt,,Gwlyt Aag,,جوليت عاج,25,240,6000,,,,1,,,
+162,Gwlyt,,Falaya Gwlyt Colors,,جوليت الوان,15,240,3600,,,,1,,,
+163,Gwlyt,,Falaya Qlb Fluorescent,,قلب فسفورى,25,240,6000,,,,1,,,
+family-Qlb,Qlb,Qlb Fly,,فلايات قلب,,,,,,,,1,,,parent
+164,Qlb,,Falaya Qlb Two-Tone Colors,,قلب 2 لون,17,240,4080,,,,1,,,
+165,Qlb,,Falaya Qlb Colors,,قلب الوان,15,240,3600,,,,1,,,
+166,Qlb,,Qlb Matte Beige,,قلب ناشف بيج,25,240,6000,,,,1,,,
+family-Khashab,Khashab,Khashab Combs,,أمشاط خشب,,,,,,,,1,,,parent
+167,Khashab,,Falaya Wooden,,فلاية خشب,60,30,1800,,,,1,,,
+168,Khashab,,Khashab Kbyr Anwaa Lwks Wooden,,خشب كبير انواع لوكس,115,22,2530,,,,1,,,
+169,Khashab,,Khashab Sghyr Anwaa Lwks Wooden,,خشب صغير انواع لوكس,96,30,2880,,,,1,,,
+170,Khashab,,Khashab Aks Larg Wooden,,خشب اكس لارج,120,20,2400,,,,1,,,
+family-Warda,Warda,Warda Combs,,أمشاط وردة,,,,,,,,1,,,parent
+171,Warda,,Warda Fluorescent,,وردة فسفورى,27,100,2700,,,,1,,,
+family-Sobaa,Sobaa,Sobaa Combs,,أمشاط صباع,,,,,,,,1,,,parent
+172,Sobaa,,Sobaa Fluorescent,,صبــــــاع فسفورى,17,200,3400,,,,1,,,
+family-Frshaa,Frshaa,Frshaa Brushes,,فرشاة شعر,,,,,,,,1,,,parent
+173,Frshaa,,Frshaa Dyna,,فرشاة دينا,60,39,2340,,,,1,,,
+174,Frshaa,,Frshaa Mrbaa,,فرشاة مربعة,25,100,2500,,,,1,,,
+175,Frshaa,,Frshaa Abyr,,فرشاة عبير,25,100,2500,,,,1,,,
+176,Frshaa,,Frshaa Napoli Fluorescent,,فرشاة نابولى فسفورى,70,30,2100,,,,1,,,
+family-Hanady,Hanady,Hanady Combs,,أمشاط هنادي,,,,,,,,1,,,parent
+177,Hanady,,Hanady Fluorescent,,هنادى فسفورى,35,144,5040,,,,1,,,
+178,Hanady,,Hanady White,,هنادى ابيض,35,144,5040,,,,1,,,
+family-Bgrab,Bgrab,Bgrab Combs,,أمشاط بجراب,,,,,,,,1,,,parent
+179,Bgrab,,Mesht Bgrab Colors,,بجراب الوان,38,144,5472,,,,1,,,

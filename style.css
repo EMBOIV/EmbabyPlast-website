@@ -1569,6 +1569,28 @@ html[dir="rtl"] .force-ltr-number {
     font-weight: 700;
 }
 
+/* Keep child-card text on one line within card width */
+.products .box-container .box.variant-result-card.product-variant-card .content h3,
+.product-config .product-variant-card .content h3,
+.products .box-container .box.variant-result-card.product-variant-card .product-variant-price,
+.products .box-container .box.variant-result-card.product-variant-card .product-dozen-qty,
+.products .box-container .box.variant-result-card.product-variant-card .product-carton-price,
+.product-config .product-variant-card .product-variant-price,
+.product-config .product-variant-card .product-dozen-qty,
+.product-config .product-variant-card .product-carton-price {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.products .box-container .box.variant-result-card.product-variant-card .product-variant-price .price-label,
+.product-config .product-variant-card .product-variant-price .price-label,
+.products .box-container .box.variant-result-card.product-variant-card .product-variant-price-value,
+.product-config .product-variant-card .product-variant-price-value {
+    display: inline;
+    margin-top: 0;
+}
+
 
 .product-variant-options {
     margin-top: 1.5rem;
