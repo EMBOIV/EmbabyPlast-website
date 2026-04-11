@@ -716,6 +716,50 @@ section {
     padding: 1rem;
 }
 
+.product-image-frame {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.product-image-frame img.is-hidden {
+    display: none;
+}
+
+.product-image-fallback {
+    display: none;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 1.6rem;
+    background: #fff;
+    color: var(--primary);
+    text-align: center;
+    font-family: "Montserrat", "Poppins", sans-serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1.35;
+    word-break: break-word;
+}
+
+.product-image-frame.is-missing-image .product-image-fallback {
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: 0.35rem;
+}
+
+.products .box .images .product-image-frame {
+    height: 28rem;
+}
+
 .products .box .images img {
     width: 100%;
     height: 28rem;
@@ -801,6 +845,10 @@ section {
     padding: 1rem;
 }
 
+.products .box-container .box.variant-result-card.product-variant-card .images .product-image-frame {
+    height: 24rem;
+}
+
 .products .box-container .box.variant-result-card.product-variant-card .images img {
     width: 100%;
     height: 24rem;
@@ -825,13 +873,15 @@ section {
     margin-bottom: 0.9rem;
 }
 
-.products .box-container .box.variant-result-card.product-variant-card .product-dozen-qty {
+.products .box-container .box.variant-result-card.product-variant-card .product-dozen-qty,
+.products .box-container .box.variant-result-card.product-variant-card .product-carton-price {
     font-size: 1.35rem;
     color: var(--text-light);
     margin: 0;
 }
 
-.products .box-container .box.variant-result-card.product-variant-card .product-dozen-qty .qty-label {
+.products .box-container .box.variant-result-card.product-variant-card .product-dozen-qty .qty-label,
+.products .box-container .box.variant-result-card.product-variant-card .product-carton-price .qty-label {
     font-weight: 700;
     color: var(--primary);
 }
@@ -941,6 +991,10 @@ section {
     padding: 1rem;
 }
 
+.product-config .product-variant-card .images .product-image-frame {
+    height: 24rem;
+}
+
 .product-config .product-variant-card .images img {
     width: 100%;
     height: 24rem;
@@ -969,13 +1023,15 @@ section {
     margin-bottom: 0.9rem;
 }
 
-.product-config .product-dozen-qty {
+.product-config .product-dozen-qty,
+.product-config .product-carton-price {
     font-size: 1.35rem;
     color: var(--text-light);
     margin: 0;
 }
 
-.product-config .product-dozen-qty .qty-label {
+.product-config .product-dozen-qty .qty-label,
+.product-config .product-carton-price .qty-label {
     font-weight: 700;
     color: var(--primary);
 }
@@ -1149,6 +1205,10 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.recommendation-image-wrap .product-image-frame {
+    height: 14rem;
 }
 
 .recommendation-image-wrap img {

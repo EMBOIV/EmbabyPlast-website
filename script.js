@@ -1,9 +1,10 @@
 ﻿// Embaby Plast - Product showcase with folder-based Arabic/English structure
 // ===== PRODUCT CATALOG =====
-// Each row = one variant. Families are grouped using familyKey.
+// Each row = one catalog entry. Child rows are sellable variants.
+// Optional parent rows are grouped using familyKey and can provide family images.
 // Required fields for import:
 // id, familyKey, familyName, familyNameAr, varianttype, varianttypeAr,
-// name, nameAr, DozenPrice, pcsPerCarton, imageFile, badge, enabled
+// name, nameAr, DozenPrice, pcsPerCarton, cartonPrice, imageFile, badge, enabled, rowType
 
 var PRODUCT_CATALOG = {
 };
@@ -171,6 +172,14 @@ function deriveFamilyKeyFromRow(id, name, nameAr, familyName, familyNameAr) {
     return normalized || String(id || '');
 }
 
+function isFamilyParentRowType(value) {
+    var normalized = normalizeLookup(value);
+    return normalized === 'parent'
+        || normalized === 'family'
+        || normalized === 'header'
+        || normalized === 'group';
+}
+
 function buildCatalogFromCsvRows(rows) {
     if (!rows || !rows.length) return {};
 
@@ -196,6 +205,20 @@ function buildCatalogFromCsvRows(rows) {
         var familyName = getRowValue(mapped, ['familyName', 'family_name']);
         var familyNameAr = getRowValue(mapped, ['familyNameAr', 'family_name_ar', 'familynamearabic']);
         var familyKey = getRowValue(mapped, ['familyKey', 'family_key']);
+        var rowType = getRowValue(mapped, ['rowType', 'row_type', 'recordType', 'record_type', 'entryType', 'entry_type']);
+        var varianttype = getRowValue(mapped, ['varianttype', 'variantType', 'type']);
+        var varianttypeAr = getRowValue(mapped, ['varianttypeAr', 'variantTypeAr', 'typeAr']);
+        var badge = getRowValue(mapped, ['badge']);
+        var badgeAr = getRowValue(mapped, ['badgeAr', 'badge_ar']);
+        var enabled = getRowValue(mapped, ['enabled', 'active']) || '1';
+
+        if (!rowType && isFamilyParentRowType(varianttypeAr)) {
+            rowType = varianttypeAr;
+            varianttypeAr = '';
+            if (badgeAr === '1') {
+                badgeAr = '';
+            }
+        }
 
         if (!familyKey) {
             familyKey = deriveFamilyKeyFromRow(id, name, nameAr, familyName, familyNameAr);
@@ -206,16 +229,18 @@ function buildCatalogFromCsvRows(rows) {
             familyKey: String(familyKey),
             familyName: familyName || name,
             familyNameAr: familyNameAr || nameAr || familyName || name,
-            varianttype: getRowValue(mapped, ['varianttype', 'variantType', 'type']),
-            varianttypeAr: getRowValue(mapped, ['varianttypeAr', 'variantTypeAr', 'typeAr']),
+            varianttype: varianttype,
+            varianttypeAr: varianttypeAr,
             name: name,
             nameAr: nameAr,
-            DozenPrice: getRowValue(mapped, ['DozenPrice', 'dozen_price', 'price', 'cartonPrice']),
+            DozenPrice: getRowValue(mapped, ['DozenPrice', 'dozen_price', 'price']),
             pcsPerCarton: getRowValue(mapped, ['pcsPerCarton', 'pcs_per_carton', 'pieces_per_carton']),
+            cartonPrice: getRowValue(mapped, ['cartonPrice', 'carton_price', 'cartonprize', 'carton_prize']),
             imageFile: getRowValue(mapped, ['imageFile', 'image', 'image_file']),
-            badge: getRowValue(mapped, ['badge']),
-            badgeAr: getRowValue(mapped, ['badgeAr', 'badge_ar']),
-            enabled: getRowValue(mapped, ['enabled', 'active']) || '1'
+            badge: badge,
+            badgeAr: badgeAr,
+            rowType: rowType,
+            enabled: enabled
         };
     }
 
@@ -441,6 +466,31 @@ function getProductImageFile(product) {
     return product.imageFile || (String(product.id) + '.jpg');
 }
 
+function isFamilyParentRow(product) {
+    return Boolean(product) && isFamilyParentRowType(product.rowType);
+}
+
+function handleProductImageError(img) {
+    if (!img) return;
+    img.onerror = null;
+    img.classList.add('is-hidden');
+    img.setAttribute('aria-hidden', 'true');
+
+    var frame = img.parentNode;
+    if (frame && frame.classList) {
+        frame.classList.add('is-missing-image');
+    }
+}
+
+function buildProductImageHtml(imageSrc, productName, imgClass) {
+    var classAttr = imgClass ? ' class="' + escapeHtml(imgClass) + '"' : '';
+    return ''
+        + '<div class="product-image-frame">'
+        + '<img' + classAttr + ' src="' + imageSrc + '" alt="' + escapeHtml(productName) + '" onerror="handleProductImageError(this)">'
+        + '<div class="product-image-fallback" aria-hidden="true">' + escapeHtml(productName) + '</div>'
+        + '</div>';
+}
+
 function isProductEnabled(product) {
     var raw = String(product.enabled == null ? '1' : product.enabled).trim().toLowerCase();
     return !(raw === '0' || raw === 'false' || raw === 'no' || raw === 'off' || raw === 'disabled');
@@ -506,10 +556,28 @@ function getBadgeLabel(value, ar) {
 }
 
 function getCatalogArray() {
-    return Object.keys(PRODUCT_CATALOG).map(function(id) {
+    var all = Object.keys(PRODUCT_CATALOG).map(function(id) {
         return PRODUCT_CATALOG[id];
-    }).filter(function(product) {
-        return isProductEnabled(product);
+    });
+
+    // Collect family keys whose parent row is explicitly disabled.
+    var disabledFamilies = {};
+    all.forEach(function(product) {
+        if (isFamilyParentRow(product) && !isProductEnabled(product)) {
+            disabledFamilies[String(product.familyKey)] = true;
+        }
+    });
+
+    return all.filter(function(product) {
+        if (!isProductEnabled(product)) return false;
+        if (!isFamilyParentRow(product) && disabledFamilies[String(product.familyKey)]) return false;
+        return true;
+    });
+}
+
+function getVariantCatalogArray() {
+    return getCatalogArray().filter(function(product) {
+        return !isFamilyParentRow(product);
     });
 }
 
@@ -521,12 +589,22 @@ function buildFamilies(products) {
         if (!map[key]) {
             map[key] = {
                 key: key,
-                familyName: product.familyName || product.name || '',
-                familyNameAr: product.familyNameAr || product.nameAr || product.familyName || product.name || '',
-                variantType: getVariantTypeEn(product),
-                variantTypeAr: getVariantTypeAr(product),
+                familyName: '',
+                familyNameAr: '',
+                variantType: '',
+                variantTypeAr: '',
+                parent: null,
                 variants: []
             };
+        }
+
+        if (isFamilyParentRow(product)) {
+            map[key].parent = product;
+            map[key].familyName = product.familyName || '';
+            map[key].familyNameAr = product.familyNameAr || product.nameAr || product.familyName || '';
+            map[key].variantType = getVariantTypeEn(product) || map[key].variantType;
+            map[key].variantTypeAr = getVariantTypeAr(product) || map[key].variantTypeAr;
+            return;
         }
 
         if (!map[key].variantType) {
@@ -541,6 +619,7 @@ function buildFamilies(products) {
 
     return Object.keys(map).map(function(key) {
         var family = map[key];
+        if (!family.variants.length) return null;
         var minPrice = 0;
 
         family.variants.forEach(function(variant) {
@@ -551,10 +630,10 @@ function buildFamilies(products) {
         });
 
         family.minPrice = minPrice;
-        family.badge = '';
-        family.badgeAr = '';
+        family.badge = family.parent ? (family.parent.badge || '') : '';
+        family.badgeAr = family.parent ? (family.parent.badgeAr || '') : '';
         for (var i = 0; i < family.variants.length; i++) {
-            if (normalizeBadge(family.variants[i].badge)) {
+            if (!family.badge && normalizeBadge(family.variants[i].badge)) {
                 family.badge = family.variants[i].badge;
             }
             if (!family.badgeAr && normalizeBadge(family.variants[i].badgeAr)) {
@@ -566,13 +645,13 @@ function buildFamilies(products) {
         }
 
         return family;
-    });
+    }).filter(Boolean);
 }
 
 function getPriceText(product, ar) {
     var price = getNumericPrice(product);
     if (price > 0) {
-        return 'EGP ' + price.toFixed(2);
+        return ar ? (price.toFixed(2) + ' \u062C.\u0645') : ('EGP ' + price.toFixed(2));
     }
     return ar ? '\u0627\u0644\u0633\u0639\u0631 \u0639\u0646\u062F \u0627\u0644\u0637\u0644\u0628' : 'On Request';
 }
@@ -590,6 +669,22 @@ function getDozensPerCarton(product) {
     return pcsText;
 }
 
+function getCartonPriceText(product, ar) {
+    var carton = toNumberPrice(product.cartonPrice);
+    if (carton <= 0) {
+        var dozenPrice = getNumericPrice(product);
+        var dozens = Number(getDozensPerCarton(product));
+        if (dozenPrice > 0 && Number.isFinite(dozens) && dozens > 0) {
+            carton = dozenPrice * dozens;
+        }
+    }
+
+    if (carton > 0) {
+        return ar ? (carton.toFixed(2) + ' \u062C.\u0645') : ('EGP ' + carton.toFixed(2));
+    }
+    return ar ? '\u0627\u0644\u0633\u0639\u0631 \u0639\u0646\u062F \u0627\u0644\u0637\u0644\u0628' : 'On Request';
+}
+
 // ===== SHARED VARIANT CARD BUILDER =====
 // Used by both the product details page and the catalog search results.
 // opts = {
@@ -600,9 +695,12 @@ function getDozensPerCarton(product) {
 function buildVariantCardHtml(item, ar, imgBase, opts) {
     opts = opts || {};
     var productName = getProductName(item, ar);
+    var imageHtml = buildProductImageHtml(imgBase + escapeHtml(getProductImageFile(item)), productName, 'product-variant-image');
     var priceText   = getPriceText(item, ar);
+    var cartonPriceText = getCartonPriceText(item, ar);
     var dozensPerCarton = getDozensPerCarton(item);
     var priceLabel  = ar ? '\u0633\u0639\u0631 \u0627\u0644\u062F\u0633\u062A\u0629' : 'Dozen Price';
+    var cartonPriceLabel = ar ? '\u0633\u0639\u0631 \u0627\u0644\u0643\u0631\u062A\u0648\u0646\u0629' : 'Carton Price';
     var dozenLabel  = ar ? '\u0639\u062F\u062F \u0627\u0644\u062F\u0633\u062A\u0629 \u0641\u064A \u0627\u0644\u0643\u0631\u062A\u0648\u0646\u0629' : 'Dozens Per Carton';
     var btnWhatsapp = ar ? '\u062A\u0648\u0627\u0635\u0644 \u0639\u0628\u0631 \u0627\u0644\u0648\u0627\u062A\u0633\u0627\u0628' : 'Contact via WhatsApp';
     var waMsg = ar
@@ -624,12 +722,13 @@ function buildVariantCardHtml(item, ar, imgBase, opts) {
         + '<article class="product-variant-card' + extraClasses + '" tabindex="0" aria-label="' + escapeHtml(productName) + '"' + extraAttrs + '>'
         + badgeHtml
         + '<div class="images">'
-        + '<img src="' + imgBase + escapeHtml(getProductImageFile(item)) + '" alt="' + escapeHtml(productName) + '" onerror="this.style.background=\'#D8DEE4\';this.style.height=\'24rem\'">'
+        + imageHtml
         + '</div>'
         + '<div class="content">'
         + '<h3>' + escapeHtml(productName) + '</h3>'
         + '<p class="product-price product-variant-price"><span class="price-label">' + priceLabel + ':</span><span class="product-variant-price-value">' + escapeHtml(priceText) + '</span></p>'
         + '<p class="product-dozen-qty"><span class="qty-label">' + dozenLabel + ':</span><span class="qty-value"> ' + escapeHtml(dozensPerCarton || '-') + '</span></p>'
+        + '<p class="product-carton-price"><span class="qty-label">' + cartonPriceLabel + ':</span><span class="qty-value"> ' + escapeHtml(cartonPriceText) + '</span></p>'
         + '</div>'
         + '<div class="icons">'
         + '<a href="' + getWhatsappHrefWithText(waMsg) + '" target="_blank" rel="noopener noreferrer" class="btn-cart product-variant-wa">' + btnWhatsapp + '</a>'
@@ -640,7 +739,7 @@ function buildVariantCardHtml(item, ar, imgBase, opts) {
 
 function getStartsFromText(minPrice, ar) {
     if (minPrice > 0) {
-        return 'EGP ' + minPrice.toFixed(2);
+        return ar ? (minPrice.toFixed(2) + ' \u062C.\u0645') : ('EGP ' + minPrice.toFixed(2));
     }
     return ar ? '\u0627\u0644\u0633\u0639\u0631 \u0639\u0646\u062F \u0627\u0644\u0637\u0644\u0628' : 'On Request';
 }
@@ -661,9 +760,16 @@ function getHighestPriceVariant(variants) {
     return highest || variants[0] || null;
 }
 
+function getFamilyCardProduct(family) {
+    if (family && family.parent && family.parent.imageFile) {
+        return family.parent;
+    }
+    return getHighestPriceVariant(family ? family.variants : []);
+}
+
 function getFamilyVariants(product) {
     var familyKey = String(product.familyKey || product.id);
-    return getCatalogArray().filter(function(item) {
+    return getVariantCatalogArray().filter(function(item) {
         return String(item.familyKey || item.id) === familyKey;
     });
 }
@@ -689,11 +795,13 @@ function buildRecommendations(currentProduct, ar, imgBase) {
     var detailsLabel = ar ? 'عرض التفاصيل' : 'View Details';
     var cards = picked.map(function(family) {
         var topVariant = getHighestPriceVariant(family.variants);
+        var displayProduct = getFamilyCardProduct(family) || topVariant;
         var familyTitle = ar ? family.familyNameAr : family.familyName;
         var startsFrom = getStartsFromText(family.minPrice, ar);
+        var recommendationImageHtml = buildProductImageHtml(imgBase + escapeHtml(getProductImageFile(displayProduct)), getProductName(displayProduct, ar), 'recommendation-image');
         return ''
             + '<article class="recommendation-card" data-detail-url="product.html?id=' + escapeHtml(topVariant.id) + '" tabindex="0" role="link" aria-label="' + escapeHtml(familyTitle) + '">'
-            + '<div class="recommendation-image-wrap"><img src="' + imgBase + escapeHtml(getProductImageFile(topVariant)) + '" alt="' + escapeHtml(getProductName(topVariant, ar)) + '"></div>'
+            + '<div class="recommendation-image-wrap">' + recommendationImageHtml + '</div>'
             + '<h4>' + escapeHtml(familyTitle) + '</h4>'
             + '<p class="recommendation-price">' + (ar ? 'السعر يبدأ من: ' : 'Price starts from: ') + escapeHtml(startsFrom) + '</p>'
             + '<a class="recommendation-link" href="product.html?id=' + escapeHtml(topVariant.id) + '">' + detailsLabel + '</a>'
@@ -780,11 +888,12 @@ function renderProductConfigPage() {
     });
     var lblVariant = ar ? '\u0627\u0644\u0623\u0646\u0648\u0627\u0639' : 'Variants';
     var btnBack = ar ? '\u0627\u0644\u0639\u0648\u062F\u0629 \u0644\u0644\u0643\u062A\u0627\u0644\u0648\u062C' : 'Back to Catalog';
+    var initialVariant = getHighestPriceVariant(variants) || product;
 
     var langToggle = document.getElementById('lang-toggle-link');
     var langMobile = document.getElementById('lang-switch-mobile');
     var otherLangFolder = ar ? '../en/' : '../ar/';
-    var otherProductUrl = otherLangFolder + 'product.html?id=' + product.id;
+    var otherProductUrl = otherLangFolder + 'product.html?id=' + initialVariant.id;
     if (langToggle) langToggle.href = otherProductUrl;
     if (langMobile) langMobile.href = otherProductUrl;
 
@@ -858,8 +967,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         var imgBase = getImageBase();
         var boxContainer = productsSection.querySelector('.box-container');
         var totalCountEl = document.getElementById('products-total-count');
-        var products = getCatalogArray();
-        var families = buildFamilies(products);
+        var products = getVariantCatalogArray();
+        var families = buildFamilies(getCatalogArray());
         var startsFromLabel = ar ? '\u0627\u0644\u0633\u0639\u0631 \u064A\u0628\u062F\u0623 \u0645\u0646:' : 'Price starts from:';
         var viewLabel = ar ? '\u0639\u0631\u0636 \u0627\u0644\u062A\u0641\u0627\u0635\u064A\u0644' : 'View Details';
 
@@ -873,6 +982,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         function makeFamilyCardHtml(family) {
             var initial = getHighestPriceVariant(family.variants);
+            var displayProduct = getFamilyCardProduct(family) || initial;
             var familyTitle = ar ? family.familyNameAr : family.familyName;
             var startsFrom = getStartsFromText(family.minPrice, ar);
             var badgeRaw = ar ? (family.badgeAr || family.badge) : (family.badge || family.badgeAr);
@@ -880,12 +990,13 @@ document.addEventListener('DOMContentLoaded', async function() {
             var badgeClass = getBadgeClass(badgeRaw);
             var typeLabel = getVariantTypeLabel(family, ar);
             var typeFilterKey = getFilterKey(typeLabel);
+            var familyImageHtml = buildProductImageHtml(imgBase + escapeHtml(getProductImageFile(displayProduct)), getProductName(displayProduct, ar), 'product-family-image');
 
             return ''
                 + '<div class="box" data-family-key="' + escapeHtml(family.key) + '" data-type-key="' + escapeHtml(typeFilterKey) + '" data-detail-url="product.html?id=' + escapeHtml(initial.id) + '" tabindex="0" role="link" aria-label="' + escapeHtml(familyTitle) + '">'
                 + (badgeLabel ? '<span class="product-badge ' + escapeHtml(badgeClass) + '">' + escapeHtml(badgeLabel) + '</span>' : '')
                 + '<div class="images">'
-                + '<img class="product-family-image" src="' + imgBase + escapeHtml(getProductImageFile(initial)) + '" alt="' + escapeHtml(getProductName(initial, ar)) + '" onerror="this.style.background=\'#D8DEE4\';this.style.height=\'28rem\'">'
+                + familyImageHtml
                 + '</div>'
                 + '<div class="content">'
                 + '<h3>' + escapeHtml(familyTitle) + '</h3>'
