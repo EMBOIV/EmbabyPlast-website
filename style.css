@@ -1660,3 +1660,18 @@ html[dir="rtl"] .force-ltr-number {
         text-align: right;
     }
 }
+
+/* Enforce 2-column child card layout on mobile phones */
+@media(max-width: 768px) {
+    .product-config .product-variants-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 1.2rem;
+    }
+}
+
+@media(max-width: 450px) {
+    .product-config .product-variants-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
