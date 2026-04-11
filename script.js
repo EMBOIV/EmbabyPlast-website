@@ -871,9 +871,13 @@ function renderProductConfigPage() {
         return;
     }
 
+    var familyKey = String(product.familyKey || product.id);
+    var family = buildFamilies(getCatalogArray()).find(function(item) {
+        return String(item.key) === familyKey;
+    });
     var familyName = ar
-        ? (product.familyNameAr || product.nameAr || product.familyName || product.name)
-        : (product.familyName || product.name || product.familyNameAr || product.nameAr);
+        ? ((family && family.familyNameAr) || (family && family.familyName) || product.familyNameAr || product.familyName || product.nameAr || product.name)
+        : ((family && family.familyName) || (family && family.familyNameAr) || product.familyName || product.familyNameAr || product.name || product.nameAr);
     if (pageTitle) pageTitle.textContent = familyName;
     document.title = familyName + (ar ? (' - ' + BRAND_INFO.ar) : (' - ' + BRAND_INFO.en));
 
