@@ -1589,16 +1589,17 @@ html[dir="rtl"] .force-ltr-number {
     font-weight: 700;
 }
 
-/* Keep child-card details on one line within card width */
+/* Keep child-card details fully visible (no truncation/ellipsis) */
 .products .box-container .box.variant-result-card.product-variant-card .product-variant-price,
 .products .box-container .box.variant-result-card.product-variant-card .product-dozen-qty,
 .products .box-container .box.variant-result-card.product-variant-card .product-carton-price,
 .product-config .product-variant-card .product-variant-price,
 .product-config .product-variant-card .product-dozen-qty,
 .product-config .product-variant-card .product-carton-price {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    overflow-wrap: anywhere;
 }
 
 .products .box-container .box.variant-result-card.product-variant-card .product-variant-price .price-label,
