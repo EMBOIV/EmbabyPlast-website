@@ -486,7 +486,7 @@ function buildProductImageHtml(imageSrc, productName, imgClass) {
     var classAttr = imgClass ? ' class="' + escapeHtml(imgClass) + '"' : '';
     return ''
         + '<div class="product-image-frame">'
-        + '<img' + classAttr + ' src="' + imageSrc + '" alt="' + escapeHtml(productName) + '" onerror="handleProductImageError(this)">'
+        + '<img' + classAttr + ' src="' + imageSrc + '" alt="' + escapeHtml(productName) + '" loading="lazy" decoding="async" onerror="handleProductImageError(this)">'
         + '<div class="product-image-fallback" aria-hidden="true">' + escapeHtml(productName) + '</div>'
         + '</div>';
 }
