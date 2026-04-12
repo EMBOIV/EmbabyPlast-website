@@ -508,7 +508,7 @@ function buildProductImageHtml(imageSrc, productName, imgClass) {
         + '<picture>'
         + '<source type="image/jpeg" srcset="' + jpgThumb + '" media="(max-width: 600px)">'
         + '<source type="image/jpeg" srcset="' + jpgFull + '">'
-        + '<img' + classAttr + ' src="' + imageSrc + '" alt="' + escapeHtml(productName) + '" loading="lazy" decoding="async" onerror="handleProductImageError(this)">'
+        + '<img' + classAttr + ' src="' + imageSrc + '" data-original-src="' + escapeHtml(imageSrc) + '" alt="' + escapeHtml(productName) + '" loading="lazy" decoding="async" onerror="handleProductImageError(this)">'
         + '</picture>'
         + '<div class="product-image-fallback" aria-hidden="true">' + escapeHtml(productName) + '</div>'
         + '</div>';
@@ -952,7 +952,7 @@ function renderProductConfigPage() {
             img.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                lightboxImg.src = img.src;
+                lightboxImg.src = img.getAttribute('data-original-src') || img.currentSrc || img.src;
                 lightboxImg.alt = img.alt;
                 lightbox.classList.add('open');
                 lightbox.setAttribute('aria-hidden', 'false');
@@ -1073,7 +1073,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     img.addEventListener('click', function(e) {
                         e.preventDefault();
                         e.stopPropagation();
-                        lightboxImg.src = img.src;
+                        lightboxImg.src = img.getAttribute('data-original-src') || img.currentSrc || img.src;
                         lightboxImg.alt = img.alt;
                         lightbox.classList.add('open');
                         lightbox.setAttribute('aria-hidden', 'false');
