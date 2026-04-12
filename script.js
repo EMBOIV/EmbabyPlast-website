@@ -251,7 +251,7 @@ async function loadCatalogFromCsv() {
     if (typeof fetch !== 'function') return false;
 
     try {
-        var response = await fetch(getCatalogCsvPath(), { cache: 'no-store' });
+        var response = await fetch(getCatalogCsvPath(), { cache: 'default' });
         if (!response.ok) {
             throw new Error('CSV response not OK: ' + response.status);
         }
@@ -487,11 +487,29 @@ function handleProductImageError(img) {
     }
 }
 
+function getOptimizedSrc(originalSrc, subfolder, ext) {
+    // Convert  ../images/Photo.PNG  →  ../images/<subfolder>/Photo.<ext>
+    var base = originalSrc.replace(/\\/g, '/');
+    var lastSlash = base.lastIndexOf('/');
+    var dir = lastSlash >= 0 ? base.substring(0, lastSlash) : '.';
+    var file = lastSlash >= 0 ? base.substring(lastSlash + 1) : base;
+    // Decode first so we don't double-encode
+    try { file = decodeURIComponent(file); } catch(e) {}
+    var nameOnly = file.replace(/\.[^.]+$/, '');
+    return dir + '/' + subfolder + '/' + encodeURIComponent(nameOnly).replace(/%2F/g, '/') + '.' + ext;
+}
+
 function buildProductImageHtml(imageSrc, productName, imgClass) {
     var classAttr = imgClass ? ' class="' + escapeHtml(imgClass) + '"' : '';
+    var jpgFull = getOptimizedSrc(imageSrc, 'webp', 'jpg');
+    var jpgThumb = getOptimizedSrc(imageSrc, 'thumbs', 'jpg');
     return ''
         + '<div class="product-image-frame">'
+        + '<picture>'
+        + '<source type="image/jpeg" srcset="' + jpgThumb + '" media="(max-width: 600px)">'
+        + '<source type="image/jpeg" srcset="' + jpgFull + '">'
         + '<img' + classAttr + ' src="' + imageSrc + '" alt="' + escapeHtml(productName) + '" loading="lazy" decoding="async" onerror="handleProductImageError(this)">'
+        + '</picture>'
         + '<div class="product-image-fallback" aria-hidden="true">' + escapeHtml(productName) + '</div>'
         + '</div>';
 }

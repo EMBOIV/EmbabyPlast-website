@@ -721,6 +721,8 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    background: #f0f0f0;
 }
 
 .product-image-frame img {
@@ -759,6 +761,7 @@ section {
 
 .products .box .images .product-image-frame {
     width: 100%;
+    aspect-ratio: 1 / 1;
 }
 
 .products .box .images img {
@@ -766,6 +769,10 @@ section {
     height: auto;
     object-fit: contain;
     transition: none;
+}
+
+.products .box .images img.lazy-loaded {
+    opacity: 1;
 }
 .products .box.variant-result-card .images img.clickable-preview {
     cursor: zoom-in;
