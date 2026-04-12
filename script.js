@@ -1052,7 +1052,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                 if (!box.dataset.detailUrl) return;
                 box.addEventListener('click', function(e) {
                     if (e.target.closest('.product-view-link') || e.target.closest('.product-variant-wa')) return;
-                    if (e.target.closest('.images img')) return;
+                    var clickedImage = e.target.closest('.images img');
+                    if (clickedImage && this.classList.contains('variant-result-card')) return;
                     window.location.href = this.dataset.detailUrl;
                 });
                 box.addEventListener('keydown', function(e) {
