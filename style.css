@@ -784,6 +784,7 @@ section {
     line-height: 1.3;
     color: var(--primary);
     margin-bottom: 0.6rem;
+    overflow-wrap: anywhere;
 }
 
 .products .box .content .product-type-tag {
@@ -872,6 +873,10 @@ section {
     line-height: 1.3;
     color: var(--primary);
     margin-bottom: 0.6rem;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    overflow-wrap: anywhere;
 }
 
 .products .box-container .box.variant-result-card.product-variant-card .product-dozen-qty,
@@ -1022,6 +1027,10 @@ section {
     line-height: 1.3;
     color: var(--primary);
     margin-bottom: 0.6rem;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+    overflow-wrap: anywhere;
 }
 
 .product-config .product-dozen-qty,
@@ -1570,9 +1579,7 @@ html[dir="rtl"] .force-ltr-number {
     font-weight: 700;
 }
 
-/* Keep child-card text on one line within card width */
-.products .box-container .box.variant-result-card.product-variant-card .content h3,
-.product-config .product-variant-card .content h3,
+/* Keep child-card details on one line within card width */
 .products .box-container .box.variant-result-card.product-variant-card .product-variant-price,
 .products .box-container .box.variant-result-card.product-variant-card .product-dozen-qty,
 .products .box-container .box.variant-result-card.product-variant-card .product-carton-price,
