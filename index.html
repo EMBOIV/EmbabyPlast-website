@@ -6,95 +6,209 @@
     <meta name="color-scheme" content="light">
     <meta name="theme-color" content="#0B1D2A">
     <title>Embaby Plast | Welcome</title>
-    <script>
-        (function() {
-            var lang = localStorage.getItem('lang');
-            var target = (lang === 'ar') ? 'ar/products.html' : 'en/products.html';
-            window.location.replace(target);
-        })();
-    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;800&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        @keyframes gradientShift {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes glowPulse {
+            0%, 100% { text-shadow: 0 0 20px rgba(0,168,168,0.4); }
+            50%       { text-shadow: 0 0 40px rgba(0,168,168,0.8), 0 0 80px rgba(0,168,168,0.3); }
+        }
+        @keyframes orb1 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50%       { transform: translate(40px, -60px) scale(1.15); }
+        }
+        @keyframes orb2 {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50%       { transform: translate(-50px, 40px) scale(1.1); }
+        }
+
         body {
             font-family: "Inter", sans-serif;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #0B1D2A 0%, #143042 50%, #0B1D2A 100%);
+            background: linear-gradient(-45deg, #040d14, #0B1D2A, #0e2a3a, #071520);
+            background-size: 400% 400%;
+            animation: gradientShift 12s ease infinite;
             color: #fff;
+            overflow: hidden;
+            position: relative;
         }
+
+        /* ambient orbs */
+        body::before, body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(90px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        body::before {
+            width: 520px; height: 520px;
+            background: radial-gradient(circle, rgba(0,168,168,0.18) 0%, transparent 70%);
+            top: -120px; left: -120px;
+            animation: orb1 9s ease-in-out infinite;
+        }
+        body::after {
+            width: 420px; height: 420px;
+            background: radial-gradient(circle, rgba(0,100,180,0.14) 0%, transparent 70%);
+            bottom: -100px; right: -100px;
+            animation: orb2 11s ease-in-out infinite;
+        }
+
         .welcome-container {
+            position: relative;
+            z-index: 1;
             text-align: center;
-            padding: 4rem 2rem;
-            max-width: 600px;
+            padding: 3.5rem 3rem;
+            max-width: 560px;
+            width: 90%;
+            background: rgba(255,255,255,0.045);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 1.75rem;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08);
+            animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both;
         }
+
         .welcome-logo {
             font-family: "Montserrat", sans-serif;
-            font-size: 3.6rem;
+            font-size: clamp(2.6rem, 8vw, 3.8rem);
             font-weight: 800;
-            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            margin-bottom: 0.6rem;
+            animation: fadeUp 0.7s 0.1s cubic-bezier(0.22,1,0.36,1) both;
         }
-        .welcome-logo span { color: #00A8A8; }
+        .welcome-logo span {
+            color: #00A8A8;
+            animation: glowPulse 3.5s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        .welcome-divider {
+            width: 52px;
+            height: 3px;
+            background: linear-gradient(90deg, #00A8A8, #00d4d4);
+            border-radius: 2px;
+            margin: 0.85rem auto 1rem;
+            animation: fadeUp 0.7s 0.2s cubic-bezier(0.22,1,0.36,1) both;
+        }
+
         .welcome-tagline {
-            font-size: 1.1rem;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 3rem;
+            font-size: 1rem;
+            font-family: "Inter", sans-serif;
+            color: rgba(255,255,255,0.82);
+            letter-spacing: 0.04em;
+            line-height: 1.65;
+            margin-bottom: 0.3rem;
+            animation: fadeUp 0.7s 0.25s cubic-bezier(0.22,1,0.36,1) both;
         }
+        .welcome-tagline-ar {
+            font-size: 1rem;
+            font-family: "Cairo", sans-serif;
+            color: rgba(255,255,255,0.82);
+            letter-spacing: 0;
+            line-height: 1.65;
+            margin-bottom: 2.4rem;
+            direction: rtl;
+            animation: fadeUp 0.7s 0.3s cubic-bezier(0.22,1,0.36,1) both;
+        }
+
         .welcome-label {
-            font-size: 1.2rem;
+            font-size: 0.82rem;
             font-weight: 600;
-            margin-bottom: 1.5rem;
-            color: rgba(255,255,255,0.85);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 1.25rem;
+            animation: fadeUp 0.7s 0.35s cubic-bezier(0.22,1,0.36,1) both;
         }
+
         .lang-buttons {
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
+            animation: fadeUp 0.7s 0.42s cubic-bezier(0.22,1,0.36,1) both;
         }
+
         .lang-btn {
-            display: inline-block;
-            padding: 1rem 3rem;
-            font-size: 1.2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.9rem 2.4rem;
+            font-size: 1.05rem;
             font-weight: 700;
-            border-radius: 0.5rem;
+            border-radius: 0.9rem;
             text-decoration: none;
-            transition: all 0.25s ease;
-            min-width: 180px;
+            transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+            min-width: 165px;
+            position: relative;
+            overflow: hidden;
         }
+        .lang-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.06);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            border-radius: inherit;
+        }
+        .lang-btn:hover::after { opacity: 1; }
+
         .lang-btn-ar {
-            background: #00A8A8;
+            background: linear-gradient(135deg, #00A8A8 0%, #007d7d 100%);
             color: #fff;
+            box-shadow: 0 4px 20px rgba(0,168,168,0.3);
         }
         .lang-btn-ar:hover {
-            background: #007777;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,168,168,0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 32px rgba(0,168,168,0.55);
         }
+        .lang-btn-ar:active { transform: translateY(-1px); }
+
         .lang-btn-en {
-            background: transparent;
-            color: #fff;
-            border: 2px solid rgba(255,255,255,0.4);
+            background: rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.9);
+            border: 1.5px solid rgba(255,255,255,0.18);
         }
         .lang-btn-en:hover {
+            background: rgba(0,168,168,0.12);
             border-color: #00A8A8;
-            color: #00A8A8;
-            transform: translateY(-2px);
+            color: #00d4d4;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 32px rgba(0,168,168,0.2);
         }
+        .lang-btn-en:active { transform: translateY(-1px); }
     </style>
 </head>
 <body>
     <div class="welcome-container">
         <div class="welcome-logo">Embaby<span>Plast</span></div>
+        <div class="welcome-divider"></div>
         <p class="welcome-tagline">Precision Plastic Combs Manufacturer</p>
+        <p class="welcome-tagline-ar">مصنع أمشاط بلاستيكية دقيقة</p>
         <p class="welcome-label">Choose your language / اختر اللغة</p>
         <div class="lang-buttons">
-            <a href="ar/index.html" class="lang-btn lang-btn-ar" onclick="localStorage.setItem('lang','ar')">العربية</a>
-            <a href="en/index.html" class="lang-btn lang-btn-en" onclick="localStorage.setItem('lang','en')">English</a>
+            <a href="ar/products.html" class="lang-btn lang-btn-ar" onclick="localStorage.setItem('lang','ar')">العربية</a>
+            <a href="en/products.html" class="lang-btn lang-btn-en" onclick="localStorage.setItem('lang','en')">English</a>
         </div>
     </div>
 </body>

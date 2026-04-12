@@ -31,7 +31,7 @@ var BRAND_INFO = {
 // true  => show families first, then children on filtering
 // false => always show all child products directly
 var PRODUCTS_PAGE_SETTINGS = {
-    groupByFamily: true
+    groupByFamily: false
 };
 
 function getPhoneTelHref() {
