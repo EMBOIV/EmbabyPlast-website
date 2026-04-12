@@ -31,7 +31,7 @@ var BRAND_INFO = {
 // true  => show families first, then children on filtering
 // false => always show all child products directly
 var PRODUCTS_PAGE_SETTINGS = {
-    groupByFamily: false
+    groupByFamily: true
 };
 
 function getPhoneTelHref() {
@@ -1029,6 +1029,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 if (!box.dataset.detailUrl) return;
                 box.addEventListener('click', function(e) {
                     if (e.target.closest('.product-view-link') || e.target.closest('.product-variant-wa')) return;
+                    if (e.target.closest('.images img')) return;
                     window.location.href = this.dataset.detailUrl;
                 });
                 box.addEventListener('keydown', function(e) {
@@ -1038,6 +1039,24 @@ document.addEventListener('DOMContentLoaded', async function() {
                     }
                 });
             });
+
+            var lightbox = ensureProductImageLightbox();
+            var lightboxImg = document.getElementById('product-image-lightbox-img');
+            if (lightbox && lightboxImg) {
+                productsSection.querySelectorAll('.box-container .box.variant-result-card .images img').forEach(function(img) {
+                    if (img.classList.contains('is-hidden')) return;
+                    img.classList.add('clickable-preview');
+                    img.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        lightboxImg.src = img.src;
+                        lightboxImg.alt = img.alt;
+                        lightbox.classList.add('open');
+                        lightbox.setAttribute('aria-hidden', 'false');
+                        document.body.style.overflow = 'hidden';
+                    });
+                });
+            }
         }
 
         var searchBar = document.querySelector('.products-search');

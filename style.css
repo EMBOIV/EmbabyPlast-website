@@ -767,6 +767,9 @@ section {
     object-fit: contain;
     transition: none;
 }
+.products .box.variant-result-card .images img.clickable-preview {
+    cursor: zoom-in;
+}
 
 .products .box:hover .images img {
     transform: none;
