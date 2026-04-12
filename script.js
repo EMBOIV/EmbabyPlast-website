@@ -466,6 +466,11 @@ function getProductImageFile(product) {
     return product.imageFile || (String(product.id) + '.jpg');
 }
 
+function getProductImageSrc(imgBase, product) {
+    var file = String(getProductImageFile(product) || '').trim();
+    return String(imgBase || '') + encodeURIComponent(file).replace(/%2F/g, '/');
+}
+
 function isFamilyParentRow(product) {
     return Boolean(product) && isFamilyParentRowType(product.rowType);
 }
@@ -695,7 +700,7 @@ function getCartonPriceText(product, ar) {
 function buildVariantCardHtml(item, ar, imgBase, opts) {
     opts = opts || {};
     var productName = getProductName(item, ar);
-    var imageHtml = buildProductImageHtml(imgBase + escapeHtml(getProductImageFile(item)), productName, 'product-variant-image');
+    var imageHtml = buildProductImageHtml(getProductImageSrc(imgBase, item), productName, 'product-variant-image');
     var priceText   = getPriceText(item, ar);
     var cartonPriceText = getCartonPriceText(item, ar);
     var dozensPerCarton = getDozensPerCarton(item);
@@ -798,7 +803,7 @@ function buildRecommendations(currentProduct, ar, imgBase) {
         var displayProduct = getFamilyCardProduct(family) || topVariant;
         var familyTitle = ar ? family.familyNameAr : family.familyName;
         var startsFrom = getStartsFromText(family.minPrice, ar);
-        var recommendationImageHtml = buildProductImageHtml(imgBase + escapeHtml(getProductImageFile(displayProduct)), getProductName(displayProduct, ar), 'recommendation-image');
+        var recommendationImageHtml = buildProductImageHtml(getProductImageSrc(imgBase, displayProduct), getProductName(displayProduct, ar), 'recommendation-image');
         return ''
             + '<article class="recommendation-card" data-detail-url="product.html?id=' + escapeHtml(topVariant.id) + '" tabindex="0" role="link" aria-label="' + escapeHtml(familyTitle) + '">'
             + '<div class="recommendation-image-wrap">' + recommendationImageHtml + '</div>'
@@ -994,7 +999,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             var badgeClass = getBadgeClass(badgeRaw);
             var typeLabel = getVariantTypeLabel(family, ar);
             var typeFilterKey = getFilterKey(typeLabel);
-            var familyImageHtml = buildProductImageHtml(imgBase + escapeHtml(getProductImageFile(displayProduct)), getProductName(displayProduct, ar), 'product-family-image');
+            var familyImageHtml = buildProductImageHtml(getProductImageSrc(imgBase, displayProduct), getProductName(displayProduct, ar), 'product-family-image');
 
             return ''
                 + '<div class="box" data-family-key="' + escapeHtml(family.key) + '" data-type-key="' + escapeHtml(typeFilterKey) + '" data-detail-url="product.html?id=' + escapeHtml(initial.id) + '" tabindex="0" role="link" aria-label="' + escapeHtml(familyTitle) + '">'
