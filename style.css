@@ -774,6 +774,7 @@ section {
 .products .box .images img.lazy-loaded {
     opacity: 1;
 }
+
 .products .box.variant-result-card .images img.clickable-preview {
     cursor: zoom-in;
 }
@@ -1613,6 +1614,282 @@ html[dir="rtl"] .force-ltr-number {
 
 .product-variant-options {
     margin-top: 1.5rem;
+}
+
+/* ===== Print / PDF ===== */
+@media print {
+
+    /* Running header + page numbers on every page */
+    @page {
+        size: A3 landscape;
+        margin: 14mm 10mm 14mm 10mm;
+
+        @top-left {
+            content: "EMBABY PLAST";
+            font-family: sans-serif;
+            font-size: 7pt;
+            font-weight: 700;
+            color: #0B1D2A;
+            letter-spacing: 0.12em;
+            vertical-align: middle;
+        }
+
+        @top-center {
+            content: "Product Catalog  ·  Since 1967";
+            font-family: sans-serif;
+            font-size: 7pt;
+            color: #555;
+            letter-spacing: 0.05em;
+            vertical-align: middle;
+        }
+
+        @top-right {
+            content: "Page " counter(page) " / " counter(pages);
+            font-family: sans-serif;
+            font-size: 7pt;
+            color: #555;
+            vertical-align: middle;
+        }
+
+        @bottom-center {
+            content: "+2012 777 93 199  ·  embaby-plast.netlify.app";
+            font-family: sans-serif;
+            font-size: 6.5pt;
+            color: #888;
+            vertical-align: middle;
+        }
+    }
+
+    html,
+    body {
+        background: #fff !important;
+        color: #111 !important;
+        font-size: 9pt;
+    }
+
+    * {
+        box-shadow: none !important;
+        text-shadow: none !important;
+        animation: none !important;
+        transition: none !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* === Hide non-catalog elements === */
+    header,
+    .products-search,
+    .products-type-filter-wrap,
+    .products-total-count,
+    .products-no-results,
+    .footer,
+    .product-image-lightbox,
+    .product-image-lightbox-close,
+    .products .box .product-badge,
+    .products .box .icons,
+    .product-config .product-variant-card .icons {
+        display: none !important;
+    }
+
+    /* === Section reset === */
+    .products,
+    .product-config {
+        padding: 0 !important;
+        margin: 0 !important;
+        min-height: auto !important;
+        background: #fff !important;
+    }
+
+    /* === Catalog section title banner === */
+    .products .heading,
+    .product-config .heading {
+        display: flex !important;
+        align-items: center !important;
+        margin: 0 0 5mm !important;
+        padding: 3mm 5mm 3mm 6mm !important;
+        background: #0B1D2A !important;
+        border-left: 5mm solid #00A8A8 !important;
+        border-radius: 0 !important;
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+    }
+
+    .products .heading *,
+    .product-config .heading * {
+        font-size: 13pt !important;
+        font-weight: 800 !important;
+        color: #fff !important;
+        letter-spacing: 0.08em !important;
+        text-transform: uppercase !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .products .heading span,
+    .product-config .heading span {
+        color: #00A8A8 !important;
+    }
+
+    [dir="rtl"] .products .heading,
+    [dir="rtl"] .product-config .heading {
+        direction: rtl !important;
+        border-left: none !important;
+        border-right: 5mm solid #00A8A8 !important;
+    }
+
+    /* === 5-column catalog grid === */
+    .products .box-container,
+    .product-config .product-variants-grid {
+        display: grid !important;
+        grid-template-columns: repeat(5, 1fr) !important;
+        gap: 3.5mm !important;
+        align-items: start !important;
+    }
+
+    /* === Product card — fixed height for uniform rows === */
+    .products .box-container .box,
+    .products .box-container .box.variant-result-card.product-variant-card,
+    .product-config .product-variant-card {
+        display: flex !important;
+        flex-direction: column !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+        -webkit-column-break-inside: avoid !important;
+        background: #fff !important;
+        border: 1px solid #cdd5dd !important;
+        border-top: 4px solid #00A8A8 !important;
+        border-radius: 0 !important;
+        overflow: hidden !important;
+        margin: 0 !important;
+        transform: none !important;
+        height: 78mm !important;
+    }
+
+    /* === Image area === */
+    .products .box-container .box .images,
+    .products .box-container .box.variant-result-card.product-variant-card .images,
+    .product-config .product-variant-card .images {
+        flex: 0 0 46mm !important;
+        height: 46mm !important;
+        min-height: 46mm !important;
+        max-height: 46mm !important;
+        padding: 2.5mm !important;
+        background: #f4f7fa !important;
+        border-bottom: 1px solid #dce4ea !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important;
+    }
+
+    .products .box-container .box .images .product-image-frame,
+    .products .box-container .box.variant-result-card.product-variant-card .images .product-image-frame,
+    .product-config .product-variant-card .images .product-image-frame,
+    .products .box-container .box .images picture,
+    .products .box-container .box.variant-result-card.product-variant-card .images picture {
+        width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: transparent !important;
+    }
+
+    .products .box-container .box .images img,
+    .products .box-container .box.variant-result-card.product-variant-card .images img,
+    .product-config .product-variant-card .images img {
+        max-width: 100% !important;
+        max-height: 41mm !important;
+        width: auto !important;
+        height: auto !important;
+        object-fit: contain !important;
+        display: block !important;
+    }
+
+    /* === Content area === */
+    .products .box-container .box .content,
+    .products .box-container .box.variant-result-card.product-variant-card .content,
+    .product-config .product-variant-card .content {
+        flex: 1 !important;
+        padding: 2mm 2.8mm 1.5mm !important;
+        overflow: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+        background: #fff !important;
+    }
+
+    /* Product name */
+    .products .box-container .box .content h3,
+    .products .box-container .box.variant-result-card.product-variant-card .content h3,
+    .product-config .product-variant-card .content h3 {
+        font-size: 7pt !important;
+        font-weight: 700 !important;
+        line-height: 1.25 !important;
+        margin: 0 0 1mm !important;
+        color: #0B1D2A !important;
+        overflow: hidden !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+    }
+
+    /* Teal accent rule under product name */
+    .products .box-container .box .content h3::after,
+    .products .box-container .box.variant-result-card.product-variant-card .content h3::after {
+        content: '' !important;
+        display: block !important;
+        width: 10mm !important;
+        height: 0.4mm !important;
+        background: #00A8A8 !important;
+        margin-top: 1.2mm !important;
+        margin-bottom: 1.5mm !important;
+    }
+
+    /* Price rows */
+    .products .box-container .box .product-price,
+    .products .box-container .box .product-dozen-qty,
+    .products .box-container .box .product-carton-price,
+    .product-config .product-variant-card .product-price,
+    .product-config .product-variant-card .product-dozen-qty,
+    .product-config .product-variant-card .product-carton-price {
+        font-size: 6.2pt !important;
+        line-height: 1.45 !important;
+        margin: 0 !important;
+        color: #2a2a2a !important;
+    }
+
+    /* Price labels */
+    .products .box-container .box .price-label,
+    .products .box-container .box .qty-label,
+    .product-config .product-variant-card .price-label,
+    .product-config .product-variant-card .qty-label {
+        font-size: 5.5pt !important;
+        color: #00A8A8 !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.04em !important;
+    }
+
+    .products .box-container .box .product-variant-price-value {
+        font-size: 6.5pt !important;
+        font-weight: 700 !important;
+        color: #0B1D2A !important;
+    }
+
+    .products .box-container .box .product-variant-price .price-label,
+    .products .box-container .box .product-variant-price-value {
+        display: inline !important;
+        margin: 0 !important;
+    }
+
+    /* RTL content alignment */
+    [dir="rtl"] .products .box .content,
+    [dir="rtl"] .products .box-container .box.variant-result-card.product-variant-card .content {
+        text-align: right !important;
+    }
 }
 
 /* ===== RTL Support ===== */

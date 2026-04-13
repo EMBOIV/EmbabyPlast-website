@@ -17,8 +17,8 @@ var CONTACT_INFO = {
         en: 'Industrial Zone, Cairo, Egypt'
     },
     workingHours: {
-        ar: 'السبت - الخميس: 8:00 ص - 5:00 م',
-        en: 'Sat - Thu: 8:00 AM - 5:00 PM'
+        ar: 'يومياً: 24 ساعة',
+        en: 'Daily: 24 Hours'
     }
 };
 
@@ -31,7 +31,7 @@ var BRAND_INFO = {
 // true  => show families first, then children on filtering
 // false => always show all child products directly
 var PRODUCTS_PAGE_SETTINGS = {
-    groupByFamily: true
+    groupByFamily: false
 };
 
 function getPhoneTelHref() {
@@ -508,7 +508,7 @@ function buildProductImageHtml(imageSrc, productName, imgClass) {
         + '<picture>'
         + '<source type="image/jpeg" srcset="' + jpgThumb + '" media="(max-width: 600px)">'
         + '<source type="image/jpeg" srcset="' + jpgFull + '">'
-        + '<img' + classAttr + ' src="' + imageSrc + '" data-original-src="' + escapeHtml(imageSrc) + '" alt="' + escapeHtml(productName) + '" loading="lazy" decoding="async" onerror="handleProductImageError(this)">'
+        + '<img' + classAttr + ' src="' + imageSrc + '" data-lightbox-src="' + escapeHtml(jpgFull) + '" data-original-src="' + escapeHtml(imageSrc) + '" alt="' + escapeHtml(productName) + '" loading="lazy" decoding="async" onerror="handleProductImageError(this)">'  
         + '</picture>'
         + '<div class="product-image-fallback" aria-hidden="true">' + escapeHtml(productName) + '</div>'
         + '</div>';
@@ -952,7 +952,7 @@ function renderProductConfigPage() {
             img.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                lightboxImg.src = img.getAttribute('data-original-src') || img.currentSrc || img.src;
+                lightboxImg.src = img.getAttribute('data-lightbox-src') || img.getAttribute('data-original-src') || img.currentSrc || img.src;
                 lightboxImg.alt = img.alt;
                 lightbox.classList.add('open');
                 lightbox.setAttribute('aria-hidden', 'false');
@@ -1073,7 +1073,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     img.addEventListener('click', function(e) {
                         e.preventDefault();
                         e.stopPropagation();
-                        lightboxImg.src = img.getAttribute('data-original-src') || img.currentSrc || img.src;
+                        lightboxImg.src = img.getAttribute('data-lightbox-src') || img.getAttribute('data-original-src') || img.currentSrc || img.src;
                         lightboxImg.alt = img.alt;
                         lightbox.classList.add('open');
                         lightbox.setAttribute('aria-hidden', 'false');
