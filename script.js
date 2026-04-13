@@ -1142,12 +1142,14 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         function applyFilters() {
             var searchInput = document.getElementById('product-search');
-            var query = searchInput ? normalizeLookup(searchInput.value) : '';
+            var rawQuery = searchInput ? normalizeLookup(searchInput.value) : '';
+            var isShowAll = rawQuery === '##all##';
+            var query = isShowAll ? '' : rawQuery;
             var selectedType = typeFilter ? typeFilter.value : '';
             var noResults = document.getElementById('no-results');
             var visibleCount = 0;
             var hasActiveFilter = Boolean(query || selectedType);
-            var showChildrenDirectly = !PRODUCTS_PAGE_SETTINGS.groupByFamily || hasActiveFilter;
+            var showChildrenDirectly = isShowAll || !PRODUCTS_PAGE_SETTINGS.groupByFamily || hasActiveFilter;
 
             if (showChildrenDirectly) {
                 var matchedProducts = products.filter(function(item) {
