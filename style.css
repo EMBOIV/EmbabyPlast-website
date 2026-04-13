@@ -856,6 +856,7 @@ section {
     align-items: center;
     justify-content: center;
     padding: 1rem;
+    height: 250px;
 }
 
 .products .box-container .box.variant-result-card.product-variant-card .images .product-image-frame {
@@ -1006,6 +1007,7 @@ section {
     align-items: center;
     justify-content: center;
     padding: 1rem;
+    height: 250px;
 }
 
 .product-config .product-variant-card .images .product-image-frame {
