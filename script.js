@@ -10,8 +10,8 @@ var PRODUCT_CATALOG = {
 };
 
 var CONTACT_INFO = {
-    phoneDigits: '201277793199',
-    phoneDisplay: '+2012 777 93 199',
+    phoneDigits: '201155556560',
+    phoneDisplay: '+2 011 5555 65 60',
     location: {
         ar: 'المنطقة الصناعية، القاهرة، مصر',
         en: 'Industrial Zone, Cairo, Egypt'
@@ -38,7 +38,7 @@ var LABELS = {
     dozenPrice:       { ar: '\u0633\u0639\u0631 \u0627\u0644\u062F\u0633\u062A\u0629',                en: 'Dozen Price' },
     cartonPrice:      { ar: '\u0633\u0639\u0631 \u0627\u0644\u0643\u0631\u062A\u0648\u0646\u0629',             en: 'Carton Price' },
     dozensPerCarton:  { ar: '\u0639\u062F\u062F \u0627\u0644\u062F\u0633\u062A\u0629 \u0641\u064A \u0627\u0644\u0643\u0631\u062A\u0648\u0646\u0629', en: 'Dozens Per Carton' },
-    contactWhatsapp:  { ar: '\u062A\u0648\u0627\u0635\u0644 \u0639\u0628\u0631 \u0627\u0644\u0648\u0627\u062A\u0633\u0627\u0628',       en: 'Contact via WhatsApp' },
+    contactWhatsapp:  { ar: '\u062A\u0648\u0627\u0635\u0644 \u0645\u0639\u0646\u0627',                        en: 'Chat with us' },
     whatsappGreeting: { ar: '\u0645\u0631\u062D\u0628\u0627\u064B \u0625\u0645\u0628\u0627\u0628\u064A \u0628\u0644\u0627\u0633\u062A! \u0623\u0648\u062F \u0627\u0644\u0627\u0633\u062A\u0641\u0633\u0627\u0631 \u0639\u0646: ', en: 'Hello Embaby Plast! I would like to inquire about: ' },
     onRequest:        { ar: '\u0627\u0644\u0633\u0639\u0631 \u0639\u0646\u062F \u0627\u0644\u0637\u0644\u0628',              en: 'On Request' },
     currency:         { ar: ' \u062C.\u0645',                              en: 'EGP ' },
@@ -59,6 +59,7 @@ var LABELS = {
     products:         { ar: '\u0627\u0644\u0645\u0646\u062A\u062C\u0627\u062A',                       en: 'Products' },
     whyUs:            { ar: '\u0644\u0645\u0627\u0630\u0627 \u0646\u062D\u0646',                     en: 'Why Us' },
     contact:          { ar: '\u0627\u062A\u0635\u0644 \u0628\u0646\u0627',                      en: 'Contact' },
+    callNow:          { ar: '\u0627\u062A\u0635\u0644 \u0628\u0646\u0627',                      en: 'Call Now' },
     decimalPlaces:    2
 };
 
@@ -337,7 +338,7 @@ function buildSharedHeaderHtml(ctx) {
     var menuBack = ar ? 'رجوع' : 'Back';
     var langMobileLabel = ar ? 'English' : 'العربية';
     var langMobileAria = ar ? 'English' : 'Arabic';
-    var socialWaTitle = ar ? 'واتساب' : 'WhatsApp';
+    var socialWaTitle = ar ? 'تواصل عبر واتساب' : 'WhatsApp';
     var currentLang = ar ? 'ar' : 'en';
 
     var homeHref = getSectionHref(ctx.isHome, 'home');
@@ -400,7 +401,7 @@ function buildSharedFooterHtml(ar) {
     var requestOrderLabel = ar ? 'اطلب الآن' : 'Request Order';
 
     var contactTitle = ar ? 'تواصل المصنع' : 'Factory Contact';
-    var waLabel = ar ? 'واتساب' : 'WhatsApp';
+    var waLabel = ar ? 'تواصل عبر واتساب' : 'WhatsApp';
     var location = getLocalizedLocation(ar);
     var currentYear = String(new Date().getFullYear());
 
@@ -755,6 +756,7 @@ function buildVariantCardHtml(item, ar, imgBase, opts) {
     var cartonPriceLabel = label('cartonPrice', ar);
     var dozenLabel  = label('dozensPerCarton', ar);
     var btnWhatsapp = label('contactWhatsapp', ar);
+    var btnCall = label('callNow', ar);
     var waMsg = label('whatsappGreeting', ar) + productName;
 
     var extraClasses = opts.extraClasses ? ' ' + opts.extraClasses : '';
@@ -781,7 +783,8 @@ function buildVariantCardHtml(item, ar, imgBase, opts) {
         + '<p class="product-carton-price"><span class="qty-label">' + cartonPriceLabel + ':</span><span class="qty-value"> ' + escapeHtml(cartonPriceText) + '</span></p>'
         + '</div>'
         + '<div class="icons">'
-        + '<a href="' + getWhatsappHrefWithText(waMsg) + '" target="_blank" rel="noopener noreferrer" class="btn-cart product-variant-wa">' + btnWhatsapp + '</a>'
+        + '<a href="' + getWhatsappHrefWithText(waMsg) + '" target="_blank" rel="noopener noreferrer" class="btn-cart product-variant-wa"><i class="fab fa-whatsapp"></i> ' + btnWhatsapp + '</a>'
+        + '<a href="' + getPhoneTelHref() + '" class="btn-cart product-variant-call"><i class="fas fa-phone"></i> ' + btnCall + '</a>'
         + '</div>'
         + '</article>';
 }

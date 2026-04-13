@@ -18,6 +18,7 @@ Add-Type -AssemblyName System.Drawing
 $ImagesDir = Join-Path $PSScriptRoot "images"
 $WebpDir   = Join-Path $ImagesDir "webp"
 $ThumbsDir = Join-Path $ImagesDir "thumbs"
+$WatermarkPath = Join-Path $ImagesDir "logo-watermark.png"
 
 # Settings
 $MaxFullWidth  = 1200     # Max width for full-size product images
@@ -25,6 +26,14 @@ $BgMaxWidth    = 1920     # Max width for background images
 $ThumbWidth    = 400      # Thumbnail width for catalog cards
 $JpegQuality   = 85       # JPEG quality (85 = high quality, much smaller than PNG)
 $ThumbQuality  = 78
+$OverwriteExisting = $true
+
+# Watermark settings (applied when images/logo-watermark.png exists)
+$WatermarkScaleFull   = 0.16
+$WatermarkScaleThumb  = 0.22
+$WatermarkOpacity     = 0.24
+$WatermarkMarginFull  = 20
+$WatermarkMarginThumb = 10
 
 # Create output directories
 if (-not (Test-Path $WebpDir))   { New-Item -ItemType Directory -Path $WebpDir   -Force | Out-Null }
@@ -45,7 +54,58 @@ function Save-AsJpeg($image, $outputPath, $quality) {
     $params.Dispose()
 }
 
-function Resize-Image($srcPath, $destPath, $maxWidth, $quality) {
+$script:WatermarkImage = $null
+if (Test-Path $WatermarkPath) {
+    try {
+        $script:WatermarkImage = [System.Drawing.Image]::FromFile($WatermarkPath)
+    }
+    catch {
+        Write-Warning "Could not load watermark image: $($_.Exception.Message)"
+    }
+}
+
+function Add-Watermark($bitmap, $scale, $marginPx, $opacity) {
+    if (-not $script:WatermarkImage) { return }
+    if (-not $bitmap) { return }
+
+    $targetW = [int]([math]::Round($bitmap.Width * $scale))
+    if ($targetW -lt 48) { $targetW = 48 }
+    if ($targetW -gt $script:WatermarkImage.Width) { $targetW = $script:WatermarkImage.Width }
+
+    $ratio = $targetW / [double]$script:WatermarkImage.Width
+    $targetH = [int]([math]::Round($script:WatermarkImage.Height * $ratio))
+
+    $x = $bitmap.Width - $targetW - $marginPx
+    $y = $bitmap.Height - $targetH - $marginPx
+    if ($x -lt 0) { $x = 0 }
+    if ($y -lt 0) { $y = 0 }
+
+    $g = [System.Drawing.Graphics]::FromImage($bitmap)
+    $g.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
+    $g.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::HighQuality
+
+    $attrs = New-Object System.Drawing.Imaging.ImageAttributes
+    $matrix = New-Object System.Drawing.Imaging.ColorMatrix
+    $matrix.Matrix33 = [single]$opacity
+    $attrs.SetColorMatrix($matrix, [System.Drawing.Imaging.ColorMatrixFlag]::Default, [System.Drawing.Imaging.ColorAdjustType]::Bitmap)
+
+    $destRect = New-Object System.Drawing.Rectangle($x, $y, $targetW, $targetH)
+    $g.DrawImage(
+        $script:WatermarkImage,
+        $destRect,
+        0,
+        0,
+        $script:WatermarkImage.Width,
+        $script:WatermarkImage.Height,
+        [System.Drawing.GraphicsUnit]::Pixel,
+        $attrs
+    )
+
+    $attrs.Dispose()
+    $g.Dispose()
+}
+
+function Resize-Image($srcPath, $destPath, $maxWidth, $quality, $watermarkScale, $watermarkMargin) {
     try {
         $src = [System.Drawing.Image]::FromFile($srcPath)
         
@@ -66,6 +126,8 @@ function Resize-Image($srcPath, $destPath, $maxWidth, $quality) {
         $g.CompositingQuality = [System.Drawing.Drawing2D.CompositingQuality]::HighQuality
         $g.DrawImage($src, 0, 0, $newWidth, $newHeight)
         $g.Dispose()
+
+        Add-Watermark $dest $watermarkScale $watermarkMargin $WatermarkOpacity
         
         Save-AsJpeg $dest $destPath $quality
         
@@ -87,8 +149,15 @@ function Resize-Image($srcPath, $destPath, $maxWidth, $quality) {
 Write-Host "`nEmbaby Plast Image Optimizer (PowerShell)`n" -ForegroundColor Cyan
 Write-Host "Note: This creates JPEG versions. For best WebP results, install Node.js and run:" -ForegroundColor Yellow
 Write-Host "  npm install sharp; node optimize-images.js`n" -ForegroundColor Yellow
+if ($script:WatermarkImage) {
+    Write-Host "Watermark: enabled (images/logo-watermark.png)" -ForegroundColor Green
+} else {
+    Write-Host "Watermark: not found, skipping watermark overlay" -ForegroundColor Yellow
+}
 
-$files = Get-ChildItem $ImagesDir -File | Where-Object { $_.Extension -match '\.(png|jpg|jpeg)$' }
+$files = Get-ChildItem $ImagesDir -File | Where-Object {
+    $_.Extension -match '\.(png|jpg|jpeg)$' -and $_.Name.ToLower() -ne 'logo-watermark.png'
+}
 Write-Host "Found $($files.Count) images to optimize...`n"
 
 $totalOrig = 0
@@ -102,8 +171,8 @@ foreach ($file in $files) {
     
     # Full-size optimized version
     $fullDest = Join-Path $WebpDir "$baseName.jpg"
-    if (-not (Test-Path $fullDest)) {
-        $result = Resize-Image $file.FullName $fullDest $maxW $JpegQuality
+    if ($OverwriteExisting -or -not (Test-Path $fullDest)) {
+        $result = Resize-Image $file.FullName $fullDest $maxW $JpegQuality $WatermarkScaleFull $WatermarkMarginFull
         if ($result) {
             Write-Host "  Full: $($file.Name) -> $baseName.jpg ($($result.OrigKB)KB -> $($result.NewKB)KB, -$($result.Saved)%)"
             $totalOrig += $result.OrigKB
@@ -114,8 +183,8 @@ foreach ($file in $files) {
     # Thumbnail (skip backgrounds and logos)
     if ($file.Name -notmatch 'welcome|background|logo') {
         $thumbDest = Join-Path $ThumbsDir "$baseName.jpg"
-        if (-not (Test-Path $thumbDest)) {
-            $result = Resize-Image $file.FullName $thumbDest $ThumbWidth $ThumbQuality
+        if ($OverwriteExisting -or -not (Test-Path $thumbDest)) {
+            $result = Resize-Image $file.FullName $thumbDest $ThumbWidth $ThumbQuality $WatermarkScaleThumb $WatermarkMarginThumb
             if ($result) {
                 Write-Host "  Thumb: $baseName.jpg ($($result.NewKB)KB)"
                 $totalThumb += $result.NewKB
@@ -134,3 +203,6 @@ if ($totalOrig -gt 0) {
 Write-Host "`nDone! Images saved to:" -ForegroundColor Green
 Write-Host "  $WebpDir"
 Write-Host "  $ThumbsDir"
+if ($script:WatermarkImage) {
+    $script:WatermarkImage.Dispose()
+}
