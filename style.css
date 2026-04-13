@@ -953,7 +953,7 @@ section {
 /* --- Product Config --- */
 .product-config { padding-top: 12rem; min-height: 75vh; }
 
-.product-config-container { max-width: 96rem; margin: 2rem auto 0; }
+.product-config-container { max-width: 130rem; margin: 2rem auto 0; }
 
 .product-config .heading {
     margin: 0;
@@ -971,8 +971,8 @@ section {
 
 .product-config .product-variants-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.4rem;
 }
 
 .product-config .product-variant-card {

@@ -31,8 +31,42 @@ var BRAND_INFO = {
 // true  => show families first, then children on filtering
 // false => always show all child products directly
 var PRODUCTS_PAGE_SETTINGS = {
-    groupByFamily: false
+    groupByFamily: true
 };
+
+var LABELS = {
+    dozenPrice:       { ar: '\u0633\u0639\u0631 \u0627\u0644\u062F\u0633\u062A\u0629',                en: 'Dozen Price' },
+    cartonPrice:      { ar: '\u0633\u0639\u0631 \u0627\u0644\u0643\u0631\u062A\u0648\u0646\u0629',             en: 'Carton Price' },
+    dozensPerCarton:  { ar: '\u0639\u062F\u062F \u0627\u0644\u062F\u0633\u062A\u0629 \u0641\u064A \u0627\u0644\u0643\u0631\u062A\u0648\u0646\u0629', en: 'Dozens Per Carton' },
+    contactWhatsapp:  { ar: '\u062A\u0648\u0627\u0635\u0644 \u0639\u0628\u0631 \u0627\u0644\u0648\u0627\u062A\u0633\u0627\u0628',       en: 'Contact via WhatsApp' },
+    whatsappGreeting: { ar: '\u0645\u0631\u062D\u0628\u0627\u064B \u0625\u0645\u0628\u0627\u0628\u064A \u0628\u0644\u0627\u0633\u062A! \u0623\u0648\u062F \u0627\u0644\u0627\u0633\u062A\u0641\u0633\u0627\u0631 \u0639\u0646: ', en: 'Hello Embaby Plast! I would like to inquire about: ' },
+    onRequest:        { ar: '\u0627\u0644\u0633\u0639\u0631 \u0639\u0646\u062F \u0627\u0644\u0637\u0644\u0628',              en: 'On Request' },
+    currency:         { ar: ' \u062C.\u0645',                              en: 'EGP ' },
+    startsFrom:       { ar: '\u0627\u0644\u0633\u0639\u0631 \u064A\u0628\u062F\u0623 \u0645\u0646:',               en: 'Price starts from:' },
+    viewDetails:      { ar: '\u0639\u0631\u0636 \u0627\u0644\u062A\u0641\u0627\u0635\u064A\u0644',                en: 'View Details' },
+    variants:         { ar: '\u0627\u0644\u0623\u0646\u0648\u0627\u0639',                       en: 'Variants' },
+    backToCatalog:    { ar: '\u0627\u0644\u0639\u0648\u062F\u0629 \u0644\u0644\u0643\u062A\u0627\u0644\u0648\u062C',             en: 'Back to Catalog' },
+    productNotFound:  { ar: '\u0627\u0644\u0645\u0646\u062A\u062C \u063A\u064A\u0631 \u0645\u0648\u062C\u0648\u062F.',              en: 'Product not found.' },
+    youMayAlsoLike:   { ar: '\u0642\u062F \u064A\u0639\u062C\u0628\u0643 \u0623\u064A\u0636\u0627\u064B',               en: 'You may also like' },
+    totalProducts:    { ar: '\u0625\u062C\u0645\u0627\u0644\u064A \u0627\u0644\u0645\u0646\u062A\u062C\u0627\u062A: ',             en: 'Total products: ' },
+    showing:          { ar: ' | \u0627\u0644\u0645\u0639\u0631\u0648\u0636: ',                    en: ' | Showing: ' },
+    filterByType:     { ar: '\u062A\u0635\u0641\u064A\u0629 \u062D\u0633\u0628 \u0627\u0644\u0646\u0648\u0639',               en: 'Filter by type' },
+    allTypes:         { ar: '\u0643\u0644 \u0627\u0644\u0623\u0646\u0648\u0627\u0639',                     en: 'All Types' },
+    typePrefix:       { ar: '\u0627\u0644\u0646\u0648\u0639: ',                         en: 'Type: ' },
+    priceStartsFrom:  { ar: '\u0627\u0644\u0633\u0639\u0631 \u064A\u0628\u062F\u0623 \u0645\u0646: ',              en: 'Price starts from: ' },
+    home:             { ar: '\u0627\u0644\u0631\u0626\u064A\u0633\u064A\u0629',                       en: 'Home' },
+    about:            { ar: '\u0639\u0646 \u0627\u0644\u0645\u0635\u0646\u0639',                     en: 'About' },
+    products:         { ar: '\u0627\u0644\u0645\u0646\u062A\u062C\u0627\u062A',                       en: 'Products' },
+    whyUs:            { ar: '\u0644\u0645\u0627\u0630\u0627 \u0646\u062D\u0646',                     en: 'Why Us' },
+    contact:          { ar: '\u0627\u062A\u0635\u0644 \u0628\u0646\u0627',                      en: 'Contact' },
+    decimalPlaces:    2
+};
+
+function label(key, ar) {
+    var entry = LABELS[key];
+    if (!entry) return '';
+    return ar ? entry.ar : entry.en;
+}
 
 function getPhoneTelHref() {
     return 'tel:+' + CONTACT_INFO.phoneDigits;
@@ -318,11 +352,11 @@ function buildSharedHeaderHtml(ctx) {
     var mobileLangExtra = ctx.isProduct ? ' id="lang-switch-mobile"' : '';
     var productToggleExtra = ctx.isProduct ? ' id="lang-toggle-link"' : '';
 
-    var homeLabel = ar ? 'الرئيسية' : 'Home';
-    var aboutLabel = ar ? 'عن المصنع' : 'About';
-    var productsLabel = ar ? 'المنتجات' : 'Products';
-    var whyLabel = ar ? 'لماذا نحن' : 'Why Us';
-    var contactLabel = ar ? 'اتصل بنا' : 'Contact';
+    var homeLabel = label('home', ar);
+    var aboutLabel = label('about', ar);
+    var productsLabel = label('products', ar);
+    var whyLabel = label('whyUs', ar);
+    var contactLabel = label('contact', ar);
 
     return ''
         + '<input type="checkbox" id="toggler">'
@@ -355,10 +389,10 @@ function buildSharedFooterHtml(ar) {
         : 'Precision plastic comb manufacturing factory. Supplying durable wholesale combs for distributors worldwide.';
 
     var quickLinksTitle = ar ? 'روابط سريعة' : 'Quick Links';
-    var homeLabel = ar ? 'الرئيسية' : 'Home';
+    var homeLabel = label('home', ar);
     var aboutLabel = ar ? 'عن المصنع' : 'About Factory';
-    var productsLabel = ar ? 'المنتجات' : 'Products';
-    var contactLabel = ar ? 'اتصل بنا' : 'Contact';
+    var productsLabel = label('products', ar);
+    var contactLabel = label('contact', ar);
 
     var productsColTitle = ar ? 'المنتجات' : 'Products';
     var allProductsLabel = ar ? 'جميع المنتجات' : 'All Products';
@@ -535,17 +569,11 @@ function normalizeLookup(value) {
         .replace(/\s+/g, ' ');
 }
 
-function getVariantTypeEn(product) {
-    return product.varianttype || '';
-}
-
-function getVariantTypeAr(product) {
-    return product.varianttypeAr || '';
-}
-
 function getVariantTypeLabel(product, ar) {
-    if (ar) return getVariantTypeAr(product) || getVariantTypeEn(product) || '';
-    return getVariantTypeEn(product) || getVariantTypeAr(product) || '';
+    var en = product.varianttype || product.variantType || '';
+    var arVal = product.varianttypeAr || product.variantTypeAr || '';
+    if (ar) return arVal || en;
+    return en || arVal;
 }
 
 function getFilterKey(value) {
@@ -625,16 +653,16 @@ function buildFamilies(products) {
             map[key].parent = product;
             map[key].familyName = product.familyName || '';
             map[key].familyNameAr = product.familyNameAr || product.nameAr || product.familyName || '';
-            map[key].variantType = getVariantTypeEn(product) || map[key].variantType;
-            map[key].variantTypeAr = getVariantTypeAr(product) || map[key].variantTypeAr;
+            map[key].variantType = (product.varianttype || product.variantType || '') || map[key].variantType;
+            map[key].variantTypeAr = (product.varianttypeAr || product.variantTypeAr || '') || map[key].variantTypeAr;
             return;
         }
 
         if (!map[key].variantType) {
-            map[key].variantType = getVariantTypeEn(product);
+            map[key].variantType = product.varianttype || product.variantType || '';
         }
         if (!map[key].variantTypeAr) {
-            map[key].variantTypeAr = getVariantTypeAr(product);
+            map[key].variantTypeAr = product.varianttypeAr || product.variantTypeAr || '';
         }
 
         map[key].variants.push(product);
@@ -671,12 +699,16 @@ function buildFamilies(products) {
     }).filter(Boolean);
 }
 
-function getPriceText(product, ar) {
-    var price = getNumericPrice(product);
-    if (price > 0) {
-        return ar ? (price.toFixed(2) + ' \u062C.\u0645') : ('EGP ' + price.toFixed(2));
+function formatPrice(value, ar) {
+    if (value > 0) {
+        var formatted = value.toFixed(LABELS.decimalPlaces);
+        return ar ? (formatted + label('currency', true)) : (label('currency', false) + formatted);
     }
-    return ar ? '\u0627\u0644\u0633\u0639\u0631 \u0639\u0646\u062F \u0627\u0644\u0637\u0644\u0628' : 'On Request';
+    return label('onRequest', ar);
+}
+
+function getPriceText(product, ar) {
+    return formatPrice(getNumericPrice(product), ar);
 }
 
 function getDozensPerCarton(product) {
@@ -702,10 +734,7 @@ function getCartonPriceText(product, ar) {
         }
     }
 
-    if (carton > 0) {
-        return ar ? (carton.toFixed(2) + ' \u062C.\u0645') : ('EGP ' + carton.toFixed(2));
-    }
-    return ar ? '\u0627\u0644\u0633\u0639\u0631 \u0639\u0646\u062F \u0627\u0644\u0637\u0644\u0628' : 'On Request';
+    return formatPrice(carton, ar);
 }
 
 // ===== SHARED VARIANT CARD BUILDER =====
@@ -722,13 +751,11 @@ function buildVariantCardHtml(item, ar, imgBase, opts) {
     var priceText   = getPriceText(item, ar);
     var cartonPriceText = getCartonPriceText(item, ar);
     var dozensPerCarton = getDozensPerCarton(item);
-    var priceLabel  = ar ? '\u0633\u0639\u0631 \u0627\u0644\u062F\u0633\u062A\u0629' : 'Dozen Price';
-    var cartonPriceLabel = ar ? '\u0633\u0639\u0631 \u0627\u0644\u0643\u0631\u062A\u0648\u0646\u0629' : 'Carton Price';
-    var dozenLabel  = ar ? '\u0639\u062F\u062F \u0627\u0644\u062F\u0633\u062A\u0629 \u0641\u064A \u0627\u0644\u0643\u0631\u062A\u0648\u0646\u0629' : 'Dozens Per Carton';
-    var btnWhatsapp = ar ? '\u062A\u0648\u0627\u0635\u0644 \u0639\u0628\u0631 \u0627\u0644\u0648\u0627\u062A\u0633\u0627\u0628' : 'Contact via WhatsApp';
-    var waMsg = ar
-        ? '\u0645\u0631\u062D\u0628\u0627\u064B \u0625\u0645\u0628\u0627\u0628\u064A \u0628\u0644\u0627\u0633\u062A! \u0623\u0648\u062F \u0627\u0644\u0627\u0633\u062A\u0641\u0633\u0627\u0631 \u0639\u0646: ' + productName
-        : ('Hello ' + BRAND_INFO.en + '! I would like to inquire about: ' + productName);
+    var priceLabel  = label('dozenPrice', ar);
+    var cartonPriceLabel = label('cartonPrice', ar);
+    var dozenLabel  = label('dozensPerCarton', ar);
+    var btnWhatsapp = label('contactWhatsapp', ar);
+    var waMsg = label('whatsappGreeting', ar) + productName;
 
     var extraClasses = opts.extraClasses ? ' ' + opts.extraClasses : '';
     var extraAttrs   = opts.extraAttrs   ? ' ' + opts.extraAttrs   : '';
@@ -761,10 +788,7 @@ function buildVariantCardHtml(item, ar, imgBase, opts) {
 // ========================================
 
 function getStartsFromText(minPrice, ar) {
-    if (minPrice > 0) {
-        return ar ? (minPrice.toFixed(2) + ' \u062C.\u0645') : ('EGP ' + minPrice.toFixed(2));
-    }
-    return ar ? '\u0627\u0644\u0633\u0639\u0631 \u0639\u0646\u062F \u0627\u0644\u0637\u0644\u0628' : 'On Request';
+    return formatPrice(minPrice, ar);
 }
 
 function getHighestPriceVariant(variants) {
@@ -811,11 +835,11 @@ function buildRecommendations(currentProduct, ar, imgBase) {
         candidates[j] = temp;
     }
 
-    var picked = candidates.slice(0, 3);
+    var picked = candidates.slice(0, 6);
     if (!picked.length) return '';
 
-    var heading = ar ? 'قد يعجبك أيضاً' : 'You may also like';
-    var detailsLabel = ar ? 'عرض التفاصيل' : 'View Details';
+    var heading = label('youMayAlsoLike', ar);
+    var detailsLabel = label('viewDetails', ar);
     var cards = picked.map(function(family) {
         var topVariant = getHighestPriceVariant(family.variants);
         var displayProduct = getFamilyCardProduct(family) || topVariant;
@@ -826,7 +850,7 @@ function buildRecommendations(currentProduct, ar, imgBase) {
             + '<article class="recommendation-card" data-detail-url="product.html?id=' + escapeHtml(topVariant.id) + '" tabindex="0" role="link" aria-label="' + escapeHtml(familyTitle) + '">'
             + '<div class="recommendation-image-wrap">' + recommendationImageHtml + '</div>'
             + '<h4>' + escapeHtml(familyTitle) + '</h4>'
-            + '<p class="recommendation-price">' + (ar ? 'السعر يبدأ من: ' : 'Price starts from: ') + escapeHtml(startsFrom) + '</p>'
+            + '<p class="recommendation-price">' + label('priceStartsFrom', ar) + escapeHtml(startsFrom) + '</p>'
             + '<a class="recommendation-link" href="product.html?id=' + escapeHtml(topVariant.id) + '">' + detailsLabel + '</a>'
             + '</article>';
     }).join('');
@@ -888,8 +912,8 @@ function renderProductConfigPage() {
     var imgBase = getImageBase();
 
     if (!product || !isProductEnabled(product)) {
-        var notFoundMsg = ar ? '\u0627\u0644\u0645\u0646\u062A\u062C \u063A\u064A\u0631 \u0645\u0648\u062C\u0648\u062F.' : 'Product not found.';
-        var backMsg = ar ? '\u0627\u0644\u0639\u0648\u062F\u0629 \u0644\u0644\u0643\u062A\u0627\u0644\u0648\u062C' : 'Back to Catalog';
+        var notFoundMsg = label('productNotFound', ar);
+        var backMsg = label('backToCatalog', ar);
         container.innerHTML = '<p>' + notFoundMsg + ' <a href="products.html">' + backMsg + '</a></p>';
         return;
     }
@@ -913,8 +937,8 @@ function renderProductConfigPage() {
         if (pb === 0 && pa > 0) return -1;
         return pa - pb;
     });
-    var lblVariant = ar ? '\u0627\u0644\u0623\u0646\u0648\u0627\u0639' : 'Variants';
-    var btnBack = ar ? '\u0627\u0644\u0639\u0648\u062F\u0629 \u0644\u0644\u0643\u062A\u0627\u0644\u0648\u062C' : 'Back to Catalog';
+    var lblVariant = label('variants', ar);
+    var btnBack = label('backToCatalog', ar);
     var initialVariant = getHighestPriceVariant(variants) || product;
 
     var langToggle = document.getElementById('lang-toggle-link');
@@ -996,8 +1020,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         var totalCountEl = document.getElementById('products-total-count');
         var products = getVariantCatalogArray();
         var families = buildFamilies(getCatalogArray());
-        var startsFromLabel = ar ? '\u0627\u0644\u0633\u0639\u0631 \u064A\u0628\u062F\u0623 \u0645\u0646:' : 'Price starts from:';
-        var viewLabel = ar ? '\u0639\u0631\u0636 \u0627\u0644\u062A\u0641\u0627\u0635\u064A\u0644' : 'View Details';
+        var startsFromLabel = label('startsFrom', ar);
+        var viewLabel = label('viewDetails', ar);
 
         function buildProductSearchText(item) {
             return normalizeLookup([
@@ -1027,7 +1051,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 + '</div>'
                 + '<div class="content">'
                 + '<h3>' + escapeHtml(familyTitle) + '</h3>'
-                + (typeLabel ? '<p class="product-type-tag">' + escapeHtml(ar ? ('النوع: ' + typeLabel) : ('Type: ' + typeLabel)) + '</p>' : '')
+                + (typeLabel ? '<p class="product-type-tag">' + escapeHtml(label('typePrefix', ar) + typeLabel) + '</p>' : '')
                 + '<div class="product-price product-variant-price"><span class="price-label">' + startsFromLabel + '</span><span class="product-variant-price-value">' + escapeHtml(startsFrom) + '</span></div>'
                 + '</div>'
                 + '<div class="icons">'
@@ -1103,9 +1127,9 @@ document.addEventListener('DOMContentLoaded', async function() {
                 var filterWrap = document.createElement('div');
                 filterWrap.className = 'products-type-filter-wrap';
                 filterWrap.innerHTML = ''
-                    + '<label class="products-type-filter-label" for="product-type-filter">' + (ar ? 'تصفية حسب النوع' : 'Filter by type') + '</label>'
+                    + '<label class="products-type-filter-label" for="product-type-filter">' + label('filterByType', ar) + '</label>'
                     + '<select id="product-type-filter" class="products-type-filter">'
-                    + '<option value="">' + (ar ? 'كل الأنواع' : 'All Types') + '</option>'
+                    + '<option value="">' + label('allTypes', ar) + '</option>'
                     + typeKeys.map(function(key) {
                         return '<option value="' + escapeHtml(key) + '">' + escapeHtml(typeMap[key]) + '</option>';
                     }).join('')
@@ -1149,13 +1173,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
             if (totalCountEl) {
                 var totalBaseCount = showChildrenDirectly ? products.length : families.length;
-                var totalText = ar
-                    ? ('إجمالي المنتجات: ' + totalBaseCount)
-                    : ('Total products: ' + totalBaseCount);
-                var visibleText = ar
-                    ? (' | المعروض: ' + visibleCount)
-                    : (' | Showing: ' + visibleCount);
-                totalCountEl.textContent = totalText + visibleText;
+                totalCountEl.textContent = label('totalProducts', ar) + totalBaseCount + label('showing', ar) + visibleCount;
             }
         }
 
