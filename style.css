@@ -24,6 +24,7 @@
     --border: #D8DEE4;
     --shadow: rgba(11, 29, 42, 0.08);
     --shadow-hover: rgba(11, 29, 42, 0.14);
+    --product-card-image-height: 220px;
 }
 
 html {
@@ -665,6 +666,7 @@ section {
 .products .box-container .box {
     display: flex;
     flex-direction: column;
+    height: 100%;
     position: relative;
     background: var(--white);
     border: 1px solid var(--border);
@@ -708,6 +710,7 @@ section {
 
 .products .box .images {
     position: relative;
+    height: var(--product-card-image-height);
     overflow: hidden;
     background: #fff;
     display: flex;
@@ -718,15 +721,26 @@ section {
 
 .product-image-frame {
     width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    background: #f0f0f0;
+    background: #fff;
+}
+
+.product-image-frame picture {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .product-image-frame img {
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
     height: auto;
     display: block;
     object-fit: contain;
@@ -761,11 +775,14 @@ section {
 
 .products .box .images .product-image-frame {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    height: 100%;
+    aspect-ratio: auto;
 }
 
 .products .box .images img {
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
     height: auto;
     object-fit: contain;
     transition: none;
@@ -785,6 +802,9 @@ section {
 
 .products .box .content {
     padding: 1.8rem 1.8rem 1rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
     text-align: left;
 }
 
@@ -856,21 +876,27 @@ section {
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    height: 250px;
+    height: var(--product-card-image-height);
 }
 
 .products .box-container .box.variant-result-card.product-variant-card .images .product-image-frame {
     width: 100%;
+    height: 100%;
 }
 
 .products .box-container .box.variant-result-card.product-variant-card .images img {
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
     height: auto;
     object-fit: contain;
 }
 
 .products .box-container .box.variant-result-card.product-variant-card .content {
     padding: 1.8rem 1.8rem 1rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
     text-align: left;
 }
 
@@ -988,6 +1014,7 @@ section {
 .product-config .product-variant-card {
     display: flex;
     flex-direction: column;
+    height: 100%;
     position: relative;
     background: var(--white);
     border: 1px solid var(--border);
@@ -1016,15 +1043,18 @@ section {
     align-items: center;
     justify-content: center;
     padding: 1rem;
-    height: 250px;
+    height: var(--product-card-image-height);
 }
 
 .product-config .product-variant-card .images .product-image-frame {
     width: 100%;
+    height: 100%;
 }
 
 .product-config .product-variant-card .images img {
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
     height: auto;
     object-fit: contain;
 }
@@ -1035,6 +1065,9 @@ section {
 
 .product-config .product-variant-card .content {
     padding: 1.8rem 1.8rem 1rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
     text-align: left;
 }
 
@@ -1420,6 +1453,10 @@ section {
 }
 
 @media(max-width: 768px) {
+    :root {
+        --product-card-image-height: 180px;
+    }
+
     header .fa-bars {
         display: inline-flex;
         align-items: center;

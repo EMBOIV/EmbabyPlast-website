@@ -512,6 +512,26 @@ function isFamilyParentRow(product) {
 
 function handleProductImageError(img) {
     if (!img) return;
+
+    var currentSrc = String(img.currentSrc || img.src || '').replace(/\\/g, '/');
+    var originalSrc = String(img.getAttribute('data-original-src') || '').trim();
+    var triedOriginal = img.getAttribute('data-original-fallback-attempted') === '1';
+    var optimizedFailed = /\/(thumbs|webp)\//i.test(currentSrc);
+
+    // If an optimized source fails, retry once using the original image file from CSV.
+    if (!triedOriginal && optimizedFailed && originalSrc) {
+        img.setAttribute('data-original-fallback-attempted', '1');
+        var picture = img.parentNode;
+        if (picture && picture.tagName && picture.tagName.toLowerCase() === 'picture') {
+            var sources = picture.querySelectorAll('source');
+            for (var i = 0; i < sources.length; i++) {
+                sources[i].removeAttribute('srcset');
+            }
+        }
+        img.src = originalSrc;
+        return;
+    }
+
     img.onerror = null;
     img.classList.add('is-hidden');
     img.setAttribute('aria-hidden', 'true');
@@ -536,14 +556,14 @@ function getOptimizedSrc(originalSrc, subfolder, ext) {
 
 function buildProductImageHtml(imageSrc, productName, imgClass) {
     var classAttr = imgClass ? ' class="' + escapeHtml(imgClass) + '"' : '';
-    var jpgFull = getOptimizedSrc(imageSrc, 'webp', 'jpg');
-    var jpgThumb = getOptimizedSrc(imageSrc, 'thumbs', 'jpg');
+    var webpFull = getOptimizedSrc(imageSrc, 'webp', 'webp');
+    var webpThumb = getOptimizedSrc(imageSrc, 'thumbs', 'webp');
     return ''
         + '<div class="product-image-frame">'
         + '<picture>'
-        + '<source type="image/jpeg" srcset="' + jpgThumb + '" media="(max-width: 600px)">'
-        + '<source type="image/jpeg" srcset="' + jpgFull + '">'
-        + '<img' + classAttr + ' src="' + imageSrc + '" data-lightbox-src="' + escapeHtml(jpgFull) + '" data-original-src="' + escapeHtml(imageSrc) + '" alt="' + escapeHtml(productName) + '" loading="lazy" decoding="async" onerror="handleProductImageError(this)">'  
+        + '<source type="image/webp" srcset="' + webpThumb + '" media="(max-width: 600px)">'
+        + '<source type="image/webp" srcset="' + webpFull + '">'
+        + '<img' + classAttr + ' src="' + imageSrc + '" data-lightbox-src="' + escapeHtml(webpFull) + '" data-original-src="' + escapeHtml(imageSrc) + '" alt="' + escapeHtml(productName) + '" loading="lazy" decoding="async" onerror="handleProductImageError(this)">'  
         + '</picture>'
         + '<div class="product-image-fallback" aria-hidden="true">' + escapeHtml(productName) + '</div>'
         + '</div>';

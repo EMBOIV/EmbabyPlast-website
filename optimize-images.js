@@ -29,7 +29,11 @@ const path = require('path');
 const IMAGES_DIR = path.join(__dirname, 'images');
 const WEBP_DIR = path.join(IMAGES_DIR, 'webp');
 const THUMBS_DIR = path.join(IMAGES_DIR, 'thumbs');
-const WATERMARK_FILE = path.join(IMAGES_DIR, 'logo-watermark.png');
+const WATERMARK_CANDIDATES = [
+    path.join(IMAGES_DIR, 'logo-watermark.png'),
+    path.join(IMAGES_DIR, 'logo-watermark.jpg'),
+    path.join(IMAGES_DIR, 'logo-watermark.jpeg')
+];
 
 // WebP quality: 82 is visually lossless for product photos
 const WEBP_QUALITY = 82;
@@ -46,11 +50,19 @@ const WATERMARK_MARGIN_THUMB = 10;
 // Also resize the welcome background to max 1920px wide
 const BG_MAX_WIDTH = 1920;
 
+function getWatermarkFile() {
+    for (const candidate of WATERMARK_CANDIDATES) {
+        if (fs.existsSync(candidate)) return candidate;
+    }
+    return null;
+}
+
 async function createWatermarkLayer(targetWidth, scale, marginPx) {
-    if (!fs.existsSync(WATERMARK_FILE)) return null;
+    const watermarkFile = getWatermarkFile();
+    if (!watermarkFile) return null;
 
     const desiredWidth = Math.max(80, Math.round(targetWidth * scale));
-    return sharp(WATERMARK_FILE)
+    return sharp(watermarkFile)
         .resize({ width: desiredWidth, withoutEnlargement: true })
         .png()
         .extend({
@@ -66,6 +78,7 @@ async function createWatermarkLayer(targetWidth, scale, marginPx) {
 async function buildOptimizedPipeline(filePath, fileName, outputKind) {
     const lowerName = fileName.toLowerCase();
     const isThumb = outputKind === 'thumb';
+    const isWelcomeBg = lowerName.includes('welcome');
     const quality = isThumb ? THUMB_QUALITY : WEBP_QUALITY;
     const scale = isThumb ? WATERMARK_SCALE_THUMB : WATERMARK_SCALE_FULL;
     const margin = isThumb ? WATERMARK_MARGIN_THUMB : WATERMARK_MARGIN_FULL;
@@ -74,12 +87,15 @@ async function buildOptimizedPipeline(filePath, fileName, outputKind) {
 
     if (isThumb) {
         pipeline.resize({ width: THUMB_WIDTH, withoutEnlargement: true });
-    } else if (lowerName.includes('welcome')) {
+    } else if (isWelcomeBg) {
         pipeline.resize({ width: BG_MAX_WIDTH, withoutEnlargement: true });
     }
 
     const metadata = await pipeline.metadata();
-    const targetWidth = metadata.width || THUMB_WIDTH;
+    const sourceWidth = metadata.width || THUMB_WIDTH;
+    const targetWidth = isThumb
+        ? Math.min(sourceWidth, THUMB_WIDTH)
+        : (isWelcomeBg ? Math.min(sourceWidth, BG_MAX_WIDTH) : sourceWidth);
     const watermarkLayer = await createWatermarkLayer(targetWidth, scale, margin);
 
     if (watermarkLayer) {
@@ -101,9 +117,9 @@ async function ensureDir(dir) {
 async function optimizeImage(filePath, fileName) {
     const ext = path.extname(fileName).toLowerCase();
     if (!['.png', '.jpg', '.jpeg'].includes(ext)) return;
-    if (fileName.toLowerCase() === 'logo-watermark.png') return;
+    if (fileName.toLowerCase().startsWith('logo-watermark.')) return;
 
-    const baseName = path.basename(fileName, ext);
+    const baseName = path.parse(fileName).name;
     const webpName = baseName + '.webp';
 
     // Full-size WebP
@@ -133,10 +149,11 @@ async function optimizeImage(filePath, fileName) {
 
 async function main() {
     console.log('Embaby Plast Image Optimizer\n');
-    if (fs.existsSync(WATERMARK_FILE)) {
-        console.log('Watermark: enabled (images/logo-watermark.png)\n');
+    const watermarkFile = getWatermarkFile();
+    if (watermarkFile) {
+        console.log(`Watermark: enabled (${path.basename(watermarkFile)})\n`);
     } else {
-        console.log('Watermark: not found (expected images/logo-watermark.png)\n');
+        console.log('Watermark: not found (expected logo-watermark.png/jpg/jpeg)\n');
     }
     await ensureDir(WEBP_DIR);
     await ensureDir(THUMBS_DIR);
