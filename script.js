@@ -631,18 +631,8 @@ function getCatalogArray() {
     var all = Object.keys(PRODUCT_CATALOG).map(function(id) {
         return PRODUCT_CATALOG[id];
     });
-
-    // Collect family keys whose parent row is explicitly disabled.
-    var disabledFamilies = {};
-    all.forEach(function(product) {
-        if (isFamilyParentRow(product) && !isProductEnabled(product)) {
-            disabledFamilies[String(product.familyKey)] = true;
-        }
-    });
-
     return all.filter(function(product) {
         if (!isProductEnabled(product)) return false;
-        if (!isFamilyParentRow(product) && disabledFamilies[String(product.familyKey)]) return false;
         return true;
     });
 }
