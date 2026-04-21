@@ -34,6 +34,56 @@ var PRODUCTS_PAGE_SETTINGS = {
     groupByFamily: true
 };
 
+// ===== SECURITY & UTILITY CONSTANTS =====
+var SECURITY_CONFIG = {
+    MAX_SEARCH_LENGTH: 500,
+    SEARCH_DEBOUNCE_MS: 300,
+    ALLOWED_LANGUAGES: ['en', 'ar'],
+    CONTACT_DEBOUNCE_MS: 1000
+};
+
+var DOM_SELECTORS = {
+    CONTACT_PHONE: '[data-contact-link="phone"]',
+    CONTACT_WHATSAPP: '[data-contact-link="whatsapp"]',
+    CONTACT_LOCATION: '[data-contact-content="location"]',
+    CONTACT_HOURS: '[data-contact-content="hours"]',
+    CONTACT_CARD: '.contact-card[data-contact-card-link]',
+    PRODUCT_SEARCH: '#product-search',
+    PRODUCT_TYPE_FILTER: '#product-type-filter',
+    MENU_TOGGLER: '#toggler'
+};
+
+// ===== DEBOUNCE UTILITY =====
+function debounce(func, delayMs) {
+    var timeoutId = null;
+    return function() {
+        var context = this;
+        var args = arguments;
+        if (timeoutId !== null) clearTimeout(timeoutId);
+        timeoutId = setTimeout(function() {
+            func.apply(context, args);
+        }, delayMs);
+    };
+}
+
+// ===== VALIDATION UTILITIES =====
+function validateSearchInput(value) {
+    if (!value) return '';
+    var cleaned = String(value).trim();
+    if (cleaned.length > SECURITY_CONFIG.MAX_SEARCH_LENGTH) {
+        console.warn('Search input exceeded max length');
+        return cleaned.substring(0, SECURITY_CONFIG.MAX_SEARCH_LENGTH);
+    }
+    return cleaned;
+}
+
+function validateLanguageCode(lang) {
+    if (!lang) return 'en';
+    var validated = String(lang).toLowerCase().trim();
+    return SECURITY_CONFIG.ALLOWED_LANGUAGES.indexOf(validated) !== -1 ? validated : 'en';
+}
+
+// ===== LABELS OBJECT =====
 var LABELS = {
     dozenPrice:       { ar: '\u0633\u0639\u0631 \u0627\u0644\u062F\u0633\u062A\u0629',                en: 'Dozen Price' },
     cartonPrice:      { ar: '\u0633\u0639\u0631 \u0627\u0644\u0643\u0631\u062A\u0648\u0646\u0629',             en: 'Carton Price' },
@@ -114,6 +164,58 @@ function syncContactLinks() {
 
     document.querySelectorAll('[data-contact-content="hours"]').forEach(function(el) {
         el.textContent = getLocalizedWorkingHours(ar);
+    });
+}
+
+function enableContactCardClicks() {
+    var lastClickTime = {};
+
+    document.querySelectorAll('.contact-card[data-contact-card-link]').forEach(function(card) {
+        if (card.getAttribute('data-card-click-ready') === '1') return;
+
+        var linkType = card.getAttribute('data-contact-card-link');
+        if (!linkType) return;
+
+        card.setAttribute('data-card-click-ready', '1');
+        card.setAttribute('role', 'link');
+        card.setAttribute('tabindex', '0');
+
+        function navigateFromCard() {
+            var link = card.querySelector('[data-contact-link="' + linkType + '"]');
+            if (!link) return;
+
+            var href = String(link.getAttribute('href') || '').trim();
+            if (!href || href === '#') return;
+
+            var opensNewTab = link.getAttribute('target') === '_blank';
+            if (opensNewTab) {
+                window.open(href, '_blank', 'noopener');
+            } else {
+                window.location.href = href;
+            }
+        }
+
+        function handleContactClick() {
+            var now = Date.now();
+            var cardId = linkType + '_' + card.offsetTop;
+            if (lastClickTime[cardId] && now - lastClickTime[cardId] < SECURITY_CONFIG.CONTACT_DEBOUNCE_MS) {
+                return;
+            }
+            lastClickTime[cardId] = now;
+            navigateFromCard();
+        }
+
+        card.addEventListener('click', function(e) {
+            if (e.target.closest('a, button, input, textarea, select, label')) return;
+            handleContactClick();
+        });
+
+        card.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleContactClick();
+            }
+        });
     });
 }
 
@@ -283,27 +385,51 @@ function buildCatalogFromCsvRows(rows) {
 }
 
 async function loadCatalogFromCsv() {
-    if (typeof fetch !== 'function') return false;
+    if (typeof fetch !== 'function') {
+        console.warn('Embaby Plast: Fetch API not available, using fallback catalog.');
+        return false;
+    }
 
     try {
         var response = await fetch(getCatalogCsvPath(), { cache: 'default' });
         if (!response.ok) {
-            throw new Error('CSV response not OK: ' + response.status);
+            throw new Error('CSV response error: HTTP ' + response.status);
         }
 
         var csvText = await response.text();
+        if (!csvText || csvText.trim().length === 0) {
+            throw new Error('CSV is empty');
+        }
+
         var rows = parseCsvText(csvText);
+        if (!rows || rows.length === 0) {
+            throw new Error('No valid rows found in CSV');
+        }
+
         var csvCatalog = buildCatalogFromCsvRows(rows);
 
         if (Object.keys(csvCatalog).length) {
             PRODUCT_CATALOG = csvCatalog;
             return true;
+        } else {
+            throw new Error('CSV parsed but no products created');
         }
     } catch (error) {
-        console.warn('Embaby Plast: CSV load failed, using fallback catalog.', error);
+        console.error('Embaby Plast: CSV load failed:', error);
+        console.warn('Using empty fallback catalog. Check products_template.csv is in the correct location.');
+        return false;
     }
+}
 
-    return false;
+// ===== LANGUAGE MANAGEMENT =====
+function setLanguage(lang) {
+    var validated = validateLanguageCode(lang);
+    try {
+        localStorage.setItem('lang', validated);
+    } catch (e) {
+        console.warn('Could not save language preference:', e);
+    }
+    return validated;
 }
 
 // Detect language from <html lang> attribute
@@ -365,8 +491,8 @@ function buildSharedHeaderHtml(ctx) {
         + '<div class="logo-wrap">'
         + '<a href="index.html" class="logo">Embaby<span>Plast</span></a>'
         + '<div class="lang-mini-switch" aria-label="Language switch">'
-        + '<a href="' + enHref + '" class="lang-mini-btn' + (ar ? '' : ' active') + '"' + (ar && ctx.isProduct ? productToggleExtra : '') + ' onclick="localStorage.setItem(\'lang\',\'en\')">EN</a>'
-        + '<a href="' + arHref + '" class="lang-mini-btn' + (ar ? ' active' : '') + '"' + (!ar && ctx.isProduct ? productToggleExtra : '') + ' onclick="localStorage.setItem(\'lang\',\'ar\')">AR</a>'
+        + '<a href="' + enHref + '" class="lang-mini-btn' + (ar ? '' : ' active') + '"' + (ar && ctx.isProduct ? productToggleExtra : '') + ' onclick="setLanguage(\'en\')">EN</a>'
+        + '<a href="' + arHref + '" class="lang-mini-btn' + (ar ? ' active' : '') + '"' + (!ar && ctx.isProduct ? productToggleExtra : '') + ' onclick="setLanguage(\'ar\')">AR</a>'
         + '</div>'
         + '</div>'
         + '<nav class="navbar">'
@@ -376,7 +502,7 @@ function buildSharedHeaderHtml(ctx) {
         + '<a href="' + productsHref + '">' + productsLabel + '</a>'
         + '<a href="' + whyHref + '">' + whyLabel + '</a>'
         + '<a href="' + contactHref + '">' + contactLabel + '</a>'
-        + '<a href="' + mobileLangHref + '" class="lang-switch-mobile"' + mobileLangExtra + ' onclick="localStorage.setItem(\'lang\',\'' + (ar ? 'en' : 'ar') + '\')" aria-label="' + langMobileAria + '">' + langMobileLabel + '</a>'
+        + '<a href="' + mobileLangHref + '" class="lang-switch-mobile"' + mobileLangExtra + ' onclick="setLanguage(\'' + (ar ? 'en' : 'ar') + '\')" aria-label="' + langMobileAria + '">' + langMobileLabel + '</a>'
         + '<div class="nav-social">'
         + '<a href="' + getWhatsappBaseHref() + '" target="_blank" rel="noreferrer" aria-label="WhatsApp" title="' + socialWaTitle + '"><i class="fab fa-whatsapp"></i></a>'
         + '</div>'
@@ -1016,6 +1142,7 @@ function renderProductConfigPage() {
 document.addEventListener('DOMContentLoaded', async function() {
     renderSharedLayout();
     syncContactLinks();
+    enableContactCardClicks();
     await loadCatalogFromCsv();
 
     var menuToggler = document.getElementById('toggler');
@@ -1195,11 +1322,17 @@ document.addEventListener('DOMContentLoaded', async function() {
         // Apply initial search state
         applyFilters();
 
-        // Search input listener
+        // Search input listener with validation and debounce
         var searchInput = document.getElementById('product-search');
         if (searchInput) {
-            searchInput.addEventListener('input', function() {
+            var debouncedApplyFilters = debounce(function() {
                 applyFilters();
+            }, SECURITY_CONFIG.SEARCH_DEBOUNCE_MS);
+
+            searchInput.addEventListener('input', function(e) {
+                var validated = validateSearchInput(e.target.value);
+                e.target.value = validated;
+                debouncedApplyFilters();
             });
         }
 

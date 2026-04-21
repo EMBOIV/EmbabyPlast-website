@@ -1,12 +1,12 @@
 ﻿id,familyKey,familyName,name,familyNameAr,nameAr,DozenPrice,pcsPerCarton,cartonPrice,imageFile,badge,badgeAr,enabled,varianttype,varianttypeAr,rowType
-family-Rabbit,Rabbit,Rabbit Combs,,أمشاط أرنب,,,,,,,,1,,,parent
+family-Rabbit,Rabbit,Rabbit Combs,,أمشاط أرنب,,,,,Rabbit Colors.jpg,,,1,,,parent
 1,Rabbit,,Rabbit Colors,,ارنب الوان,20,120,2400,Rabbit Colors.jpg,,,1,,,
 2,Rabbit,,Rabbit Two-Tone Colors,,ارنب 2 لون,30,120,3600,Rabbit Two-Tone Colors.jpg,,,0,,,
 3,Rabbit,,Rabbit Fluorescent Printed,,ارنب فسفورى مطبوع,65,40,2600,Rabbit Fluorescent Printed.jpg,,,0,,,
 4,Rabbit,,Rabbit Glass Honey Printed,,ارنب زجاج عسلى مطبوع,85,40,3400,Rabbit Glass Honey Printed.jpg,,,0,,,
 5,Rabbit,,Rabbit Glass Colors Printed,,ارنب زجاج الوان مطبوع,85,40,3400,Rabbit Glass Colors Printed.jpg,,,0,,,
 6,Rabbit,,Rabbit Two-Tone Colors Printed,,ارنب 2 لون مطبوع,65,40,2600,Rabbit Two-Tone Colors Printed.jpg,,,1,,,
-family-Amira,Amira,Amira Combs,,أمشاط أميرة,,,,,,,,1,,,parent
+family-Amira,Amira,Amira Combs,,أمشاط أميرة,,,,,Amira Fluorescent.jpg,,,1,,,parent
 7,Amira,,Amira Colors,,اميرة الوان,20,192,3840,Amira Colors.jpg,,,1,,,
 8,Amira,,Amira Fluorescent,,اميرة فسفورى,30,192,5760,Amira Fluorescent.jpg,,,1,,,
 9,Amira,,Amira Two-Tone Colors,,اميرة 2 لون,30,192,5760,Amira Two-Tone Colors.jpg,,,0,,,
@@ -16,7 +16,7 @@ family-Jaguar,Jaguar,Jaguar Combs,,أمشاط جاجوار,,,,,Jaguar Colors.jpg
 12,Jaguar,,Jaguar Black,,جاجوار اسود,10,360,3600,Jaguar Black.jpg,,,1,,,
 13,Jaguar,,Jaguar Colors,,جاجوار الوان,10,360,3600,Jaguar Colors.jpg,,,1,,,
 14,Jaguar,,Jaguar Two-Tone Colors,,جاجوار 2 لون,17,360,6120,Jaguar Two-Tone Colors.jpg,,,0,,,
-family-Dolphin,Dolphin,Dolphin Combs,,أمشاط دولفين,,,,,,,,1,,,parent
+family-Dolphin,Dolphin,Dolphin Combs,,أمشاط دولفين,,,,,Dolphin Two-Tone Colors.jpg,,,1,,,parent
 15,Dolphin,,Dolphin Colors,,دولفين الوان,23,120,2760,Dolphin Colors.jpg,,,1,,,
 16,Dolphin,,Dolphin Fluorescent Boxed,,دولفين فسفورى علبة,47,72,3384,Dolphin Fluorescent Boxed.jpg,,,1,,,
 17,Dolphin,,Dolphin Two-Tone Colors,,دولفن 2 لون,37,120,4440,Dolphin Two-Tone Colors.jpg,,,1,,,
@@ -26,22 +26,22 @@ family-Dolphin,Dolphin,Dolphin Combs,,أمشاط دولفين,,,,,,,,1,,,parent
 21,Dolphin,,Dolphin Colors Printed,,دولفين الوان مطبوع,65,40,2600,Dolphin Colors Printed.jpg,,,0,,,
 22,Dolphin,,Dolphin Two-Tone Colors Printed,,دولفين 2 لون مطبوع,65,40,2600,Dolphin Two-Tone Colors Printed.jpg,,,1,,,
 23,Dolphin,,Dolphin Bag Plain Printed,,دولفين كيس سادة مطبوع,65,40,2600,Dolphin Bag Plain Printed.jpg,,,0,,,
-family-Halaq,Halaq,Halaq Combs,,أمشاط حلاق,,,,,,,,1,,,parent
+family-Halaq,Halaq,Halaq Combs,,أمشاط حلاق,,,,,Halaq White.jpg,,,1,,,parent
 24,Halaq,,Halaq White,,حلاق ابيض,25,360,9000,Halaq White.jpg,,,1,,,
 25,Halaq,,Halaq Black,,حلاق اسود,25,360,9000,Halaq Black.jpg,,,1,,,
 26,Halaq,,Halaq Beige,,حلاق بيج,25,360,9000,Halaq Beige.jpg,,,1,,,
-family-Gogo,Gogo,Gogo,,جوجو,,,,,,,,1,,,parent
+family-Gogo,Gogo,Gogo,,جوجو,,,,,Gogo.jpg,,,1,,,parent
 27,Gogo,,Gogo,,جوجو,20,360,7200,Gogo.jpg,,,1,,,
-family-Cinderella,Cinderella,Cinderella Combs,,أمشاط سندريلا,,,,,,,,1,,,parent
+family-Cinderella,Cinderella,Cinderella Combs,,أمشاط سندريلا,,,,,Cinderella Glass Colors Printed.jpg,,,1,,,parent
 28,Cinderella,,Cinderella Colors,,سندريلا الوان,35,80,2800,Cinderella Colors.jpg,,,1,,,
 29,Cinderella,,Cinderella Two-Tone Colors,,سندريلا 2 لون,47,80,3760,Cinderella Two-Tone Colors.jpg,,,0,,,
 30,Cinderella,,Cinderella Glass Colors Printed,,سندريلا زجاج الوان مطبوع,115,40,4600,Cinderella Glass Colors Printed.jpg,,,1,,,
 31,Cinderella,,Cinderella Glass Honey Printed,,سندريلا زجاج عسلى مطبوع,115,40,4600,Cinderella Glass Honey Printed.jpg,,,0,,,
-32,Cinderella,,Cinderella Fluorescent Carded and Printed,,سندريلا فسفورى كارت و مطبوع,85,40,3400,Cinderella Fluorescent Carded and Printed.jpg,,,0,,,
+32,Cinderella,,Cinderella Fluorescent Carded and Printed,,سندريلا فسفورى كارت و مطبوع,85,40,3400,Cinderella Fluorescent Carded and Printed.jpg,,,1,,,
 33,Cinderella,,Cinderella Two-Tone Colors Printed,,سندريلا 2 لون مطبوع,85,40,3400,Cinderella Two-Tone Colors Printed.jpg,,,0,,,
-family-Sindbad,Sindbad,Sindbad Combs,,أمشاط سندباد,,,,,,,,1,,,parent
+family-Sindbad,Sindbad,Sindbad Combs,,أمشاط سندباد,,,,,Sindbad Colors.jpg,,,1,,,parent
 34,Sindbad,,Sindbad Colors,,سندباد الوان,20,120,2400,Sindbad Colors.jpg,,,1,,,
-family-SatoorKbyr,SatoorKbyr,Satoor Kbyr Combs,,أمشاط ساطور كبير,,,,,,,,1,,,parent
+family-SatoorKbyr,SatoorKbyr,Satoor Kbyr Combs,,أمشاط ساطور كبير,,,,,Satoor Kbyr Glass Colors Printed.jpg,,,1,,,parent
 35,SatoorKbyr,,Satoor Kbyr Colors,,ساطور كبير الوان,55,40,2200,Satoor Kbyr Colors.jpg,,,0,,,
 36,SatoorKbyr,,Satoor Kbyr Black,,ساطور كبير اسود,55,40,2200,Satoor Kbyr Black.jpg,,,0,,,
 37,SatoorKbyr,,Satoor Kbyr Fluorescent Printed,,ساطور كبير فسفورى مطبوع,85,40,3400,Satoor Kbyr Fluorescent Printed.jpg,,,0,,,
@@ -49,20 +49,20 @@ family-SatoorKbyr,SatoorKbyr,Satoor Kbyr Combs,,أمشاط ساطور كبير,,
 39,SatoorKbyr,,Satoor Kbyr Glass Colors Printed,,ساطور كبير زجاج الوان مطبوع,115,40,4600,Satoor Kbyr Glass Colors Printed.jpg,,,1,,,
 40,SatoorKbyr,,Satoor Kbyr Glass Honey Printed,,ساطور كبير زجاج عسلى مطبوع,115,40,4600,Satoor Kbyr Glass Honey Printed.jpg,,,0,,,
 41,SatoorKbyr,,Satoor Kbyr Black Printed,,ساطور كبير اسود مطبوع,85,40,3400,Satoor Kbyr Black Printed.jpg,,,1,,,
-family-SatoorSghyr,SatoorSghyr,Satoor Sghyr Combs,,أمشاط ساطور صغير,,,,,,,,1,,,parent
+family-SatoorSghyr,SatoorSghyr,Satoor Sghyr Combs,,أمشاط ساطور صغير,,,,,Satoor Sghyr Fluorescent Printed.jpg,,,1,,,parent
 42,SatoorSghyr,,Satoor Sghyr Black,,ساطور صغير اسود,27,90,2430,Satoor Sghyr Black.jpg,,,1,,,
 43,SatoorSghyr,,Satoor Sghyr Colors,,ساطور صغير الوان,27,90,2430,Satoor Sghyr Colors.jpg,,,1,,,
 44,SatoorSghyr,,Satoor Sghyr Fluorescent Printed,,ساطور صغير فسفورى مطبوع,65,40,2600,Satoor Sghyr Fluorescent Printed.jpg,,,1,,,
-45,SatoorSghyr,,Satoor Glass Honey Printed,,ساطور زجاج عسلى مطبوع,85,40,3400,Satoor Glass Honey Printed.jpg,,,0,,,
+45,SatoorSghyr,,Satoor Sghyr Glass Honey Printed,,ساطور صغير زجاج عسلى مطبوع,85,40,3400,Satoor Glass Honey Printed.jpg,,,0,,,
 46,SatoorSghyr,,Satoor Sghyr Two-Tone Colors Printed,,ساطور صغير 2 لون مطبوع,65,40,2600,Satoor Sghyr Two-Tone Colors Printed.jpg,,,0,,,
 47,SatoorSghyr,,Satoor Sghyr Black Printed,,ساطور صغير اسود مطبوع,65,40,2600,Satoor Sghyr Black Printed.jpg,,,0,,,
 48,SatoorSghyr,,Satoor Sghyr Glass Colors Printed,,ساطور صغير زجاج الوان مطبوع,85,40,3400,Satoor Sghyr Glass Colors Printed.jpg,,,1,,,
-family-kokoSghyr,kokoSghyr,koko Sghyr Combs,,أمشاط كوكو صغير,,,,,,,,1,,,parent
+family-kokoSghyr,kokoSghyr,koko Sghyr Combs,,أمشاط كوكو صغير,,,,,koko Sghyr Fluorescent.jpg,,,1,,,parent
 49,kokoSghyr,,koko Sghyr Fluorescent,,كوكو صغير فسفورى,23,180,4140,koko Sghyr Fluorescent.jpg,,,1,,,
 50,kokoSghyr,,koko Soghayar Black,,كوكو صغير اسود,15,180,2700,koko Soghayar Black.jpg,,,0,,,
 51,kokoSghyr,,koko Soghayar Colors,,كوكو صغير الوان,15,180,2700,koko Soghayar Colors.jpg,,,1,,,
 52,kokoSghyr,,koko Sghyr Two-Tone Colors,,كوكو صغير 2 لون,25,180,4500,koko Sghyr Two-Tone Colors.jpg,,,0,,,
-family-kokoKbyr,kokoKbyr,koko Kbyr Combs,,أمشاط كوكو كبير,,,,,,,,1,,,parent
+family-kokoKbyr,kokoKbyr,koko Kbyr Combs,,أمشاط كوكو كبير,,,,,koko Kbyr Colors.jpg,,,1,,,parent
 53,kokoKbyr,,koko Kbyr Fluorescent,,كوكو كبير فسفورى,48,120,5760,koko Kbyr Fluorescent.jpg,,,0,,,
 54,kokoKbyr,,koko Kbyr Colors,,كوكو كبير الوان,33,120,3960,koko Kbyr Colors.jpg,,,1,,,
 family-TaqmkokoSghyr,TaqmkokoSghyr,Taqm koko Sghyr Combs,,أطقم كوكو صغير,,,,,,,,1,,,parent
