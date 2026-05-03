@@ -25,7 +25,7 @@ family-Dolphin,Dolphin,Dolphin Combs,,أمشاط دولفين,,,,,Dolphin Two-To
 20,Dolphin,,Dolphin Glass Honey Printed,,دولفين زجاج عسلى مطبوع,85,40,3400,Dolphin Glass Honey Printed.jpg,,,1,,,,1
 21,Dolphin,,Dolphin Colors Printed,,دولفين الوان مطبوع,65,40,2600,Dolphin Colors Printed.jpg,,,1,,,,1
 22,Dolphin,,Dolphin Two-Tone Colors Printed,,دولفين 2 لون مطبوع,65,40,2600,Dolphin Two-Tone Colors Printed.jpg,,,1,,,,0
-23,Dolphin,,Dolphin Bag Plain Printed,,دولفين كيس سادة مطبوع,65,40,2600,Dolphin Bag Plain Printed.jpg,,,0,,,,1
+23,Dolphin,,Dolphin Bag Plain Printed,,دولفين كيس سادة ,65,40,2600,Dolphin Bag Plain.jpg,,,0,,,,1
 family-Halaq,Halaq,Halaq Combs,,أمشاط حلاق,,,,,Halaq White.jpg,,,1,,,parent,1
 24,Halaq,,Halaq White,,حلاق ابيض,25,360,9000,Halaq White.jpg,,,1,,,,0
 25,Halaq,,Halaq Black,,حلاق اسود,25,360,9000,Halaq Black.jpg,,,1,,,,0
@@ -114,7 +114,7 @@ family-Rody,Rody,Rody Combs,,أمشاط رودي,,,,,,,,1,,,parent,1
 94,Rody,,Mesht Rody Two-Tone Colors,,رودى 2 لون,45,100,4500,Mesht Rody Two-Tone Colors.jpg,,,0,,,,1
 95,Rody,,Rody Two-Tone Colors Printed,,رودى 2 لون مطبوع,65,40,2600,Rody Two-Tone Colors Printed.jpg,,,0,,,,1
 family-TwoNahia,TwoNahia,2 Nahia Combs,,أمشاط 2 ناحية,,,,,,,,1,,,parent,1
-96,TwoNahia,,2 Nahia Colors,,2 ناحية الوان,168,15,2520,2 Nahia Colors.jpg,,,1,,,,0
+96,TwoNahia,,2 Nahia Colors,,2 ناحية الوان,14,180,2520,2 Nahia Colors.jpg,,,1,,,,0
 97,TwoNahia,,2 Nahia Glass Colors Printed,,2 ناحية زجاج الوان مطبوع,45,40,1800,2 Nahia Glass Colors Printed.jpg,,,1,,,,1
 98,TwoNahia,,2 Nahia Glass Honey Printed,,2 ناحية زجاج عسلى مطبوع,45,40,1800,2 Nahia Glass Honey Printed.jpg,,,0,,,,1
 99,TwoNahia,,2 Nahia Fluorescent Printed,,2 ناحية فسفورى مطبوع,45,40,1800,2 Nahia Fluorescent Printed.jpg,,,1,,,,1
