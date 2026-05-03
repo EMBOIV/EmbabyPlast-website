@@ -377,7 +377,8 @@ function buildCatalogFromCsvRows(rows) {
             badge: badge,
             badgeAr: badgeAr,
             rowType: rowType,
-            enabled: enabled
+            enabled: enabled,
+            sortOrder: getRowValue(mapped, ['sortOrder', 'sort_order', 'order'])
         };
     }
 
@@ -781,6 +782,7 @@ function buildFamilies(products) {
                 familyNameAr: '',
                 variantType: '',
                 variantTypeAr: '',
+                sortOrder: null,
                 parent: null,
                 variants: []
             };
@@ -792,6 +794,8 @@ function buildFamilies(products) {
             map[key].familyNameAr = product.familyNameAr || product.nameAr || product.familyName || '';
             map[key].variantType = (product.varianttype || product.variantType || '') || map[key].variantType;
             map[key].variantTypeAr = (product.varianttypeAr || product.variantTypeAr || '') || map[key].variantTypeAr;
+            var rawOrder = String(product.sortOrder || '').trim();
+            if (rawOrder !== '') map[key].sortOrder = parseFloat(rawOrder);
             return;
         }
 
@@ -808,6 +812,10 @@ function buildFamilies(products) {
     return Object.keys(map).map(function(key) {
         var family = map[key];
         if (!family.variants.length) return null;
+        if (family.sortOrder == null && family.parent) {
+            var rawOrder = String(family.parent.sortOrder || '').trim();
+            if (rawOrder !== '') family.sortOrder = parseFloat(rawOrder);
+        }
         var minPrice = 0;
 
         family.variants.forEach(function(variant) {
@@ -833,7 +841,11 @@ function buildFamilies(products) {
         }
 
         return family;
-    }).filter(Boolean);
+    }).filter(Boolean).sort(function(a, b) {
+        var oa = a.sortOrder != null ? a.sortOrder : Infinity;
+        var ob = b.sortOrder != null ? b.sortOrder : Infinity;
+        return oa - ob;
+    });
 }
 
 function formatPrice(value, ar) {
