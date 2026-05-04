@@ -1,12 +1,12 @@
 ﻿id,familyKey,familyName,name,familyNameAr,nameAr,DozenPrice,pcsPerCarton,cartonPrice,imageFile,badge,badgeAr,enabled,varianttype,varianttypeAr,rowType,sortOrder
-family-Rabbit,Rabbit,Rabbit Combs,,أمشاط أرنب,,,,,,,,1,,,parent,2
+family-Rabbit,Rabbit,Rabbit Combs,,أمشاط أرنب,,,,,,,,1,,,parent,1
 1,Rabbit,,Rabbit Colors,,ارنب الوان,20,120,2400,Rabbit Colors.jpg,,,1,,,,
 2,Rabbit,,Rabbit Two-Tone Colors,,ارنب 2 لون,30,120,3600,Rabbit Two-Tone Colors.jpg,,,1,,,,
 3,Rabbit,,Rabbit Fluorescent Printed,,ارنب فسفورى مطبوع,65,40,2600,Rabbit Fluorescent Printed.jpg,,,0,,,,
 4,Rabbit,,Rabbit Glass Honey Printed,,ارنب زجاج عسلى مطبوع,85,40,3400,Rabbit Glass Honey Printed.jpg,,,1,,,,
 5,Rabbit,,Rabbit Glass Colors Printed,,ارنب زجاج الوان مطبوع,85,40,3400,Rabbit Glass Colors Printed.jpg,,,0,,,,
 6,Rabbit,,Rabbit Two-Tone Colors Printed,,ارنب 2 لون مطبوع,65,40,2600,Rabbit Two-Tone Colors Printed.jpg,,,1,,,,
-family-Amira,Amira,Amira Combs,,أمشاط أميرة,,,,,,,,1,,,parent,1
+family-Amira,Amira,Amira Combs,,أمشاط أميرة,,,,,,,,1,,,parent,2
 7,Amira,,Amira Colors,,اميرة الوان,20,192,3840,Amira Colors.jpg,,,1,,,,
 8,Amira,,Amira Fluorescent,,اميرة فسفورى,30,192,5760,Amira Fluorescent.jpg,,,1,,,,
 9,Amira,,Amira Two-Tone Colors,,اميرة 2 لون,30,192,5760,Amira Two-Tone Colors.jpg,,,0,,,,

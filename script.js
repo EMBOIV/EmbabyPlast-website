@@ -1174,6 +1174,23 @@ document.addEventListener('DOMContentLoaded', async function() {
         var viewToggleEl = document.getElementById('products-view-toggle');
         var products = getVariantCatalogArray();
         var families = buildFamilies(getCatalogArray());
+
+        // Build a lookup: familyKey → sortOrder (from parent rows via buildFamilies)
+        var familySortOrderMap = {};
+        families.forEach(function(family) {
+            familySortOrderMap[family.key] = family.sortOrder != null ? family.sortOrder : Infinity;
+        });
+
+        // Sort flat variant list by their family's sortOrder, then by their own id as tiebreaker
+        products = products.slice().sort(function(a, b) {
+            var oa = familySortOrderMap[String(a.familyKey || a.id)];
+            var ob = familySortOrderMap[String(b.familyKey || b.id)];
+            if (oa == null) oa = Infinity;
+            if (ob == null) ob = Infinity;
+            if (oa !== ob) return oa - ob;
+            return Number(a.id) - Number(b.id);
+        });
+
         var startsFromLabel = label('startsFrom', ar);
         var viewLabel = label('viewDetails', ar);
 
