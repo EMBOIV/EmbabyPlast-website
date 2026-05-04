@@ -907,6 +907,53 @@ section {
     font-size: 1.35rem;
     color: var(--text-light);
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    min-height: 1.7rem;
+}
+
+.products .products-total-count-text {
+    white-space: nowrap;
+}
+
+.products .products-view-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex: 0 0 auto;
+}
+
+.products .products-view-btn {
+    width: 1.7rem;
+    height: 1.7rem;
+    border: 1px solid var(--border);
+    border-radius: 0.35rem;
+    background: var(--white);
+    color: var(--text-light);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.products .products-view-btn:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.products .products-view-btn:focus-visible {
+    outline: 2px solid var(--secondary);
+    outline-offset: 2px;
+}
+
+.products .products-view-btn.active {
+    color: var(--white);
+    background: var(--primary);
+    border-color: var(--primary);
 }
 
 .products .products-no-results {

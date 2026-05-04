@@ -1170,10 +1170,34 @@ document.addEventListener('DOMContentLoaded', async function() {
         var imgBase = getImageBase();
         var boxContainer = productsSection.querySelector('.box-container');
         var totalCountEl = document.getElementById('products-total-count');
+        var totalCountTextEl = document.getElementById('products-total-count-text');
+        var viewToggleEl = document.getElementById('products-view-toggle');
         var products = getVariantCatalogArray();
         var families = buildFamilies(getCatalogArray());
         var startsFromLabel = label('startsFrom', ar);
         var viewLabel = label('viewDetails', ar);
+
+        function syncViewToggleState() {
+            if (!viewToggleEl) return;
+            var activeMode = PRODUCTS_PAGE_SETTINGS.groupByFamily ? 'family' : 'variant';
+            viewToggleEl.querySelectorAll('.products-view-btn').forEach(function(btn) {
+                var isActive = btn.getAttribute('data-group-mode') === activeMode;
+                btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+                btn.classList.toggle('active', isActive);
+            });
+        }
+
+        if (viewToggleEl) {
+            viewToggleEl.querySelectorAll('.products-view-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var mode = btn.getAttribute('data-group-mode');
+                    PRODUCTS_PAGE_SETTINGS.groupByFamily = mode !== 'variant';
+                    syncViewToggleState();
+                    applyFilters();
+                });
+            });
+            syncViewToggleState();
+        }
 
         function buildProductSearchText(item) {
             return normalizeLookup([
@@ -1327,7 +1351,12 @@ document.addEventListener('DOMContentLoaded', async function() {
 
             if (totalCountEl) {
                 var totalBaseCount = showChildrenDirectly ? products.length : families.length;
-                totalCountEl.textContent = label('totalProducts', ar) + totalBaseCount + label('showing', ar) + visibleCount;
+                var countText = label('totalProducts', ar) + totalBaseCount + label('showing', ar) + visibleCount;
+                if (totalCountTextEl) {
+                    totalCountTextEl.textContent = countText;
+                } else {
+                    totalCountEl.textContent = countText;
+                }
             }
         }
 
