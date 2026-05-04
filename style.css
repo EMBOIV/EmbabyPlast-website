@@ -821,13 +821,40 @@ section {
 /* --- Product Search --- */
 .products .products-search {
     position: relative;
+    display: flex;
+    align-items: stretch;
+    gap: 0.8rem;
     margin-top: 0.8rem;
+    max-width: 58rem;
+}
+
+.products .products-search-input-wrap {
+    position: relative;
+    flex: 1 1 auto;
     max-width: 48rem;
+}
+
+[dir="rtl"] .products .products-search .products-view-toggle {
+    order: -1;
 }
 
 .products .products-type-filter-wrap {
     margin-top: 1rem;
-    max-width: 32rem;
+    max-width: 58rem;
+}
+
+.products .products-type-filter-row {
+    display: flex;
+    align-items: stretch;
+    gap: 0.8rem;
+}
+
+.products .products-type-filter-row .products-view-toggle {
+    order: 1;
+}
+
+.products .products-type-filter-row .products-type-filter {
+    order: 2;
 }
 
 .products .products-type-filter-label {
@@ -840,6 +867,7 @@ section {
 
 .products .products-type-filter {
     width: 100%;
+    max-width: 48rem;
     height: 4.2rem;
     padding: 0 1.1rem;
     font-size: 1.4rem;
@@ -877,6 +905,7 @@ section {
 
 .products .products-search-input {
     width: 100%;
+    height: 4.2rem;
     padding: 1rem 1.4rem 1rem 4rem;
     font-size: 1.4rem;
     font-family: inherit;
@@ -907,14 +936,10 @@ section {
     font-size: 1.35rem;
     color: var(--text-light);
     font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    min-height: 1.7rem;
 }
 
 .products .products-total-count-text {
-    white-space: nowrap;
+    white-space: normal;
 }
 
 .products .products-view-toggle {
@@ -925,8 +950,8 @@ section {
 }
 
 .products .products-view-btn {
-    width: 1.7rem;
-    height: 1.7rem;
+    width: 4.2rem;
+    height: 4.2rem;
     border: 1px solid var(--border);
     border-radius: 0.35rem;
     background: var(--white);
@@ -934,7 +959,7 @@ section {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.95rem;
+    font-size: 1.5rem;
     line-height: 1;
     cursor: pointer;
     transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
@@ -954,6 +979,34 @@ section {
     color: var(--white);
     background: var(--primary);
     border-color: var(--primary);
+}
+
+@media (max-width: 700px) {
+    .products .products-search {
+        flex-wrap: nowrap;
+        align-items: stretch;
+    }
+
+    .products .products-search-input-wrap {
+        max-width: none;
+        min-width: 0;
+        flex: 1 1 auto;
+    }
+
+    .products .products-type-filter-row {
+        flex-wrap: nowrap;
+        gap: 0.6rem;
+    }
+
+    .products .products-type-filter {
+        max-width: none;
+        min-width: 0;
+        flex: 1 1 auto;
+    }
+
+    .products .products-view-toggle {
+        flex: 0 0 auto;
+    }
 }
 
 .products .products-no-results {

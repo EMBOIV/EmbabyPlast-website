@@ -1304,15 +1304,24 @@ document.addEventListener('DOMContentLoaded', async function() {
                 filterWrap.className = 'products-type-filter-wrap';
                 filterWrap.innerHTML = ''
                     + '<label class="products-type-filter-label" for="product-type-filter">' + label('filterByType', ar) + '</label>'
+                    + '<div class="products-type-filter-row">'
                     + '<select id="product-type-filter" class="products-type-filter">'
                     + '<option value="">' + label('allTypes', ar) + '</option>'
                     + typeKeys.map(function(key) {
                         return '<option value="' + escapeHtml(key) + '">' + escapeHtml(typeMap[key]) + '</option>';
                     }).join('')
-                    + '</select>';
+                    + '</select>'
+                    + '</div>';
 
                 searchBar.insertAdjacentElement('afterend', filterWrap);
                 typeFilter = document.getElementById('product-type-filter');
+
+                if (viewToggleEl) {
+                    var filterRow = filterWrap.querySelector('.products-type-filter-row');
+                    if (filterRow) {
+                        filterRow.prepend(viewToggleEl);
+                    }
+                }
             }
         }
 
