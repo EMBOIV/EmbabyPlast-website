@@ -111,8 +111,8 @@ body.welcome-page::after {
     max-width: 560px;
     width: 90%;
     background: rgba(255,255,255,0.045);
-    backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
     border: 1px solid rgba(255,255,255,0.1);
     border-radius: 1.75rem;
     box-shadow: 0 24px 60px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.08);
@@ -280,8 +280,8 @@ header {
     left: 0;
     right: 0;
     background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     padding: 1.4rem 3rem;
     display: flex;
     align-items: center;
@@ -1010,6 +1010,7 @@ section {
 }
 
 .products .products-no-results {
+    display: none;
     margin-top: 2rem;
     font-size: 1.5rem;
     color: var(--text-light);
@@ -1600,7 +1601,6 @@ section {
     overflow-y: hidden;
     padding-bottom: 0.6rem;
     scroll-snap-type: x proximity;
-    -webkit-overflow-scrolling: touch;
 }
 
 .product-recommendations-grid::-webkit-scrollbar {
@@ -2507,7 +2507,7 @@ html[dir="rtl"] .force-ltr-number {
     .product-config {
         padding: 0 !important;
         margin: 0 !important;
-        min-height: auto !important;
+        min-height: 0 !important;
         background: #fff !important;
     }
 
@@ -2567,7 +2567,6 @@ html[dir="rtl"] .force-ltr-number {
         flex-direction: column !important;
         break-inside: avoid !important;
         page-break-inside: avoid !important;
-        -webkit-column-break-inside: avoid !important;
         background: #fff !important;
         border: 1px solid #cdd5dd !important;
         border-top: 4px solid #00A8A8 !important;
