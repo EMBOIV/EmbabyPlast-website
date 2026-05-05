@@ -828,26 +828,30 @@ section {
     border: 1px solid var(--border);
     border-radius: 0.5rem;
     background: #f7f9fb;
+    width: min(58rem, 100%);
 }
 
 .products .products-section-btn {
-    min-width: 14.5rem;
-    height: 4rem;
+    min-width: 0;
+    flex: 1 1 0;
+    height: 4.4rem;
     padding: 0 1.2rem;
-    border: 1px solid transparent;
+    border: 1px solid var(--border);
     border-radius: 0.35rem;
-    background: transparent;
-    color: var(--text-light);
-    font-size: 1.35rem;
-    font-weight: 600;
+    background: var(--white);
+    color: var(--primary);
+    font-size: 1.55rem;
+    font-weight: 700;
     line-height: 1;
     cursor: pointer;
-    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    appearance: none;
+    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .products .products-section-btn:hover {
-    color: var(--primary);
-    border-color: var(--primary);
+    border-color: var(--secondary);
+    box-shadow: 0 4px 12px rgba(0, 168, 168, 0.12);
 }
 
 .products .products-section-btn:focus-visible {
@@ -857,8 +861,29 @@ section {
 
 .products .products-section-btn.active {
     color: var(--white);
-    background: var(--primary);
-    border-color: var(--primary);
+    background: var(--secondary);
+    border-color: var(--secondary);
+    box-shadow: 0 8px 18px rgba(0, 168, 168, 0.3);
+}
+
+.products .products-section-btn[data-product-section="premium"].active {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 8px 18px rgba(242, 176, 62, 0.35);
+}
+
+.products .products-section-btn[data-product-section="products"].active {
+    background: var(--secondary);
+    border-color: var(--secondary);
+    box-shadow: 0 8px 18px rgba(0, 168, 168, 0.34);
+}
+
+.products .products-section-btn:active {
+    box-shadow: 0 10px 20px rgba(0, 168, 168, 0.36);
+}
+
+.products .products-section-btn[data-product-section="premium"]:active {
+    box-shadow: 0 10px 20px rgba(242, 176, 62, 0.38);
 }
 
 /* --- Product Search --- */
@@ -1020,8 +1045,8 @@ section {
 
 .products .products-view-btn.active {
     color: var(--white);
-    background: var(--primary);
-    border-color: var(--primary);
+    background: var(--secondary);
+    border-color: var(--secondary);
 }
 
 @media (max-width: 700px) {

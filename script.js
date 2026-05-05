@@ -32,7 +32,7 @@ var BRAND_INFO = {
 // false => always show all child products directly
 var PRODUCTS_PAGE_SETTINGS = {
     groupByFamily: true,
-    activeSection: 'premium'
+    activeSection: 'products'
 };
 
 // ===== SECURITY & UTILITY CONSTANTS =====
