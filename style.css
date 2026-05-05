@@ -863,27 +863,11 @@ section {
     color: var(--white);
     background: var(--secondary);
     border-color: var(--secondary);
-    box-shadow: 0 8px 18px rgba(0, 168, 168, 0.3);
-}
-
-.products .products-section-btn[data-product-section="premium"].active {
-    background: var(--accent);
-    border-color: var(--accent);
-    box-shadow: 0 8px 18px rgba(242, 176, 62, 0.35);
-}
-
-.products .products-section-btn[data-product-section="products"].active {
-    background: var(--secondary);
-    border-color: var(--secondary);
     box-shadow: 0 8px 18px rgba(0, 168, 168, 0.34);
 }
 
 .products .products-section-btn:active {
     box-shadow: 0 10px 20px rgba(0, 168, 168, 0.36);
-}
-
-.products .products-section-btn[data-product-section="premium"]:active {
-    box-shadow: 0 10px 20px rgba(242, 176, 62, 0.38);
 }
 
 /* --- Product Search --- */

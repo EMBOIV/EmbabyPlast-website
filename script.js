@@ -753,9 +753,55 @@ function filterProductsByCategory(list, category) {
     });
 }
 
-function buildProductDetailHref(productId, category) {
-    var normalizedCategory = normalizeProductCategory(category);
-    return 'product.html?id=' + escapeHtml(String(productId || '')) + '&category=' + escapeHtml(normalizedCategory);
+function sanitizeGroupMode(value) {
+    return value === 'variant' ? 'variant' : 'family';
+}
+
+function sanitizeTypeFilterValue(value) {
+    return String(value || '')
+        .trim()
+        .toLowerCase()
+        .replace(/[^\u0600-\u06FFa-z0-9-]+/g, '');
+}
+
+function normalizeCatalogState(state) {
+    var safe = state || {};
+    return {
+        category: normalizeProductCategory(safe.category),
+        mode: sanitizeGroupMode(safe.mode),
+        q: validateSearchInput(safe.q || ''),
+        type: sanitizeTypeFilterValue(safe.type || '')
+    };
+}
+
+function buildCatalogHrefWithState(state) {
+    var safe = normalizeCatalogState(state);
+    var query = [];
+
+    query.push('category=' + encodeURIComponent(safe.category));
+    if (safe.mode === 'variant') query.push('mode=variant');
+    if (safe.q) query.push('q=' + encodeURIComponent(safe.q));
+    if (safe.type) query.push('type=' + encodeURIComponent(safe.type));
+
+    return 'products.html' + (query.length ? ('?' + query.join('&')) : '');
+}
+
+function buildProductDetailHref(productId, category, catalogState) {
+    var safeState = normalizeCatalogState({
+        category: category,
+        mode: catalogState && catalogState.mode,
+        q: catalogState && catalogState.q,
+        type: catalogState && catalogState.type
+    });
+
+    var query = [];
+    query.push('id=' + encodeURIComponent(String(productId || '')));
+    query.push('category=' + encodeURIComponent(safeState.category));
+    if (safeState.mode === 'variant') query.push('mode=variant');
+    if (safeState.q) query.push('q=' + encodeURIComponent(safeState.q));
+    if (safeState.type) query.push('type=' + encodeURIComponent(safeState.type));
+
+    return 'product.html?' + query.join('&');
 }
 
 function getBadgeClass(value) {
@@ -1087,14 +1133,21 @@ function renderProductConfigPage() {
     var ar = isArabic();
     var params = new URLSearchParams(window.location.search);
     var productId = params.get('id');
-    var activeCategory = normalizeProductCategory(params.get('category') || 'premium');
+    var activeCategory = normalizeProductCategory(params.get('category') || 'products');
+    var backCatalogState = normalizeCatalogState({
+        category: activeCategory,
+        mode: params.get('mode') || 'family',
+        q: params.get('q') || '',
+        type: params.get('type') || ''
+    });
+    var backCatalogHref = buildCatalogHrefWithState(backCatalogState);
     var product = PRODUCT_CATALOG[productId];
     var imgBase = getImageBase();
 
     if (!product || !isProductEnabled(product)) {
         var notFoundMsg = label('productNotFound', ar);
         var backMsg = label('backToCatalog', ar);
-        container.innerHTML = '<p>' + notFoundMsg + ' <a href="products.html">' + backMsg + '</a></p>';
+        container.innerHTML = '<p>' + notFoundMsg + ' <a href="' + backCatalogHref + '">' + backMsg + '</a></p>';
         return;
     }
 
@@ -1124,7 +1177,7 @@ function renderProductConfigPage() {
     var langToggle = document.getElementById('lang-toggle-link');
     var langMobile = document.getElementById('lang-switch-mobile');
     var otherLangFolder = ar ? '../en/' : '../ar/';
-    var otherProductUrl = otherLangFolder + buildProductDetailHref(initialVariant.id, activeCategory);
+    var otherProductUrl = otherLangFolder + buildProductDetailHref(initialVariant.id, activeCategory, backCatalogState);
     if (langToggle) langToggle.href = otherProductUrl;
     if (langMobile) langMobile.href = otherProductUrl;
 
@@ -1137,7 +1190,7 @@ function renderProductConfigPage() {
     if (!variants.length) {
         var notFoundMsg = label('productNotFound', ar);
         var backMsg = label('backToCatalog', ar);
-        container.innerHTML = '<p>' + notFoundMsg + ' <a href="products.html">' + backMsg + '</a></p>';
+        container.innerHTML = '<p>' + notFoundMsg + ' <a href="' + backCatalogHref + '">' + backMsg + '</a></p>';
         return;
     }
 
@@ -1149,7 +1202,7 @@ function renderProductConfigPage() {
         + '<div class="product-variants-grid">' + cardsMarkup + '</div>'
         + '</div>'
         + '<div class="product-config-actions">'
-        + '<a href="products.html" class="btn btn-outline-dark">' + btnBack + '</a>'
+        + '<a href="' + backCatalogHref + '" class="btn btn-outline-dark">' + btnBack + '</a>'
         + '</div>'
         + '</div>'
         + '</div>'
@@ -1202,6 +1255,17 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     var productsSection = document.querySelector('.products.luxury-grid');
     if (productsSection) {
+        var catalogParams = new URLSearchParams(window.location.search);
+        var initialCatalogState = normalizeCatalogState({
+            category: catalogParams.get('category') || PRODUCTS_PAGE_SETTINGS.activeSection,
+            mode: catalogParams.get('mode') || (PRODUCTS_PAGE_SETTINGS.groupByFamily ? 'family' : 'variant'),
+            q: catalogParams.get('q') || '',
+            type: catalogParams.get('type') || ''
+        });
+
+        PRODUCTS_PAGE_SETTINGS.activeSection = initialCatalogState.category;
+        PRODUCTS_PAGE_SETTINGS.groupByFamily = initialCatalogState.mode !== 'variant';
+
         var ar = isArabic();
         var imgBase = getImageBase();
         var boxContainer = productsSection.querySelector('.box-container');
@@ -1232,6 +1296,16 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         var startsFromLabel = label('startsFrom', ar);
         var viewLabel = label('viewDetails', ar);
+
+        function getCurrentCatalogState() {
+            var searchInput = document.getElementById('product-search');
+            return normalizeCatalogState({
+                category: PRODUCTS_PAGE_SETTINGS.activeSection,
+                mode: PRODUCTS_PAGE_SETTINGS.groupByFamily ? 'family' : 'variant',
+                q: searchInput ? searchInput.value : '',
+                type: typeFilter ? typeFilter.value : ''
+            });
+        }
 
         function getSectionProducts() {
             return filterProductsByCategory(products, PRODUCTS_PAGE_SETTINGS.activeSection);
@@ -1305,7 +1379,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             var typeLabel = getVariantTypeLabel(family, ar);
             var typeFilterKey = getFilterKey(typeLabel);
             var familyImageHtml = buildProductImageHtml(getProductImageSrc(imgBase, displayProduct), getProductName(displayProduct, ar), 'product-family-image');
-            var detailHref = buildProductDetailHref(initial.id, PRODUCTS_PAGE_SETTINGS.activeSection);
+            var detailHref = buildProductDetailHref(initial.id, PRODUCTS_PAGE_SETTINGS.activeSection, getCurrentCatalogState());
 
             return ''
                 + '<div class="box" data-family-key="' + escapeHtml(family.key) + '" data-type-key="' + escapeHtml(typeFilterKey) + '" data-detail-url="' + detailHref + '" tabindex="0" role="link" aria-label="' + escapeHtml(familyTitle) + '">'
@@ -1410,6 +1484,18 @@ document.addEventListener('DOMContentLoaded', async function() {
                         filterRow.prepend(viewToggleEl);
                     }
                 }
+            }
+        }
+
+        var initialSearchInput = document.getElementById('product-search');
+        if (initialSearchInput) {
+            initialSearchInput.value = initialCatalogState.q;
+        }
+
+        if (typeFilter && initialCatalogState.type) {
+            var typeOption = typeFilter.querySelector('option[value="' + initialCatalogState.type + '"]');
+            if (typeOption) {
+                typeFilter.value = initialCatalogState.type;
             }
         }
 
