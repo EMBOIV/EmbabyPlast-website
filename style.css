@@ -310,7 +310,7 @@ header .logo span {
 }
 
 header .logo span::after {
-    content: "Since 1967";
+    content: "Since 1963";
     position: absolute;
     left: 0;
     top: 100%;
@@ -2446,7 +2446,7 @@ html[dir="rtl"] .force-ltr-number {
         }
 
         @top-center {
-            content: "Product Catalog  ·  Since 1967";
+            content: "Product Catalog  ·  Since 1963";
             font-family: sans-serif;
             font-size: 7pt;
             color: #555;

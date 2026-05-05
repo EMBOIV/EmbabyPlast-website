@@ -13,12 +13,12 @@ var CONTACT_INFO = {
     phoneDigits: '201155556560',
     phoneDisplay: '+2 011 5555 65 60',
     location: {
-        ar: 'المنطقة الصناعية، القاهرة، مصر',
-        en: 'Industrial Zone, Cairo, Egypt'
+        ar: 'حارة اليهود ، القاهرة، مصر',
+        en: 'Jewish Quarter, Cairo, Egypt'
     },
     workingHours: {
-        ar: 'يومياً: 24 ساعة',
-        en: 'Daily: 24 Hours'
+        ar: 'يومياً: 12 ساعة',
+        en: 'Daily: 12 Hours'
     }
 };
 
