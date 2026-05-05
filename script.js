@@ -31,7 +31,8 @@ var BRAND_INFO = {
 // true  => show families first, then children on filtering
 // false => always show all child products directly
 var PRODUCTS_PAGE_SETTINGS = {
-    groupByFamily: true
+    groupByFamily: true,
+    activeSection: 'premium'
 };
 
 // ===== SECURITY & UTILITY CONSTANTS =====
@@ -107,6 +108,7 @@ var LABELS = {
     home:             { ar: '\u0627\u0644\u0631\u0626\u064A\u0633\u064A\u0629',                       en: 'Home' },
     about:            { ar: '\u0639\u0646 \u0627\u0644\u0645\u0635\u0646\u0639',                     en: 'About' },
     products:         { ar: '\u0627\u0644\u0645\u0646\u062A\u062C\u0627\u062A',                       en: 'Products' },
+    premiumProducts:  { ar: '\u0627\u0644\u0645\u0646\u062A\u062C\u0627\u062A \u0627\u0644\u0645\u0645\u064A\u0632\u0629',        en: 'Premium Products' },
     whyUs:            { ar: '\u0644\u0645\u0627\u0630\u0627 \u0646\u062D\u0646',                     en: 'Why Us' },
     contact:          { ar: '\u0627\u062A\u0635\u0644 \u0628\u0646\u0627',                      en: 'Contact' },
     callNow:          { ar: '\u0627\u062A\u0635\u0644 \u0628\u0646\u0627',                      en: 'Call Now' },
@@ -730,6 +732,32 @@ function getFilterKey(value) {
         .replace(/^-+|-+$/g, '');
 }
 
+function isPrintedVariant(product) {
+    var name = String((product && product.name) || '').trim().toLowerCase();
+    return name.indexOf('printed') !== -1;
+}
+
+function normalizeProductCategory(value) {
+    return value === 'products' ? 'products' : 'premium';
+}
+
+function productMatchesCategory(product, category) {
+    var normalizedCategory = normalizeProductCategory(category);
+    var printed = isPrintedVariant(product);
+    return normalizedCategory === 'premium' ? printed : !printed;
+}
+
+function filterProductsByCategory(list, category) {
+    return (list || []).filter(function(item) {
+        return productMatchesCategory(item, category);
+    });
+}
+
+function buildProductDetailHref(productId, category) {
+    var normalizedCategory = normalizeProductCategory(category);
+    return 'product.html?id=' + escapeHtml(String(productId || '')) + '&category=' + escapeHtml(normalizedCategory);
+}
+
 function getBadgeClass(value) {
     var badge = normalizeLookup(value);
     if (!badge) return '';
@@ -1059,6 +1087,7 @@ function renderProductConfigPage() {
     var ar = isArabic();
     var params = new URLSearchParams(window.location.search);
     var productId = params.get('id');
+    var activeCategory = normalizeProductCategory(params.get('category') || 'premium');
     var product = PRODUCT_CATALOG[productId];
     var imgBase = getImageBase();
 
@@ -1079,7 +1108,7 @@ function renderProductConfigPage() {
     if (pageTitle) pageTitle.textContent = familyName;
     document.title = familyName + (ar ? (' - ' + BRAND_INFO.ar) : (' - ' + BRAND_INFO.en));
 
-    var variants = getFamilyVariants(product).slice().sort(function(a, b) {
+    var variants = filterProductsByCategory(getFamilyVariants(product), activeCategory).slice().sort(function(a, b) {
         var pa = getNumericPrice(a);
         var pb = getNumericPrice(b);
 
@@ -1095,7 +1124,7 @@ function renderProductConfigPage() {
     var langToggle = document.getElementById('lang-toggle-link');
     var langMobile = document.getElementById('lang-switch-mobile');
     var otherLangFolder = ar ? '../en/' : '../ar/';
-    var otherProductUrl = otherLangFolder + 'product.html?id=' + initialVariant.id;
+    var otherProductUrl = otherLangFolder + buildProductDetailHref(initialVariant.id, activeCategory);
     if (langToggle) langToggle.href = otherProductUrl;
     if (langMobile) langMobile.href = otherProductUrl;
 
@@ -1104,6 +1133,13 @@ function renderProductConfigPage() {
             showBadge: false
         });
     }).join('');
+
+    if (!variants.length) {
+        var notFoundMsg = label('productNotFound', ar);
+        var backMsg = label('backToCatalog', ar);
+        container.innerHTML = '<p>' + notFoundMsg + ' <a href="products.html">' + backMsg + '</a></p>';
+        return;
+    }
 
     container.innerHTML = ''
         + '<div class="product-config-card product-variants-layout">'
@@ -1172,8 +1208,11 @@ document.addEventListener('DOMContentLoaded', async function() {
         var totalCountEl = document.getElementById('products-total-count');
         var totalCountTextEl = document.getElementById('products-total-count-text');
         var viewToggleEl = document.getElementById('products-view-toggle');
+        var sectionToggleEl = document.getElementById('products-section-toggle');
+        var allCatalog = getCatalogArray();
+        var parentRows = allCatalog.filter(function(item) { return isFamilyParentRow(item); });
         var products = getVariantCatalogArray();
-        var families = buildFamilies(getCatalogArray());
+        var families = buildFamilies(allCatalog);
 
         // Build a lookup: familyKey → sortOrder (from parent rows via buildFamilies)
         var familySortOrderMap = {};
@@ -1193,6 +1232,25 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         var startsFromLabel = label('startsFrom', ar);
         var viewLabel = label('viewDetails', ar);
+
+        function getSectionProducts() {
+            return filterProductsByCategory(products, PRODUCTS_PAGE_SETTINGS.activeSection);
+        }
+
+        function getSectionFamilies(sectionProducts) {
+            var sectionCatalog = parentRows.concat(sectionProducts);
+            return buildFamilies(sectionCatalog);
+        }
+
+        function syncSectionToggleState() {
+            if (!sectionToggleEl) return;
+            sectionToggleEl.querySelectorAll('.products-section-btn').forEach(function(btn) {
+                var btnSection = btn.getAttribute('data-product-section');
+                var isActive = btnSection === PRODUCTS_PAGE_SETTINGS.activeSection;
+                btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+                btn.classList.toggle('active', isActive);
+            });
+        }
 
         function syncViewToggleState() {
             if (!viewToggleEl) return;
@@ -1216,6 +1274,18 @@ document.addEventListener('DOMContentLoaded', async function() {
             syncViewToggleState();
         }
 
+        if (sectionToggleEl) {
+            sectionToggleEl.querySelectorAll('.products-section-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var nextSection = btn.getAttribute('data-product-section') || 'premium';
+                    PRODUCTS_PAGE_SETTINGS.activeSection = nextSection;
+                    syncSectionToggleState();
+                    applyFilters();
+                });
+            });
+            syncSectionToggleState();
+        }
+
         function buildProductSearchText(item) {
             return normalizeLookup([
                 item.familyName, item.familyNameAr,
@@ -1235,9 +1305,10 @@ document.addEventListener('DOMContentLoaded', async function() {
             var typeLabel = getVariantTypeLabel(family, ar);
             var typeFilterKey = getFilterKey(typeLabel);
             var familyImageHtml = buildProductImageHtml(getProductImageSrc(imgBase, displayProduct), getProductName(displayProduct, ar), 'product-family-image');
+            var detailHref = buildProductDetailHref(initial.id, PRODUCTS_PAGE_SETTINGS.activeSection);
 
             return ''
-                + '<div class="box" data-family-key="' + escapeHtml(family.key) + '" data-type-key="' + escapeHtml(typeFilterKey) + '" data-detail-url="product.html?id=' + escapeHtml(initial.id) + '" tabindex="0" role="link" aria-label="' + escapeHtml(familyTitle) + '">'
+                + '<div class="box" data-family-key="' + escapeHtml(family.key) + '" data-type-key="' + escapeHtml(typeFilterKey) + '" data-detail-url="' + detailHref + '" tabindex="0" role="link" aria-label="' + escapeHtml(familyTitle) + '">'
                 + (badgeLabel ? '<span class="product-badge ' + escapeHtml(badgeClass) + '">' + escapeHtml(badgeLabel) + '</span>' : '')
                 + '<div class="images">'
                 + familyImageHtml
@@ -1248,7 +1319,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 + '<div class="product-price product-variant-price"><span class="price-label">' + startsFromLabel + '</span><span class="product-variant-price-value">' + escapeHtml(startsFrom) + '</span></div>'
                 + '</div>'
                 + '<div class="icons">'
-                + '<a href="product.html?id=' + escapeHtml(initial.id) + '" class="btn-cart product-view-link">' + viewLabel + '</a>'
+                + '<a href="' + detailHref + '" class="btn-cart product-view-link">' + viewLabel + '</a>'
                 + '</div>'
                 + '</div>';
         }
@@ -1350,11 +1421,13 @@ document.addEventListener('DOMContentLoaded', async function() {
             var selectedType = typeFilter ? typeFilter.value : '';
             var noResults = document.getElementById('no-results');
             var visibleCount = 0;
+            var sectionProducts = getSectionProducts();
+            var sectionFamilies = getSectionFamilies(sectionProducts);
             var hasActiveFilter = Boolean(query || selectedType);
             var showChildrenDirectly = isShowAll || !PRODUCTS_PAGE_SETTINGS.groupByFamily || hasActiveFilter;
 
             if (showChildrenDirectly) {
-                var matchedProducts = products.filter(function(item) {
+                var matchedProducts = sectionProducts.filter(function(item) {
                     var typeKey = getFilterKey(getVariantTypeLabel(item, ar));
                     var matchesType = !selectedType || typeKey === selectedType;
                     if (!matchesType) return false;
@@ -1365,8 +1438,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                 if (boxContainer) boxContainer.innerHTML = matchedProducts.map(makeVariantCardHtml).join('');
                 visibleCount = matchedProducts.length;
             } else {
-                if (boxContainer) boxContainer.innerHTML = families.map(makeFamilyCardHtml).join('');
-                visibleCount = families.length;
+                if (boxContainer) boxContainer.innerHTML = sectionFamilies.map(makeFamilyCardHtml).join('');
+                visibleCount = sectionFamilies.length;
             }
 
             bindCardInteractions();
@@ -1376,7 +1449,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
 
             if (totalCountEl) {
-                var totalBaseCount = showChildrenDirectly ? products.length : families.length;
+                var totalBaseCount = showChildrenDirectly ? sectionProducts.length : sectionFamilies.length;
                 var countText = label('totalProducts', ar) + totalBaseCount + label('showing', ar) + visibleCount;
                 if (totalCountTextEl) {
                     totalCountTextEl.textContent = countText;
