@@ -347,6 +347,7 @@ function buildCatalogFromCsvRows(rows) {
         var rowType = getRowValue(mapped, ['rowType', 'row_type', 'recordType', 'record_type', 'entryType', 'entry_type']);
         var varianttype = getRowValue(mapped, ['varianttype', 'variantType', 'type']);
         var varianttypeAr = getRowValue(mapped, ['varianttypeAr', 'variantTypeAr', 'typeAr']);
+        var printed = getRowValue(mapped, ['printed']);
         var badge = getRowValue(mapped, ['badge']);
         var badgeAr = getRowValue(mapped, ['badgeAr', 'badge_ar']);
         var enabled = getRowValue(mapped, ['enabled', 'active']) || '1';
@@ -376,6 +377,7 @@ function buildCatalogFromCsvRows(rows) {
             pcsPerCarton: getRowValue(mapped, ['pcsPerCarton', 'pcs_per_carton', 'pieces_per_carton']),
             cartonPrice: getRowValue(mapped, ['cartonPrice', 'carton_price', 'cartonprize', 'carton_prize']),
             imageFile: getRowValue(mapped, ['imageFile', 'image', 'image_file']),
+            printed: printed,
             badge: badge,
             badgeAr: badgeAr,
             rowType: rowType,
@@ -732,9 +734,13 @@ function getFilterKey(value) {
         .replace(/^-+|-+$/g, '');
 }
 
+function parseBooleanFlag(value) {
+    var normalized = normalizeLookup(value);
+    return normalized === '1' || normalized === 'true' || normalized === 'yes' || normalized === 'on';
+}
+
 function isPrintedVariant(product) {
-    var name = String((product && product.name) || '').trim().toLowerCase();
-    return name.indexOf('printed') !== -1;
+    return parseBooleanFlag(product && product.printed);
 }
 
 function normalizeProductCategory(value) {
