@@ -1052,8 +1052,12 @@ function getFamilyVariants(product) {
     });
 }
 
-function buildRecommendations(currentProduct, ar, imgBase) {
-    var allFamilies = buildFamilies(getCatalogArray());
+function buildRecommendations(currentProduct, ar, imgBase, activeCategory) {
+    var category = normalizeProductCategory(activeCategory || 'products');
+    var allCatalog = getCatalogArray();
+    var categoryVariants = filterProductsByCategory(allCatalog.filter(function(p) { return !isFamilyParentRow(p); }), category);
+    var categoryParents = allCatalog.filter(function(p) { return isFamilyParentRow(p); });
+    var allFamilies = buildFamilies(categoryParents.concat(categoryVariants));
     var currentFamilyKey = String(currentProduct.familyKey || currentProduct.id);
     var candidates = allFamilies.filter(function(family) {
         return String(family.key) !== currentFamilyKey;
@@ -1077,12 +1081,13 @@ function buildRecommendations(currentProduct, ar, imgBase) {
         var familyTitle = ar ? family.familyNameAr : family.familyName;
         var startsFrom = getStartsFromText(family.minPrice, ar);
         var recommendationImageHtml = buildProductImageHtml(getProductImageSrc(imgBase, displayProduct), getProductName(displayProduct, ar), 'recommendation-image');
+        var detailUrl = 'product.html?id=' + escapeHtml(topVariant.id) + '&category=' + encodeURIComponent(category);
         return ''
-            + '<article class="recommendation-card" data-detail-url="product.html?id=' + escapeHtml(topVariant.id) + '" tabindex="0" role="link" aria-label="' + escapeHtml(familyTitle) + '">'
+            + '<article class="recommendation-card" data-detail-url="' + detailUrl + '" tabindex="0" role="link" aria-label="' + escapeHtml(familyTitle) + '">'
             + '<div class="recommendation-image-wrap">' + recommendationImageHtml + '</div>'
             + '<h4>' + escapeHtml(familyTitle) + '</h4>'
             + '<p class="recommendation-price">' + label('priceStartsFrom', ar) + escapeHtml(startsFrom) + '</p>'
-            + '<a class="recommendation-link" href="product.html?id=' + escapeHtml(topVariant.id) + '">' + detailsLabel + '</a>'
+            + '<a class="recommendation-link" href="' + detailUrl + '">' + detailsLabel + '</a>'
             + '</article>';
     }).join('');
 
@@ -1212,7 +1217,7 @@ function renderProductConfigPage() {
         + '</div>'
         + '</div>'
         + '</div>'
-        + buildRecommendations(product, ar, imgBase);
+        + buildRecommendations(product, ar, imgBase, activeCategory);
 
     var lightbox = ensureProductImageLightbox();
     var lightboxImg = document.getElementById('product-image-lightbox-img');
