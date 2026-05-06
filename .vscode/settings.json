@@ -1,0 +1,11 @@
+{
+  "liveServer.settings.ignoreFiles": [
+    "**/.vscode/**",
+    "**/.git/**",
+    "**/node_modules/**",
+    "**/images/webp/**",
+    "**/images/thumbs/**",
+    "**/sync-images.log"
+  ],
+  "liveServer.settings.wait": 1000
+}
