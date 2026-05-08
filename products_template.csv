@@ -112,7 +112,7 @@ family-Rody,Rody,Rody Combs,,أمشاط رودي,,,,,,,,1,,,parent,19,FALSE
 95,Rody,,Rody Two-Tone Colors Printed,,رودى 2 لون مطبوع,65,40,2600,Rody Two-Tone Colors Printed.jpg,,,0,,,,,TRUE
 family-TwoNahia,TwoNahia,2 Nahia Combs,,أمشاط 2 ناحية,,,,,,,,1,,,parent,20,FALSE
 96,TwoNahia,,2 Nahia Colors,,2 ناحية الوان,14,180,2520,2 Nahia Colors.jpg,,,1,,,,,FALSE
-97,TwoNahia,,2 Nahia Glass Colors Printed,,2 ناحية زجاج الوان مطبوع,45,40,1800,2 Nahia Glass Colors Printed.jpg,,,1,,,,,TRUE
+97,TwoNahia,,2 Nahia Glass Colors Printed,,2 ناحية زجاج الوان مطبوع,65,40,2600,2 Nahia Glass Colors Printed.jpg,,,1,,,,,TRUE
 98,TwoNahia,,2 Nahia Glass Honey Printed,,2 ناحية زجاج عسلى مطبوع,45,40,1800,2 Nahia Glass Honey Printed.jpg,,,0,,,,,TRUE
 99,TwoNahia,,2 Nahia Fluorescent Printed,,2 ناحية فسفورى مطبوع,45,40,1800,2 Nahia Fluorescent Printed.jpg,,,1,,,,,TRUE
 100,TwoNahia,,2 Nahia Black Printed,,2 ناحية اسود مطبوع,25,40,1000,2 Nahia Black Printed.jpg,,,1,,,,,TRUE
@@ -194,10 +194,10 @@ family-Qlb,Qlb,Qlb Fly,,فلايات قلب,,,,,,,,1,,,parent,34,FALSE
 165,Qlb,,Falaya Qlb Two-Tone Colors,,قلب 2 لون,17,240,4080,Falaya Qlb Two-Tone Colors.jpg,,,1,,,,,FALSE
 167,Qlb,,Falaya Qlb Matte Beige,,قلب ناشف بيج,25,240,6000,Falaya Qlb Matte Beige.jpg,,,0,,,,,FALSE
 family-Khashab,Khashab,Khashab Combs,,أمشاط خشب,,,,,,,,1,,,parent,35,TRUE
-168,Khashab,,Falaya Wooden,,فلاية خشب,60,30,1800,Falaya Wooden.jpg,,,1,,,,,TRUE
-169,Khashab,,Khashab Kbyr Anwaa Lwks Wooden,,خشب كبير انواع لوكس,115,22,2530,Khashab Kbyr Anwaa Lwks Wooden.jpg,,,1,,,,,TRUE
-170,Khashab,,Khashab Sghyr Anwaa Lwks Wooden,,خشب صغير انواع لوكس,96,30,2880,Khashab Sghyr Anwaa Lwks Wooden.jpg,,,1,,,,,TRUE
-171,Khashab,,Khashab Aks Larg Wooden,,خشب اكس لارج,120,20,2400,Khashab Aks Larg Wooden.jpg,,,1,,,,,TRUE
+168,Khashab,,Falaya Wooden,,فلاية خشب,70,30,2100,Falaya Wooden.jpg,,,1,,,,,TRUE
+169,Khashab,,Khashab Kbyr Anwaa Lwks Wooden,,خشب كبير انواع لوكس,140,22,3080,Khashab Kbyr Anwaa Lwks Wooden.jpg,,,1,,,,,TRUE
+170,Khashab,,Khashab Sghyr Anwaa Lwks Wooden,,خشب صغير انواع لوكس,110,30,3300,Khashab Sghyr Anwaa Lwks Wooden.jpg,,,1,,,,,TRUE
+171,Khashab,,Khashab Aks Larg Wooden,,خشب اكس لارج,150,20,3000,Khashab Aks Larg Wooden.jpg,,,1,,,,,TRUE
 family-Warda,Warda,Warda Combs,,فرشاة وردة,,,,,,,,1,,,parent,36,FALSE
 172,Warda,,Warda Fluorescent,,وردة فسفورى,27,100,2700,Warda Fluorescent.jpg,,,1,,,,,FALSE
 family-Sobaa,Sobaa,Sobaa Combs,,فرشاة صباع,,,,,,,,1,,,parent,37,FALSE
