@@ -2,9 +2,9 @@
 family-Rabbit,Rabbit,Rabbit Combs,,أمشاط أرنب,,,,,,,,1,,,parent,1,FALSE
 1,Rabbit,,Rabbit Colors,,ارنب الوان,20,120,2400,Rabbit Colors.jpg,,,1,,,,,FALSE
 2,Rabbit,,Rabbit Two-Tone Colors,,ارنب 2 لون,30,120,3600,Rabbit Two-Tone Colors.jpg,,,1,,,,,FALSE
-3,Rabbit,,Rabbit Fluorescent Printed,,ارنب فسفورى مطبوع,65,40,2600,Rabbit Fluorescent Printed.jpg,,,0,,,,,TRUE
+3,Rabbit,,Rabbit Fluorescent Printed,,ارنب فسفورى مطبوع,65,40,2600,Rabbit Fluorescent Printed.jpg,,,1,,,,,TRUE
 4,Rabbit,,Rabbit Glass Honey Printed,,ارنب زجاج عسلى مطبوع,85,40,3400,Rabbit Glass Honey Printed.jpg,,,1,,,,,TRUE
-5,Rabbit,,Rabbit Glass Colors Printed,,ارنب زجاج الوان مطبوع,85,40,3400,Rabbit Glass Colors Printed.jpg,,,0,,,,,TRUE
+5,Rabbit,,Rabbit Glass Colors Printed,,ارنب زجاج الوان مطبوع,85,40,3400,Rabbit Glass Colors Printed.jpg,,,1,,,,,TRUE
 6,Rabbit,,Rabbit Two-Tone Colors Printed,,ارنب 2 لون مطبوع,65,40,2600,Rabbit Two-Tone Colors Printed.jpg,,,1,,,,,TRUE
 family-Amira,Amira,Amira Combs,,أمشاط أميرة,,,,,,,,1,,,parent,2,FALSE
 7,Amira,,Amira Colors,,اميرة الوان,20,192,3840,Amira Colors.jpg,,,1,,,,,FALSE
@@ -32,11 +32,11 @@ family-Gogo,Gogo,Gogo,,جوجو,,,,,,,,1,,,parent,6,FALSE
 27,Gogo,,Gogo,,جوجو,20,360,7200,Gogo.jpg,,,1,,,,,FALSE
 family-Cinderella,Cinderella,Cinderella Combs,,أمشاط سندريلا,,,,,,,,1,,,parent,7,FALSE
 28,Cinderella,,Cinderella Colors,,سندريلا الوان,35,80,2800,Cinderella Colors.jpg,,,1,,,,,FALSE
-29,Cinderella,,Cinderella Two-Tone Colors,,سندريلا 2 لون,47,80,3760,Cinderella Two-Tone Colors.jpg,,,0,,,,,FALSE
+29,Cinderella,,Cinderella Two-Tone Colors,,سندريلا 2 لون,47,80,3760,Cinderella Two-Tone Colors.jpg,,,1,,,,,FALSE
 30,Cinderella,,Cinderella Glass Colors Printed,,سندريلا زجاج الوان مطبوع,115,40,4600,Cinderella Glass Colors Printed.jpg,,,1,,,,,TRUE
 31,Cinderella,,Cinderella Glass Honey Printed,,سندريلا زجاج عسلى مطبوع,115,40,4600,Cinderella Glass Honey Printed.jpg,,,1,,,,,TRUE
 32,Cinderella,,Cinderella Fluorescent Carded and Printed,,سندريلا فسفورى مطبوع,85,40,3400,Cinderella Fluorescent Carded and Printed.jpg,,,1,,,,,TRUE
-33,Cinderella,,Cinderella Two-Tone Colors Printed,,سندريلا 2 لون مطبوع,85,40,3400,Cinderella Two-Tone Colors Printed.jpg,,,0,,,,,TRUE
+33,Cinderella,,Cinderella Two-Tone Colors Printed,,سندريلا 2 لون مطبوع,85,40,3400,Cinderella Two-Tone Colors Printed.jpg,,,1,,,,,TRUE
 family-Sindbad,Sindbad,Sindbad Combs,,أمشاط سندباد,,,,,,,,1,,,parent,8,FALSE
 34,Sindbad,,Sindbad Colors,,سندباد الوان,20,120,2400,Sindbad Colors.jpg,,,1,,,,,FALSE
 family-SatoorKbyr,SatoorKbyr,Satoor Kbyr Combs,,أمشاط ساطور كبير,,,,,,,,1,,,parent,9,FALSE
@@ -53,7 +53,7 @@ family-SatoorSghyr,SatoorSghyr,Satoor Sghyr Combs,,أمشاط ساطور صغي�
 44,SatoorSghyr,,Satoor Sghyr Fluorescent Printed,,ساطور صغير فسفورى مطبوع,65,40,2600,Satoor Sghyr Fluorescent Printed.jpg,,,1,,,,,TRUE
 45,SatoorSghyr,,Satoor Sghyr Glass Honey Printed,,ساطور صغير زجاج عسلى مطبوع,85,40,3400,Satoor Sghyr Glass Honey Printed.jpg,,,1,,,,,TRUE
 46,SatoorSghyr,,Satoor Sghyr Two-Tone Colors Printed,,ساطور صغير 2 لون مطبوع,65,40,2600,Satoor Sghyr Two-Tone Colors Printed.jpg,,,1,,,,,TRUE
-47,SatoorSghyr,,Satoor Sghyr Black Printed,,ساطور صغير اسود مطبوع,65,40,2600,Satoor Sghyr Black Printed.jpg,,,0,,,,,TRUE
+47,SatoorSghyr,,Satoor Sghyr Black Printed,,ساطور صغير اسود مطبوع,65,40,2600,Satoor Sghyr Black Printed.jpg,,,1,,,,,TRUE
 48,SatoorSghyr,,Satoor Sghyr Glass Colors Printed,,ساطور صغير زجاج الوان مطبوع,85,40,3400,Satoor Sghyr Glass Colors Printed.jpg,,,1,,,,,TRUE
 family-kokoSghyr,kokoSghyr,koko Sghyr Combs,,أمشاط كوكو صغير,,,,,,,,1,,,parent,11,FALSE
 49,kokoSghyr,,koko Sghyr Fluorescent,,كوكو صغير فسفورى,23,180,4140,koko Sghyr Fluorescent.jpg,,,1,,,,,FALSE
@@ -79,11 +79,11 @@ family-Gawhara,Gawhara,Gawhara Combs,,أمشاط الجوهرة,,,,,,,,1,,,paren
 65,Gawhara,,Mesht Al Gawhara Colors,,الجوهرة الوان,23,120,2760,Mesht Al Gawhara Colors.jpg,,,1,,,,,FALSE
 66,Gawhara,,Gawhara Fluorescent Boxed,,الجوهرة فسفورى علبة,47,72,3384,Gawhara Fluorescent Boxed.jpg,,,1,,,,,FALSE
 67,Gawhara,,Mesht Al Gawhara Two-Tone Colors,,الجوهرة 2 لون,37,120,4440,Mesht Al Gawhara Two-Tone Colors.jpg,,,0,,,,,FALSE
-68,Gawhara,,Mesht Gawhara Black,,الجوهرة اسود,18,120,2160,Mesht Gawhara Black.jpg,,,0,,,,,FALSE
+68,Gawhara,,Mesht Gawhara Black,,الجوهرة اسود,18,120,2160,Mesht Gawhara Black.jpg,,,1,,,,,FALSE
 69,Gawhara,,Mesht Al Gawhara Two-Tone Colors Printed,,الجوهرة 2 لون مطبوع,65,40,2600,Mesht Al Gawhara Two-Tone Colors Printed.jpg,,,0,,,,,TRUE
 70,Gawhara,,Al Gawhara Glass Colors Printed,,الجوهرة زجاج الوان مطبوع,85,40,3400,Al Gawhara Glass Colors Printed.jpg,,,0,,,,,TRUE
 71,Gawhara,,Al Gawhara Glass Honey Printed,,الجوهرة زجاج عسلى مطبوع,85,40,3400,Al Gawhara Glass Honey Printed.jpg,,,1,,,,,TRUE
-72,Gawhara,,Al Gawhara Glass Black Printed,,الجوهرة زجاج اسود مطبوع,65,40,2600,Al Gawhara Glass Black Printed.jpg,,,0,,,,,TRUE
+72,Gawhara,,Al Gawhara Glass Black Printed,,الجوهرة زجاج اسود مطبوع,65,40,2600,Al Gawhara Glass Black Printed.jpg,,,1,,,,,TRUE
 73,Gawhara,,Al Gawhara Fluorescent Printed,,الجوهرة فسفورى مطبوع,65,40,2600,Al Gawhara Fluorescent Printed.jpg,,,1,,,,,TRUE
 family-Kawafeer,Kawafeer,Kawafeer Combs,,أمشاط كوافير,,,,,,,,1,,,parent,16,FALSE
 75,Kawafeer,,Kawafeer Colors,,كوافير الوان,20,192,3840,Kawafeer Colors.jpg,,,1,,,,,FALSE
@@ -92,7 +92,7 @@ family-Kawafeer,Kawafeer,Kawafeer Combs,,أمشاط كوافير,,,,,,,,1,,,pare
 78,Kawafeer,,Kawafeer Black Printed,,كوافير اسود مطبوع,65,40,2600,Kawafeer Black Printed.jpg,,,0,,,,,TRUE
 79,Kawafeer,,Kawafeer Two-Tone Colors Printed,,كوافير 2 لون مطبوع,65,40,2600,Kawafeer Two-Tone Colors Printed.jpg,,,1,,,,,TRUE
 80,Kawafeer,,Kawafeer Glass Colors Printed,,كوافير زجاج الوان مطبوع,85,40,3400,Kawafeer Glass Colors Printed.jpg,,,1,,,,,TRUE
-81,Kawafeer,,Kawafeer Glass Honey Printed,,كوافير زجاج عسلى مطبوع,85,40,3400,Kawafeer Glass Honey Printed.jpg,,,0,,,,,TRUE
+81,Kawafeer,,Kawafeer Glass Honey Printed,,كوافير زجاج عسلى مطبوع,85,40,3400,Kawafeer Glass Honey Printed.jpg,,,1,,,,,TRUE
 family-Karma,Karma,Karma Combs,,أمشاط كارما,,,,,,,,1,,,parent,17,FALSE
 82,Karma,,Karma Fluorescent,,كارمـا فسفورى,35,120,4200,Karma Fluorescent.jpg,,,1,,,,,FALSE
 83,Karma,,Karma Colors,,كارمـا الوان,18,120,2160,Karma Colors.jpg,,,1,,,,,FALSE
@@ -104,7 +104,7 @@ family-Karma,Karma,Karma Combs,,أمشاط كارما,,,,,,,,1,,,parent,17,FALSE
 family-Leader,Leader,Leader Combs,,أمشاط ليدر,,,,,,,,1,,,parent,18,FALSE
 89,Leader,,Leader Colors,,ليدر الوان,27,96,2592,Leader Colors.jpg,,,1,,,,,FALSE
 90,Leader,,Mesht Leader Fluorescent Printed,,ليدر فسفورى مطبوع,65,40,2600,Mesht Leader Fluorescent Printed.jpg,,,0,,,,,TRUE
-91,Leader,,Mesht Leader Glass Printed,,ليدر زجاج مطبوع,85,40,3400,Mesht Leader Glass Printed.jpg,,,0,,,,,TRUE
+91,Leader,,Mesht Leader Glass Printed,,ليدر زجاج مطبوع,85,40,3400,Mesht Leader Glass Printed.jpg,,,1,,,,,TRUE
 family-Rody,Rody,Rody Combs,,أمشاط رودي,,,,,,,,1,,,parent,19,FALSE
 92,Rody,,Mesht Rody Colors,,رودى الوان,30,100,3000,Mesht Rody Colors.jpg,,,1,,,,,FALSE
 93,Rody,,Mesht Rody Fluorescent,,رودى فسفورى,55,100,5500,Mesht Rody Fluorescent.jpg,,,1,,,,,FALSE
@@ -127,8 +127,8 @@ family-Carmen,Carmen,Carmen Fly,,فلايات كارمن,,,,,,,,1,,,parent,22,FA
 107,Carmen,,Carmen White Lux,,كارمن ابيض لوكس,33,240,7920,Carmen White Lux.jpg,,,1,,,,,FALSE
 108,Carmen,,Carmen White,,كارمن ابيض,18,240,4320,Carmen White.jpg,,,0,,,,,FALSE
 109,Carmen,,Carmen Fluorescent,,كارمن فسفورى,33,240,7920,Carmen Fluorescent.jpg,,,1,,,,,FALSE
-110,Carmen,,Carmen Colors,,كارمن الوان,20,240,4800,Carmen Colors.jpg,,,0,,,,,FALSE
-111,Carmen,,Carmen Black,,كارمن اسود,20,240,4800,Carmen Black.jpg,,,0,,,,,FALSE
+110,Carmen,,Carmen Colors,,كارمن الوان,20,240,4800,Carmen Colors.jpg,,,1,,,,,FALSE
+111,Carmen,,Carmen Black,,كارمن اسود,20,240,4800,Carmen Black.jpg,,,1,,,,,FALSE
 112,Carmen,,Carmen Green,,كارمن اخضر,27,240,6480,Carmen Green.jpg,,,0,,,,,FALSE
 family-Miro,Miro,Miro Fly,,فلايات ميرو,,,,,,,,1,,,parent,23,FALSE
 113,Miro,,Miro Fluorescent,,ميــرو فسفورى,33,240,7920,Miro Fluorescent.jpg,,,1,,,,,FALSE
@@ -207,12 +207,12 @@ family-FrshaaDyna,FrshaaDyna,Frshaa Dyna,,فرشاة دينا,,,,,,,,1,,,parent,
 family-FrshaaMrbaa,FrshaaMrbaa,Frshaa Mrbaa,,فرشاة مربعة,,,,,,,,1,,,parent,39,FALSE
 175,FrshaaMrbaa,,Frshaa Mrbaa,,فرشاة مربعة,25,100,2500,Frshaa Mrbaa.jpg,,,1,,,,,FALSE
 family-FrshaaAbyr,FrshaaAbyr,Frshaa Abyr Brushes,,فرشاة عبير,,,,,,,,1,,,parent,40,FALSE
-176,FrshaaAbyr,,Frshaa Abyr,,فرشاة عبير,25,100,2500,Frshaa Abyr.jpg,,,0,,,,,FALSE
+176,FrshaaAbyr,,Frshaa Abyr,,فرشاة عبير,25,100,2500,Frshaa Abyr.jpg,,,1,,,,,FALSE
 family-FrshaaNapoli,FrshaaNapoli,Frshaa Napoli Brushes,,فرشاة نابولى,,,,,,,,1,,,parent,41,FALSE
 177,FrshaaNapoli,,Frshaa Napoli Fluorescent,,فرشاة نابولى فسفورى,70,30,2100,Frshaa Napoli Fluorescent.jpg,,,1,,,,,FALSE
 family-Hanady,Hanady,Hanady Fly,,فلايات هنادي,,,,,,,,1,,,parent,42,FALSE
-178,Hanady,,Hanady AG,,هنادى عاج,35,144,5040,Hanady AG.jpg,,,0,,,,,FALSE
-179,Hanady,,Hanady Black,,هنادى اسود,35,144,5040,Hanady Black.jpg,,,0,,,,,FALSE
+178,Hanady,,Hanady AG,,هنادى عاج,35,144,5040,Hanady AG.jpg,,,1,,,,,FALSE
+179,Hanady,,Hanady Black,,هنادى اسود,35,144,5040,Hanady Black.jpg,,,1,,,,,FALSE
 180,Hanady,,Hanady Fluorescent,,هنادى فسفورى,35,144,5040,Hanady Fluorescent.jpg,,,1,,,,,FALSE
 181,Hanady,,Hanady White,,هنادى ابيض,35,144,5040,Hanady White.jpg,,,1,,,,,FALSE
 family-Bgrab,Bgrab,Bgrab Combs,,أمشاط بجراب,,,,,,,,1,,,parent,43,FALSE
