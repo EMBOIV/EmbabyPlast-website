@@ -667,7 +667,8 @@ function handleProductImageError(img) {
     img.classList.add('is-hidden');
     img.setAttribute('aria-hidden', 'true');
 
-    var frame = img.parentNode;
+    // img is inside <picture> inside <div.product-image-frame> — go up to the frame
+    var frame = img.closest ? img.closest('.product-image-frame') : (img.parentNode && img.parentNode.parentNode);
     if (frame && frame.classList) {
         frame.classList.add('is-missing-image');
     }
@@ -685,7 +686,11 @@ function getOptimizedSrc(originalSrc, subfolder, ext) {
     return dir + '/' + subfolder + '/' + encodeURIComponent(nameOnly).replace(/%2F/g, '/') + '.' + ext;
 }
 
-function buildProductImageHtml(imageSrc, productName, imgClass) {
+function buildProductImageHtml(imageSrc, productName, imgClass, noImage) {
+    var fallback = '<div class="product-image-fallback" aria-hidden="true"><span class="pif-line"></span>' + escapeHtml(productName) + '<span class="pif-line"></span></div>';
+    if (noImage) {
+        return '<div class="product-image-frame is-missing-image">' + fallback + '</div>';
+    }
     var classAttr = imgClass ? ' class="' + escapeHtml(imgClass) + '"' : '';
     var webpFull = getOptimizedSrc(imageSrc, 'webp', 'webp');
     var webpThumb = getOptimizedSrc(imageSrc, 'thumbs', 'webp');
@@ -694,9 +699,9 @@ function buildProductImageHtml(imageSrc, productName, imgClass) {
         + '<picture>'
         + '<source type="image/webp" srcset="' + webpThumb + '" media="(max-width: 600px)">'
         + '<source type="image/webp" srcset="' + webpFull + '">'
-        + '<img' + classAttr + ' src="' + imageSrc + '" data-lightbox-src="' + escapeHtml(webpFull) + '" data-original-src="' + escapeHtml(imageSrc) + '" alt="' + escapeHtml(productName) + '" loading="lazy" decoding="async" onerror="handleProductImageError(this)">'  
+        + '<img' + classAttr + ' src="' + imageSrc + '" data-lightbox-src="' + escapeHtml(webpFull) + '" data-original-src="' + escapeHtml(imageSrc) + '" alt="' + escapeHtml(productName) + '" loading="lazy" decoding="async" onerror="handleProductImageError(this)">'
         + '</picture>'
-        + '<div class="product-image-fallback" aria-hidden="true">' + escapeHtml(productName) + '</div>'
+        + fallback
         + '</div>';
 }
 
@@ -976,7 +981,7 @@ function getCartonPriceText(product, ar) {
 function buildVariantCardHtml(item, ar, imgBase, opts) {
     opts = opts || {};
     var productName = getProductName(item, ar);
-    var imageHtml = buildProductImageHtml(getProductImageSrc(imgBase, item), productName, 'product-variant-image');
+    var imageHtml = buildProductImageHtml(getProductImageSrc(imgBase, item), productName, 'product-variant-image', !item.imageFile);
     var priceText   = getPriceText(item, ar);
     var cartonPriceText = getCartonPriceText(item, ar);
     var dozensPerCarton = getDozensPerCarton(item);
@@ -1080,7 +1085,7 @@ function buildRecommendations(currentProduct, ar, imgBase, activeCategory) {
         var displayProduct = getFamilyCardProduct(family) || topVariant;
         var familyTitle = ar ? family.familyNameAr : family.familyName;
         var startsFrom = getStartsFromText(family.minPrice, ar);
-        var recommendationImageHtml = buildProductImageHtml(getProductImageSrc(imgBase, displayProduct), getProductName(displayProduct, ar), 'recommendation-image');
+        var recommendationImageHtml = buildProductImageHtml(getProductImageSrc(imgBase, displayProduct), getProductName(displayProduct, ar), 'recommendation-image', !displayProduct.imageFile);
         var detailUrl = 'product.html?id=' + escapeHtml(topVariant.id) + '&category=' + encodeURIComponent(category);
         return ''
             + '<article class="recommendation-card" data-detail-url="' + detailUrl + '" tabindex="0" role="link" aria-label="' + escapeHtml(familyTitle) + '">'
@@ -1389,7 +1394,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             var badgeClass = getBadgeClass(badgeRaw);
             var typeLabel = getVariantTypeLabel(family, ar);
             var typeFilterKey = getFilterKey(typeLabel);
-            var familyImageHtml = buildProductImageHtml(getProductImageSrc(imgBase, displayProduct), getProductName(displayProduct, ar), 'product-family-image');
+            var familyImageHtml = buildProductImageHtml(getProductImageSrc(imgBase, displayProduct), getProductName(displayProduct, ar), 'product-family-image', !displayProduct.imageFile);
             var detailHref = buildProductDetailHref(initial.id, PRODUCTS_PAGE_SETTINGS.activeSection, getCurrentCatalogState());
 
             return ''

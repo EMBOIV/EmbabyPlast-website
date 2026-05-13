@@ -1190,25 +1190,70 @@ section {
 
 .product-image-fallback {
     display: none;
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     align-items: center;
     justify-content: center;
-    padding: 1.6rem;
-    background: #fff;
-    color: var(--primary);
+    flex-direction: column;
+    padding: 2rem 2.4rem;
+    background: linear-gradient(145deg, #0B1D2A 0%, #0f2f42 55%, #0B1D2A 100%);
+    color: #00A8A8;
     text-align: center;
     font-family: "Montserrat", "Poppins", sans-serif;
-    font-size: 1.7rem;
+    font-size: 1.55rem;
     font-weight: 700;
-    line-height: 1.35;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
     word-break: break-word;
+    overflow: hidden;
+}
+
+/* Decorative corner accents */
+.product-image-fallback::before,
+.product-image-fallback::after {
+    content: '';
+    position: absolute;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-color: rgba(0,168,168,0.45);
+    border-style: solid;
+    pointer-events: none;
+}
+.product-image-fallback::before {
+    top: 0.75rem;
+    left: 0.75rem;
+    border-width: 2px 0 0 2px;
+}
+.product-image-fallback::after {
+    bottom: 0.75rem;
+    right: 0.75rem;
+    border-width: 0 2px 2px 0;
+}
+
+/* Thin horizontal rule above/below text via inner element */
+.product-image-fallback .pif-line {
+    display: block;
+    width: 3rem;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(0,168,168,0.6), transparent);
+    margin: 0.55rem auto;
+    flex-shrink: 0;
 }
 
 .product-image-frame.is-missing-image .product-image-fallback {
     display: flex;
-    border: 1px solid var(--border);
-    border-radius: 0.35rem;
+    border: 1px solid rgba(0,168,168,0.2);
+    border-radius: 0.5rem;
+    box-shadow: inset 0 0 28px rgba(0,0,0,0.35), 0 0 0 1px rgba(0,168,168,0.08);
+}
+
+/* Arabic / RTL font override */
+html[dir="rtl"] .product-image-fallback {
+    font-family: "Cairo", "Noto Naskh Arabic", "Tahoma", sans-serif;
+    letter-spacing: 0;
+    font-size: 1.65rem;
 }
 
 .products .box .images .product-image-frame {
