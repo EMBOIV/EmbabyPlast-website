@@ -377,6 +377,7 @@ function buildCatalogFromCsvRows(rows) {
             pcsPerCarton: getRowValue(mapped, ['pcsPerCarton', 'pcs_per_carton', 'pieces_per_carton']),
             cartonPrice: getRowValue(mapped, ['cartonPrice', 'carton_price', 'cartonprize', 'carton_prize']),
             imageFile: getRowValue(mapped, ['imageFile', 'image', 'image_file']),
+            imageExists: parseBooleanFlag(getRowValue(mapped, ['imageExists', 'image_exists'])),
             printed: printed,
             badge: badge,
             badgeAr: badgeAr,
@@ -981,7 +982,7 @@ function getCartonPriceText(product, ar) {
 function buildVariantCardHtml(item, ar, imgBase, opts) {
     opts = opts || {};
     var productName = getProductName(item, ar);
-    var imageHtml = buildProductImageHtml(getProductImageSrc(imgBase, item), productName, 'product-variant-image', !item.imageFile);
+    var imageHtml = buildProductImageHtml(getProductImageSrc(imgBase, item), productName, 'product-variant-image', !item.imageExists);
     var priceText   = getPriceText(item, ar);
     var cartonPriceText = getCartonPriceText(item, ar);
     var dozensPerCarton = getDozensPerCarton(item);
@@ -1085,7 +1086,7 @@ function buildRecommendations(currentProduct, ar, imgBase, activeCategory) {
         var displayProduct = getFamilyCardProduct(family) || topVariant;
         var familyTitle = ar ? family.familyNameAr : family.familyName;
         var startsFrom = getStartsFromText(family.minPrice, ar);
-        var recommendationImageHtml = buildProductImageHtml(getProductImageSrc(imgBase, displayProduct), getProductName(displayProduct, ar), 'recommendation-image', !displayProduct.imageFile);
+        var recommendationImageHtml = buildProductImageHtml(getProductImageSrc(imgBase, displayProduct), getProductName(displayProduct, ar), 'recommendation-image', !displayProduct.imageExists);
         var detailUrl = 'product.html?id=' + escapeHtml(topVariant.id) + '&category=' + encodeURIComponent(category);
         return ''
             + '<article class="recommendation-card" data-detail-url="' + detailUrl + '" tabindex="0" role="link" aria-label="' + escapeHtml(familyTitle) + '">'
@@ -1394,7 +1395,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             var badgeClass = getBadgeClass(badgeRaw);
             var typeLabel = getVariantTypeLabel(family, ar);
             var typeFilterKey = getFilterKey(typeLabel);
-            var familyImageHtml = buildProductImageHtml(getProductImageSrc(imgBase, displayProduct), getProductName(displayProduct, ar), 'product-family-image', !displayProduct.imageFile);
+            var familyImageHtml = buildProductImageHtml(getProductImageSrc(imgBase, displayProduct), getProductName(displayProduct, ar), 'product-family-image', !displayProduct.imageExists);
             var detailHref = buildProductDetailHref(initial.id, PRODUCTS_PAGE_SETTINGS.activeSection, getCurrentCatalogState());
 
             return ''
