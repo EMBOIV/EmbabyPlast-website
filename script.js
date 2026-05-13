@@ -1044,11 +1044,38 @@ function getHighestPriceVariant(variants) {
     return highest || variants[0] || null;
 }
 
+function hasImageFile(product) {
+    return Boolean(product) && String(product.imageFile || '').trim() !== '';
+}
+
+function hasAvailableCatalogImage(product) {
+    if (!hasImageFile(product)) return false;
+    return parseBooleanFlag(product.imageExists);
+}
+
 function getFamilyCardProduct(family) {
-    if (family && family.parent && family.parent.imageFile) {
+    if (!family) return null;
+
+    if (hasAvailableCatalogImage(family.parent)) {
         return family.parent;
     }
-    return getHighestPriceVariant(family ? family.variants : []);
+
+    var variants = family.variants || [];
+    var variantsWithAvailableImage = variants.filter(hasAvailableCatalogImage);
+    if (variantsWithAvailableImage.length) {
+        return getHighestPriceVariant(variantsWithAvailableImage);
+    }
+
+    if (hasImageFile(family.parent)) {
+        return family.parent;
+    }
+
+    var variantsWithImageFile = variants.filter(hasImageFile);
+    if (variantsWithImageFile.length) {
+        return getHighestPriceVariant(variantsWithImageFile);
+    }
+
+    return getHighestPriceVariant(variants);
 }
 
 function getFamilyVariants(product) {
@@ -1086,7 +1113,7 @@ function buildRecommendations(currentProduct, ar, imgBase, activeCategory) {
         var displayProduct = getFamilyCardProduct(family) || topVariant;
         var familyTitle = ar ? family.familyNameAr : family.familyName;
         var startsFrom = getStartsFromText(family.minPrice, ar);
-        var recommendationImageHtml = buildProductImageHtml(getProductImageSrc(imgBase, displayProduct), getProductName(displayProduct, ar), 'recommendation-image', !displayProduct.imageExists);
+        var recommendationImageHtml = buildProductImageHtml(getProductImageSrc(imgBase, displayProduct), getProductName(displayProduct, ar), 'recommendation-image', !hasAvailableCatalogImage(displayProduct));
         var detailUrl = 'product.html?id=' + escapeHtml(topVariant.id) + '&category=' + encodeURIComponent(category);
         return ''
             + '<article class="recommendation-card" data-detail-url="' + detailUrl + '" tabindex="0" role="link" aria-label="' + escapeHtml(familyTitle) + '">'
@@ -1395,7 +1422,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             var badgeClass = getBadgeClass(badgeRaw);
             var typeLabel = getVariantTypeLabel(family, ar);
             var typeFilterKey = getFilterKey(typeLabel);
-            var familyImageHtml = buildProductImageHtml(getProductImageSrc(imgBase, displayProduct), getProductName(displayProduct, ar), 'product-family-image', !displayProduct.imageExists);
+            var familyImageHtml = buildProductImageHtml(getProductImageSrc(imgBase, displayProduct), getProductName(displayProduct, ar), 'product-family-image', !hasAvailableCatalogImage(displayProduct));
             var detailHref = buildProductDetailHref(initial.id, PRODUCTS_PAGE_SETTINGS.activeSection, getCurrentCatalogState());
 
             return ''
