@@ -103,15 +103,15 @@ family-Karma,Karma,Karma Combs,,أمشاط كارما,,,,,,FALSE,,,1,,,parent,17
 88,Karma,,Karma Glass Honey Printed,,كارما زجاج عسلى مطبوع,80,40,3200,Karma Glass Honey Printed.jpg,TRUE,,,1,,,,,TRUE
 family-Leader,Leader,Leader Combs,,أمشاط ليدر,,,,,,FALSE,,,1,,,parent,18,FALSE
 89,Leader,,Leader Colors,,ليدر الوان,24,96,2304,Leader Colors.jpg,TRUE,,,1,,,,,FALSE
-90,Leader,,Mesht Leader Fluorescent Printed,,ليدر فسفورى مطبوع,,,,Mesht Leader Fluorescent Printed.jpg,FALSE,,,1,,,,,TRUE
-91,Leader,,Mesht Leader Glass Printed,,ليدر زجاج مطبوع,,,,Mesht Leader Glass Printed.jpg,TRUE,,,1,,,,,TRUE
+90,Leader,,Mesht Leader Fluorescent Printed,,ليدر فسفورى مطبوع,60,40,2400,Mesht Leader Fluorescent Printed.jpg,FALSE,,,1,,,,,TRUE
+91,Leader,,Mesht Leader Glass Printed,,ليدر زجاج مطبوع,80,40,3200,Mesht Leader Glass Printed.jpg,TRUE,,,1,,,,,TRUE
 family-Rody,Rody,Rody Combs,,أمشاط رودي,,,,,,FALSE,,,1,,,parent,19,FALSE
 92,Rody,,Mesht Rody Colors,,رودى الوان,27,100,2700,Mesht Rody Colors.jpg,TRUE,,,1,,,,,FALSE
 93,Rody,,Mesht Rody Fluorescent,,رودى فسفورى,50,100,5000,Mesht Rody Fluorescent.jpg,TRUE,,,1,,,,,FALSE
 94,Rody,,Mesht Rody Two-Tone Colors,,رودى 2 لون,42,100,4200,Mesht Rody Two-Tone Colors.jpg,FALSE,,,1,,,,,FALSE
 95,Rody,,Rody Two-Tone Colors Printed,,رودى 2 لون مطبوع,70,40,2800,Rody Two-Tone Colors Printed.jpg,FALSE,,,1,,,,,TRUE
 family-TwoNahia,TwoNahia,2 Nahia Combs,,أمشاط 2 ناحية,,,,,,FALSE,,,1,,,parent,20,FALSE
-96,TwoNahia,,2 Nahia Colors,,2 ناحية الوان,,,,2 Nahia Colors.jpg,TRUE,,,1,,,,,FALSE
+96,TwoNahia,,2 Nahia Colors,,2 ناحية الوان,10,180,1800,2 Nahia Colors.jpg,TRUE,,,1,,,,,FALSE
 97,TwoNahia,,2 Nahia Glass Colors Printed,,2 ناحية زجاج الوان مطبوع,40,40,1600,2 Nahia Glass Colors Printed.jpg,TRUE,,,1,,,,,TRUE
 98,TwoNahia,,2 Nahia Glass Honey Printed,,2 ناحية زجاج عسلى مطبوع,40,40,1600,2 Nahia Glass Honey Printed.jpg,FALSE,,,1,,,,,TRUE
 99,TwoNahia,,2 Nahia Fluorescent Printed,,2 ناحية فسفورى مطبوع,40,40,1600,2 Nahia Fluorescent Printed.jpg,TRUE,,,1,,,,,TRUE
